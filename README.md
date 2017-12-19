@@ -1,5 +1,5 @@
-# OGC Templates
+NetCDF Classic Standard for Encoding RDF Graphs netCDF-Classic-LD
+==============================================================
 
-This GitHub repository contains templates for OGC documents.
+This is a draft encoding standard enabling RDF graphs to be encoded in netCDF Classic encoded files, and enabling netCDF Classic encoded files to be interpreted as RDF graphs.
 
-Note that the Apache license applies only to the template. Once a  document has been created, the license must reflect the OGC document license.
