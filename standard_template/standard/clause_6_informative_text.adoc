@@ -1,9 +1,55 @@
 == Clauses not Containing Normative Material
 
-Paragraph
 
-=== Clauses not containing normative material sub-clause 1
+=== Resource Description Framework
 
-Paragraph
+The Resource Description Framework (RDF) is a W3 standard (ref!!).  Information elements are statements which have three parts: Subject, Predicate, Object.
 
-=== Clauses not containing normative material sub-clause 2
+Subjects and Predicates are Universal Resource Identifiers (URIs) whilst Objects may be URIs or Literals.  Where an Object is a URI, this may also be a subject for another statement.
+
+Statements are collected together within an RDF Graph.
+
+This standard maps the netCDF Classic data model encoding onto the RDF information model.
+
+=== Metadata RDF Graph
+
+An RDF graph representing the metadata of multiple files provides a valuable resource for summarising the file collection.
+
+The numerical data within the file is not encoded within the graph, only the metadata.  In general this means that the graph is orders of magnitude smaller than the data file it summarises.
+
+Having an RDF graph of metadata across a file collection enables the use of semantic web technologies to explore, interrogate and visualise the metadata in a variety of ways.
+
+=== Universal Resource Identifiers within netCDF files
+
+At the core of this standard is the mechanism for encoding and interpreting Universal Resource Identifiers (URIs) within netCDF files.
+
+These URIs may be declared explicitly within the files, or interpreted from file metadata and external information sources.
+
+
+==== Identity
+
+
+A netCDF file has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
+
+An explicit identity may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
+
+Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a '/'.
+
+==== Prefix Definition
+
+==== Alias Definition
+
+==== Attribute Names
+
+In order to map netCDF metadata to RDF, all global and variable attributes are interpreted as RDF statements.  This requires that all attribute names are interpreted as URIs.
+
+==== Attribute Variable References
+
+
+==== Attribute Values
+
+In RDF objects may be Literals or URIs, therefore attribute values are conditionally interpreted as Literals or as URIs.
+
+
+=== NetCDF Dimensions
+
