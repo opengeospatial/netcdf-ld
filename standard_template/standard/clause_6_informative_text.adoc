@@ -1,5 +1,13 @@
 == Clauses not Containing Normative Material
 
+=== Design principles and Rationale ===
+
+The netCDF-CLassic-LD syntax is designed to work with existing netCDF classic encoded files. netCDF-Classic-LD is designed to allow existing netCDF files to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD is primarily intended to be a way to use Linked Data in programming environments using netCDF, to enable interoperability across netCDF files of any convention. Existing netCDF libraries can be used to parse files encoded as netCDF-Classic-LD. Thus, netCDF-Classic-LD is designed to be usable directly as netCDF with no knowledge of RDF.
+
+A key part of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to IRIs via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+
+Files encoded using netCDF-Classic-LD is designed to be usable as RDF, if desired, for use with other Linked Data technologies like SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (TURTLE Ref!!).
+
 
 === Resource Description Framework
 
@@ -10,6 +18,9 @@ Subjects and Predicates are Universal Resource Identifiers (URIs) whilst Objects
 Statements are collected together within an RDF Graph.
 
 This standard maps the netCDF Classic data model encoding onto the RDF information model.
+
+
+
 
 === Metadata RDF Graph
 
@@ -52,4 +63,3 @@ In RDF objects may be Literals or URIs, therefore attribute values are condition
 
 
 === NetCDF Dimensions
-
