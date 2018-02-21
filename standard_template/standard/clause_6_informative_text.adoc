@@ -50,6 +50,30 @@ Each variable within that file has its own identity, defined relative to the fil
 
 ==== Prefix Definition
 
+The prefix is the most straightforward and the most powerful way to encode explicit URIs in this standard.  It has two parts: the first part is the declaration of a prefix, the second part is the use of the prefix.
+
+Prefixes are in wide use in a number of domains, including XML and RDF. They allow a URI to be expressed in a compact fashion that saves space, enhances human readability and can mitigate issues with reserved characters.
+
+A prefix is declared using a name : value pair that associates a short name (.e.g. ‘cf__’, ‘bald__’), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix.
+
+The 'double underscore' character pair: '__' is used as an identifier and suffix for the prefix, the double underscore is part of the prefix.
+
+The double underscore is interpreted as a special character by this standard: all uses of the double underscore shall be interpreted as prefixed entities and will be unpacked into full URIs by aware software if a full URI is defined.
+
+Prefixes are applied across the file they are declared within.  A single dedicated variable shall be used to contain all of the prefixes applied to that file by that file.
+The prefix variable is optional.
+If included the prefixes variable shall be identified within the file by a single global attribute, using the attribute name 'bald__isPrefixedBy'.
+If included, the prefixes variable shall include the prefix declaration
+bald = http://binary-array-ld.net/latest
+
+
+A prefix is used with netCDF file elements as:
+
+<prefix><name>
+
+Prefixes shall end in a URI separator, either a '/' or a '#'.  
+
+
 ==== Alias Definition
 
 ==== Attribute Names
