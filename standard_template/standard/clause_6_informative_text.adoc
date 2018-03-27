@@ -94,7 +94,7 @@ All variable names shall be within the file, or no references shall be interpret
 
 ===== Exemption
 
-An attribute name may be exempted from the process of inferring referernces.  In order for an attribute name to be exempted, the attribute shall provide a downloadable resource from its URI and that resource shall declare an rdfs:range of either rdfs:Literal or skos:Concept.
+An attribute name may be exempted from the process of inferring references.  In order for an attribute name to be exempted, the attribute shall provide a downloadable resource from its URI and that resource shall declare an rdfs:range of either rdfs:Literal or skos:Concept.
 
 ==== Attribute Values
 
