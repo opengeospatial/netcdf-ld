@@ -81,7 +81,7 @@ Prefixes shall end in a URI separator, either a '/' or a '#'.
 
 The following example CDL uses the binary-array-ld.net and the w3.org rdf-syntax-ns vocabularies to describe a reference relationship between two variables.
 
-
+----
 netcdf tmpMwXy8U {
 dimensions:
 	pdim0 = 11 ;
@@ -100,6 +100,7 @@ variables:
 // global attributes:
 		:bald__isPrefixedBy = "prefix_list" ;
 }
+----
 
 In this example:
 
