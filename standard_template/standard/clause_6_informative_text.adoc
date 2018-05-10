@@ -8,16 +8,16 @@ A design principle of netCDF-Classic-LD is that it works with existing netCDF cl
 
 A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to IRIs via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
-netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies like SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (TURTLE Ref!!).s
+netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies like SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
 
 
 === Resource Description Framework
 
-The Resource Description Framework (RDF) is a W3 standard (ref!!).  Information elements are statements which have three parts: Subject, Predicate, Object.
+The _Resource Description Framework (RDF)_ is a W3 standard (Hayes and Patel-Schneider 2014).  Information elements are statements which have three parts: _Subject_, _Predicate_, and _Object_.
 
-Subjects and Predicates are Universal Resource Identifiers (URIs) whilst Objects may be URIs or Literals.  Where an Object is a URI, this may also be a subject for another statement.
+_Subjects_ and _Predicates_ are _Universal Resource Identifiers (URIs)_ whilst Objects may be URIs or Literals.  Where an _Object_ is a _URI_, this may also be a subject for another statement.
 
-Statements are collected together within an RDF Graph.
+Statements are collected together within an _RDF Graph_.
 
 This standard maps the netCDF Classic data model encoding onto the RDF information model.
 
@@ -26,11 +26,11 @@ This standard maps the netCDF Classic data model encoding onto the RDF informati
 
 === Metadata RDF Graph
 
-An RDF graph representing the metadata of multiple files provides a valuable resource for summarising the file collection.
+An _RDF graph_ representing the metadata of multiple files provides a valuable resource for summarising the file collection.
 
 The numerical data within the file is not encoded within the graph, only the metadata.  In general this means that the graph is orders of magnitude smaller than the data file it summarises.
 
-Having an RDF graph of metadata across a file collection enables the use of semantic web technologies to explore, interrogate and visualise the metadata in a variety of ways.
+Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata in a variety of ways.
 
 === Universal Resource Identifiers within netCDF files
 
@@ -42,11 +42,11 @@ These URIs may be declared explicitly within the files, or interpreted from file
 ==== Identity
 
 
-A netCDF file has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
+A _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
 
 An explicit identity may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
 
-Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a '/'.
+Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a `/`.
 
 ==== Prefix Definition
 
@@ -80,7 +80,7 @@ Prefixes shall end in a URI separator, either a `/` or a `#`.
 
 
 
-The following example CDL uses the binary-array-ld.net and the w3.org rdf-syntax-ns vocabularies to describe a reference relationship between two variables.
+The following example CDL uses the link:++binary-array-ld.net++[binary-array-ld.net] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
 
 ----
 netcdf tmpMwXy8U {
@@ -156,7 +156,7 @@ All variable names shall be within the file, or no references shall be interpret
 
 ===== Exemption
 
-An attribute name may be exempted from the process of inferring references.  In order for an attribute name to be exempted, the attribute shall provide a downloadable resource from its URI and that resource shall declare an rdfs:range of either rdfs:Literal or skos:Concept.
+An attribute name may be exempted from the process of inferring references.  In order for an attribute name to be exempted, the attribute shall provide a downloadable resource from its URI and that resource shall declare an `rdfs:range` of either `rdfs:Literal` or `skos:Concept`.
 
 ==== Attribute Values
 
