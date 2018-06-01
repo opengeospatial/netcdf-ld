@@ -32,7 +32,11 @@ The numerical data within the file is not encoded within the graph, only the met
 
 Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata in a variety of ways.
 
-=== Universal Resource Identifiers within netCDF files
+The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
+
+Multiple graphs may be combined into a single multi-file metadata graph as long as individual file identity is unique across the multiple graph.
+
+==== Universal Resource Identifiers within netCDF files
 
 At the core of this standard is the mechanism for encoding and interpreting Universal Resource Identifiers (URIs) within netCDF files.
 
@@ -112,11 +116,33 @@ In this example:
 
 ==== Alias Definition
 
+Alongside the definition of prefixes, explicit aliases may be defined within the file, or as a scope for a file during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
+
+The aliases mechanism is less flexible than the prefixes mechanism.  It does enable interpretation of atribute names directly, making it useful for existing standards and existing files.
+
+
+Aliases are applied across the file they are declared for.
+
+Aliases are declared as a set of RDF graphs. These RDF graphs are commonly provided as URIs, to be obtained during parsing and file metadata interpretation.
+
+The RDF graphs shall be combined and treated as a single alias scope for the file.
+
+
+
 ==== Attribute Names
 
 In order to map netCDF metadata to RDF, all global and variable attributes are interpreted as RDF statements.  This requires that all attribute names are interpreted as URIs.
 
-==== Attribute Variable References
+A parsing process shall map attribute names to URIs using prefix definitions first, then map attribute names to URIs aliases.
+
+
+An attribute name shall be mapped to an alias URI if and only if there is an exact match for the full attribute name as a dct:notation (expand to full uri) for an entity within the alias graph where that entity declares a statement <entity> <rdf:type> <rdfs:ObjectProperty> (full URIs).
+
+If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
+
+
+
+All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (ref{}) to form a locally applicable URI.
 
 The value of an attribute may be a reference to another variable, or multiple variables, within the file.
 The process of establishing identity for each variable within the file enables this reference to be interpreted as a URI.
@@ -160,7 +186,36 @@ An attribute name may be exempted from the process of inferring references.  In 
 
 ==== Attribute Values
 
-In RDF objects may be Literals or URIs, therefore attribute values are conditionally interpreted as Literals or as URIs.
+In RDF, objects may be Literals or URIs, therefore attribute values are conditionally interpreted as Literals or as URIs.
 
+A parsing process shall map attribute values to URIs using identified prefixes first.
+
+===== Attribute Variable References
+
+The value of a variable attribute may be an internal reference to another variable within the file.
+
+For a variable reference to be declared, three conditions shall be met.
+
+Condition one: the value is a string which exactly matches the name of a variable within the file.
+
+Condition two: the attribute name is already interpreted as a URI, defining an entity, external to the file.
+
+Condition three: the attribute name entity declares and <rdfs:range> of <bald:subject>.
+
+An identified attribute reference shall map the attribute value to the identify of the matched variable within the file.
+
+This identification takes place after prefixes are identified and mapped.
+
+===== Attribute Value Aliases
+
+After prefix and reference interpretation, remaining attribute values are mapped to URIs using the alias graph.
+
+An attribute value shall be mapped to an alias URI if and only if there is an exact match for the full attribute value as a dct:notation (expand to full uri) for an entity within the alias graph.
+
+If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
+
+===== Attribute Value Literals
+
+All remaining attribute values shall be left unchanged and declared as instances of <rdf:Literal>.
 
 === NetCDF Dimensions
