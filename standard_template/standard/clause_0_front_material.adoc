@@ -13,7 +13,9 @@ LD also allows dataset descriptions to become more useful through the ability to
 Publishing netCDF file descriptions using LD methods presents the user community with an opportunity to address this exposure and connection and, 
 further, to enhance data findability and re-use.
 
-netCDF-Classic-LD is a standard for encoding 
+The netCDF Classic Linked Data standard (netCDF-Classic-LD) provides 
+the encoding standard for encoding linked data semantics into netCDF Classic files 
+and interpreting netCDF Classic files as RDF graphs. 
 
 
 [big]*ii.    Keywords*
