@@ -7,3 +7,11 @@ The normative provisions in this specification are denoted by the URI
 http://www.opengis.net/spec/{standard}/{m.n}
 
 All requirements and conformance tests that appear in this document are denoted by partial URIs which are relative to this base.
+
+=== UML model
+UML diagrams are included in this standard to illustrate the conceptual model 
+that underpins netCDF-classic-LD. 
+The UML model is not normative. 
+The UML profile used is specified in ISO 19103:2015.
+
+Resources are modelled as UML interfaces.

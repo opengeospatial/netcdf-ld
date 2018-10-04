@@ -1,12 +1,26 @@
 [big]*i.     Abstract*
 
-<Insert Abstract Text here>
+netCDF is a format for encoding array-oriented scientific data, particularly in many Earth & Space Science domains, 
+and is an Open Geospatial Consortium (OGC) standard.
+While netCDF is strictly a self-describing format, a common practice to aid interoperability is to use the Climate and Forecasting (CF) 
+convention and the Attribute Convention for Data Discovery (ACDD) convention. 
+Several communities are defining additional netCDF conventions for describing the semantics relating of their different domains. 
+As the concurrent use of multiple, and possibly clashing, netCDF conventions spreads the challenge of finding a common mechanism 
+to validate and interpret metadata being embedded inside netCDF files grows.
+
+Linked Data (LD) describes a method for encoding and publishing metadata to expose and connect data both within individual datasets and across multiple datasets. 
+LD also allows dataset descriptions to become more useful through the ability to run semantically-enabled queries across datasets. 
+Publishing netCDF file descriptions using LD methods presents the user community with an opportunity to address this exposure and connection and, 
+further, to enhance data findability and re-use.
+
+netCDF-Classic-LD is a standard for encoding 
+
 
 [big]*ii.    Keywords*
 
 The following are keywords to be used by search engines and document catalogues.
 
-ogcdoc, OGC document,  <tags separated by commas>
+ogcdoc, OGC document,  netCDF, Linked Data
 
 [big]*iii.   Preface*
 
@@ -21,10 +35,31 @@ Recipients of this document are requested to submit, with their comments, notifi
 
 The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
 
-Organization name(s)
+* UK Met Office
+* CSIRO
+* NOAA
+* Marine Institute, Ireland
+
 
 [big]*v.     Submitters*
 
 All questions regarding this submission should be directed to the editor or the submitters:
 
-Name  Affiliation
+[%header,cols=2*] 
+|===
+|Name  
+|Affiliation
+
+|Mark Hedley
+|UK Met Office
+
+|Jonathan Yu
+|CSIRO
+
+|James Biard
+|NOAA
+
+|Adam Leadbetter
+|Marine Institute, Ireland
+|===
+
