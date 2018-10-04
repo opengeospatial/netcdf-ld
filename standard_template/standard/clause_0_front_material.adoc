@@ -39,7 +39,7 @@ The following organizations submitted this Document to the Open Geospatial Conso
 * CSIRO
 * NOAA
 * Marine Institute, Ireland
-
+* HDF Group
 
 [big]*v.     Submitters*
 
@@ -61,5 +61,9 @@ All questions regarding this submission should be directed to the editor or the 
 
 |Adam Leadbetter
 |Marine Institute, Ireland
+
+|Aleksander Jelenak
+|HDF Group
 |===
+
 
