@@ -1,9 +1,17 @@
 == Scope
 
-NetCDF-LD is an approach for constructing Linked Data descriptions using the metadata and structures found in netCDF files. Linked Data is a set of practices to allow structured data to be published so that it can be interlinked on the web and support semantic queries. It uses the W3 Resource Description Framework (RDF) to express the information and relationships.
+NetCDF-LD is an approach for constructing Linked Data descriptions using the metadata 
+and structures found in netCDF files. 
+Linked Data is a set of practices to allow structured data to be published 
+so that it can be interlinked on the web and support semantic queries. 
+It uses the W3 Resource Description Framework (RDF) to express the information and relationships.
 
-NetCDF-LD enhances netCDF metadata, enabling information found in netCDF files to be linked with published conventions and controlled vocabularies used to express the content.
+NetCDF-LD enhances netCDF metadata, enabling information found in netCDF files 
+to be linked with published conventions and controlled vocabularies used to express the content.
 
-The netCDF Classic Linked Data standard: netCDF-Classic-LD provides the encoding standard for encoding linked data semantics into netCDF Classic files and interpreting netCDF Classic files as RDF graphs.
+The netCDF Classic Linked Data standard: netCDF-Classic-LD provides 
+the encoding standard for encoding linked data semantics into netCDF Classic files 
+and interpreting netCDF Classic files as RDF graphs.
 
-NetCDF Classic files may use the HDF5 based netCDF-4 encoding, as long as it is limited to the netCDF classic data model, or the legacy netCDF-3 encoding.
+NetCDF Classic files may use the HDF5 based netCDF-4 encoding, as long as 
+it is limited to the netCDF classic data model, or the legacy netCDF-3 encoding.
