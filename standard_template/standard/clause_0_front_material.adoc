@@ -2,7 +2,7 @@
 
 netCDF is a format for encoding array-oriented scientific data, particularly in many Earth & Space Science domains, 
 and is an Open Geospatial Consortium (OGC) standard.
-While netCDF is strictly a self-describing format, a common practice to aid interoperability is to use the Climate and Forecasting (CF) 
+It is common practice to aid interoperability is to use the Climate and Forecasting (CF) 
 convention and the Attribute Convention for Data Discovery (ACDD) convention. 
 Several communities are defining additional netCDF conventions for describing the semantics relating of their different domains. 
 As the concurrent use of multiple, and possibly clashing, netCDF conventions spreads the challenge of finding a common mechanism 
