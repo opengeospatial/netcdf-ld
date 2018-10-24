@@ -34,7 +34,7 @@ Having an _RDF graph_ of metadata across a file collection enables the use of Se
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
-Multiple graphs may be combined into a single multi-file metadata graph as long as individual file identity is unique across the multiple graph.
+Multiple graphs may be combined into a single multi-file metadata graph as long as individual file identity is unique across the multi-file metadata graph.
 
 ==== Universal Resource Identifiers within netCDF files
 
@@ -72,12 +72,27 @@ If included the prefixes variable shall be identified within the file by a singl
 
 If included, the prefixes variable shall include the prefix declaration
 ----
-bald__ = http://binary-array-ld.net/latest/
+`bald__ = http://binary-array-ld.net/latest/`
 ----
 
 A prefix is used with netCDF file elements as:
 ----
 <prefix><name>
+----
+
+This is interpreted within this standard as a URI, a concatenation of the matching value within the prefix variable and the remainder of the attribute name or value.
+
+The attribute name
+----
+`bald__isPrefixedBy` 
+----
+together with the prefix definition
+----
+`bald__ = http://binary-array-ld.net/latest/`
+----
+is interpreted as
+----
+`bald__ = http://binary-array-ld.net/latest/isPrefixedBy`
 ----
 
 Prefixes shall end in a URI separator, either a `/` or a `#`.  
