@@ -142,6 +142,19 @@ Aliases are declared as a set of RDF graphs. These RDF graphs are commonly provi
 
 The RDF graphs shall be combined and treated as a single alias scope for the file.
 
+For an entity in an alias graph to be considered as an alias, the entity will define a statement:
+
+<$entity> <http://purl.org/dc/terms/identified> "$Literal"
+
+The Literal object of this statement is the alias name.
+
+An alias that may be used as an attribute name alias shall define its Type as
+
+<$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> 
+
+or
+
+<$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty>
 
 
 ==== Attribute Names

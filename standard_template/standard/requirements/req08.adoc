@@ -1,0 +1,15 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 8* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+An attribute alias, defined in an alias graph, shall declare the statement
+
+<$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> 
+
+or
+
+<$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty>
+
+
+|===

@@ -1,0 +1,16 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 13* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+An attribute value that matches the name of a variable within the file shall be interpreted as a reference to that other variable, unless that attribute name is explcitly exempted.
+
+An attribute name may be exempted from the process of inferring references.  In order for an attribute name to be exempted, the attribute name shall :
+
+be an HTTP URI
+
+provide a downloadable resource from that URI
+
+that resource shall declare an `rdfs:range` of either `rdfs:Literal` or `skos:Concept`
+
+|===

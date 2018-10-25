@@ -1,0 +1,11 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 1* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+Requirement 'shall' statement {set:cellbgcolor:#FFFFFF}
+A netCDF file shall be provided with its on identity, as a URI, externally to the file contents.
+
+If no identity is provided, then the path used by a library to access the file is used as a default identity.
+
+|===

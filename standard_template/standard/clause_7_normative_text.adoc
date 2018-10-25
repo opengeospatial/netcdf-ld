@@ -12,3 +12,7 @@ include::requirements/requirements_class.adoc[]
 
 include::requirements/req01.adoc[]
 
+include::requirements/req02.adoc[]
+
+include::requirements/req03.adoc[]
+
