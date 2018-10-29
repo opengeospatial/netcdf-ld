@@ -72,7 +72,7 @@ If included the prefixes variable shall be identified within the file by a singl
 
 If included, the prefixes variable shall include the prefix declaration
 ----
-bald = http://binary-array-ld.net/latest
+bald__ = http://binary-array-ld.net/latest/
 ----
 
 A prefix is used with netCDF file elements as:
@@ -95,7 +95,7 @@ variables:
 	int a_variable(pdim0, pdim1) ;
 		parent_variable:rdf__type = "bald__Array" ;
 		parent_variable:bald__references = "b_variable" ;
-	int b_variable(pdim0), pdim1) ;
+	int b_variable(pdim0, pdim1) ;
 		child_variable:rdf__type = "bald__Reference" ;
 		child_variable:bald__array = "b_variable" ;
 	int prefix_list ;
