@@ -172,9 +172,26 @@ If multiple aliases match an attribute name, this is an error condition, the dec
 
 All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (ref{}) to form a locally applicable URI.
 
+==== Variable to Variable References
+
 The value of an attribute may be a reference to another variable, or multiple variables, within the file.
 The process of establishing identity for each variable within the file enables this reference to be interpreted as a URI.
 In this way, the RDF approach to having objects that are links to subjects, chaining statements into graphs, is implemented.
+
+For a reference to be identified, the predicate that defines that reference must identify itself as suitable for variable to variable referencing.  No references will be inferred for predicates that do not identify themselves in this way.
+
+To identify a predicate as a variable to variable reference predicate, that predicate shall provide a statement that explicitly opts into this behaviour.  The simplest way to do this is to include the statement
+
+  <{predicate}> rdfs:range bald:Subject .
+
+Binary array linked data recognises that some vocabularies already use the rdfs:range for specific purposes.  To enable particular scenarios to be supported, then a subClassOf approach may be used.  This has potential implications for reasoning, so should be adopted only where it has value, and the implications are understood.  The simple statement above is the advised option where it can be implemented.
+
+Binary array linked data shall infer a variable to variable reference where an rdfs:range target is also identifed as an rdfs:subClassOf bald:Subject
+
+ <{predicate}> rdfs:range <{AClass}> .
+ <{AClass}> rdfs:subClassOf bald:Subject .
+
+
 
 References to variables are implemented in netCDF files by defining the value of an attribute as the name of a variable, or as a space separated set of names of variables, or as a parenthesis bound space separated list of names of variables.
 
@@ -208,9 +225,7 @@ will be interpreted into RDF(turtle) as:
 
 All variable names shall be within the file, or no references shall be interpreted.  There shall be no partial matching.
 
-===== Exemption
-
-An attribute name may be exempted from the process of inferring references.  In order for an attribute name to be exempted, the attribute shall provide a downloadable resource from its URI and that resource shall declare an `rdfs:range` of either `rdfs:Literal` or `skos:Concept`.
+If such matching fails, the fall back option is to ignore the potential for references and leave the attribute value as a Literal.
 
 ==== Attribute Values
 
