@@ -1,4 +1,4 @@
-:Title: OGC (add title text)
+:Title: OGC Encoding Linked Data Graphs in NetCDF Classic Files
 :titletext: OGC (add title text)
 :doctype: book
 :encoding: utf-8
@@ -21,10 +21,10 @@
 |Approval Date:   <yyyy-mm-dd>
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
-|Internal reference number of this OGC(R) document:    YY-nnnrx
+|Internal reference number of this OGC(R) document:    19-002
 |Version: n.n
-|Category: OGC(R) <Implementation / Abstract Specification / Best Practice>
-|Editor:   <Name(s) of Editor or Editors>
+|Category: OGC(R) Implementation
+|Editor:   Mark Hedley, Jonathan Yu
 |===
 
 [cols = "^", frame = "none"]
