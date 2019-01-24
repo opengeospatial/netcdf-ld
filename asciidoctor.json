@@ -1,0 +1,16 @@
+{
+       "0":  {
+               "OGC_doc_number": "19-002",
+               "urn":"http://www.opengis.net/doc/DRAFT/netCDF-Classic-LD/1.0";,
+               "title":"OGC(r) NetCDF Classic Standard for Encoding RDF Graphs netCDF-Classic-LD",
+               "path":"standard_template/standard/standard_document.adoc",
+               "options": ["--trace"],
+               "a":[
+                       "data-uri",
+                       "stylesdir=./resources/stylesheets"
+               ],
+               "r":[
+                       "asciidoctor-diagram"
+               ]
+       }
+}
