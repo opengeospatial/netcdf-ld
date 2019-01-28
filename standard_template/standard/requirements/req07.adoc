@@ -5,7 +5,7 @@
 
 An alias, defined in an alias graph, shall declare the statement
 
-<$entity> <http://purl.org/dc/terms/identified> "$Literal"
+<$entity> <http://purl.org/dc/terms/identifier> "$Literal"
 
 The defined "$Literal" shall be used as the string to match on when interpreting aliases.
 
