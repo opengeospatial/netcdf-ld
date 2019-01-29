@@ -1,0 +1,14 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 3* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+A list of prefixes may be defined within a netCDF file, within a variable that is referenced by the global attribute `bald__isPrefixedBy`.
+
+If a prefix variable is defined, that prefix variable shall contain the prefix:
+
+`bald__ = http://binary-array-ld.net/latest/`
+
+Prefixes defined within a prefix variable shall be used as the definitive list of prefixes for that file.
+
+|===

@@ -1,0 +1,11 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 5* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+A prefix value, defined in a prefix variable, shall be a HTTP URI.
+
+A prefix value, defined in a prefix variable, shall end in either a `/` or a `#` (a valid URI separator).
+
+
+|===

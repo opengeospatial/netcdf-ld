@@ -1,0 +1,8 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 11* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+If an attribute name in a netCDF file does not match a prefix definition, but does match an attribute name alias,  then that attribute name shall be interpreted using the defined alias.
+
+|===

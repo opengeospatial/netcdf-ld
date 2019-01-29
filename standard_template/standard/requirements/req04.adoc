@@ -1,0 +1,15 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 4* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+A prefix attribute name, defined in a prefix variable, shall use the limited character set:
+`[a-zA-z0-9_]`
+
+A prefix attribute name, defined in a prefix variable, shall end with the sub-string:
+`__`
+
+
+
+
+|===

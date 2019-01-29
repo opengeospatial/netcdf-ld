@@ -1,0 +1,9 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 2* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+Each netCDF variable within the root group shall take its identity as a URI, relative to the file identity.
+
+This identity is defined using the variable name appended to the file identity and separated by a `/`.
+|===

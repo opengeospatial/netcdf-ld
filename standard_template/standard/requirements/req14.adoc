@@ -1,0 +1,20 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 14* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+An attribute declared by a metadata standard as a variable reference attribute where:
+ - the attribute value matches the name of a variable within the file;
+shall be interpreted as a reference to that other variable.
+
+An attribute declared by a metadata standard as a variable reference attribute where:
+ - the attribute value is a set of space separated names, all of which match a variable name within the file;
+shall be interpreted as an unordered set of references to the other variables.
+
+An attribute declared by a metadata standard as a variable reference attribute where:
+- the attribute is a parenthesis wrapped, comma separated list of names, all of which match a variable name within the file;
+shall be interpreted as an ordered list of references to the other variables.
+
+
+
+|===

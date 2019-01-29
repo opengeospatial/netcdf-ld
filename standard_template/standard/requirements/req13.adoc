@@ -1,0 +1,18 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 13* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+An attribute may be declared by a metadata standard as a variable reference attribute.
+
+In order to do this, the attribute shall declare itself in a resolveable RDF graph and include the statement:
+
+ <{attribute}> rdfs:range <http://binary-array-ld.net/latest/Subject> .
+
+It is also permissable to provide an rdfs:range statement targeting another resource and for that resource to declare that it is an rdfs:subClassOf bald:Subject, for example:
+
+ <{attribute}> rdfs:range <{AClass}> .
+ <{AClass}> rdfs:subClassOf <http://binary-array-ld.net/latest/Subject> .
+
+
+|===

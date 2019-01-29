@@ -9,18 +9,46 @@ Use the following table for Requirements Classes.
 include::requirements/requirements_class.adoc[]
 
 ==== Requirement 1
-Paragraph - intro text for the requirement.
 
-Use the following table for Requirements, number sequentially.
+include::requirements/req01.adoc[]
+==== Requirement 2
 
-include::requirements/requirement.adoc[]
+include::requirements/req02.adoc[]
+==== Requirement 3
 
-Dictionary tables for requirements can be added as necessary. Modify the following example as needed.
+include::requirements/req03.adoc[]
+==== Requirement 4
 
-[width="90%",options="header"]
-|===
-|Names |Definition |Data types and values |Multiplicity and use
-|name 1 |definition of name 1 |float |One or more (mandatory)
-|name 2 |definition of name 2 |character string type, not empty |Zero or one (optional)
-|name 3 |definition of name 3 |GML:: Point PropertyType |One (mandatory)
-|===
+include::requirements/req04.adoc[]
+==== Requirement 5
+
+include::requirements/req05.adoc[]
+==== Requirement 6
+
+include::requirements/req06.adoc[]
+
+==== Requirement 7
+include::requirements/req07.adoc[]
+
+==== Requirement 8
+include::requirements/req08.adoc[]
+
+==== Requirement 9
+include::requirements/req09.adoc[]
+
+==== Requirement 10
+include::requirements/req10.adoc[]
+
+==== Requirement 11
+include::requirements/req11.adoc[]
+
+==== Requirement 12
+include::requirements/req12.adoc[]
+
+==== Requirement 13
+include::requirements/req13.adoc[]
+
+==== Requirement 14
+include::requirements/req14.adoc[]
+
+
