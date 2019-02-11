@@ -13,6 +13,8 @@ It is also permissable to provide an rdfs:range statement targeting another reso
 
  <{attribute}> rdfs:range <{AClass}> .
  <{AClass}> rdfs:subClassOf <http://binary-array-ld.net/latest/Subject> .
+ 
+ {set:cellbgcolor:#FFFFFF}
 
 
 |===
