@@ -1,0 +1,26 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement 15* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+ +
+
+Each variable within a netCDF file that is defined with respect to one or more dimensions shall be described by a statement:
+
+----
+<$entity> <http://binary-array-ld.net/latest/shape> ($d0 $d1 $d2)
+----
+
+where `$dn` is an integer, taken from the defined dimension size in the netCDF file and the count of the number of values is the dimensionality of the variable.
+
+Where a variable is defined with respect to a single dimension, the statements
+
+----
+<$entity> <http://binary-array-ld.net/latest/shape> ($d0)
+----
+and
+----
+<$entity> <http://binary-array-ld.net/latest/shape> $d0
+----
+
+shall be interpreted as semantically equivalent.
+
+|===

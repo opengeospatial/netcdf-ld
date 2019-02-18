@@ -262,3 +262,83 @@ If multiple aliases match an attribute name, this is an error condition, the dec
 All remaining attribute values shall be left unchanged and declared as instances of <rdf:Literal>.
 
 === NetCDF Dimensions
+
+NetCDF makes strong inferences regarding how variables are defined by dimensions
+
+NetCDF files define named dimensions, 'dims'.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other.
+
+NetCDF-Classic-LD uses the dimensions to interpret the size and shape of a variable array.
+
+NetCDF-Classic-LD does not explicity encode the dimensions: only the sizing and referencing information.  In cases where dimensions do not have a netCDF coordinate variable defined, this results in the name of the dimension being lost.
+
+Extensive Variables are variables defined with respect to one or more dimensions.
+
+In netCDF-Classic-LD, the size and shape of each extensive variable is explicitly stored as a statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be rdf:Literal instances.
+
+Each extensive variable shall be described by a statement.
+
+----
+<$entity> <http://binary-array-ld.net/latest/shape> ($d0 $d1 $d2)
+----
+
+where `$dn` is an integer, taken from the defined dimension size in the netCDF file and the count of the number of values is the dimensionality of the variable.
+
+The object of this statement is an RDF List.
+
+
+==== Variable References and Dimensions
+
+NetCDF-Classic-LD uses the dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
+
+Each variable reference between variables defined with respect to netCDF dimensions is assumed to be an array to array relationship and that the arrays can be broadcast to enable a common indexing approach.
+
+This interpretation means that it can be expected that the child in the reference relationship can be viewed with the same dimensionality as the parent, with size one values for dimensions that are to be broadcast over.
+
+Note: this is a key feature of netCDF dimensions: defining the size and commonality of array dimensions for variables.
+
+In each case where a variable to variable reference is inferred within a netCDF file and both of the variables are defined with respect to one or more dimensions, the nature of that reference from the perspective of the arrays will be explicitly encoded within the RDF graph.
+
+The inferencing of how array dimensions are matched and how this enables the interpretation of array broadcasting is subtle and implicit in netCDF, and specific to netCDF.
+
+This information is unpacked and stored in a general fashion within the RDF graph.
+
+All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
+NetCDf-Classic-LD explicitly includes all reference statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
+
+A reshape array has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
+
+To hold this information, netCDF-Classic-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
+
+This `<$referenceEntity>` is referenced by the `<$parentEntity>` using the predicate `<http://binary-array-ld.net/latest/references>`, i.e.:
+
+----
+<$parentEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity>
+----
+
+The `<$referenceEntity>` is defined to be of type `<http://binary-array-ld.net/latest/Reference>` and is expected to carry a single reference to the child entity in the relationship and a `bald:childBroadcast` statement defining the expansion of the child array to the same shape as the parent. i.e.:
+
+----
+<$referenceEntity> a <http://binary-array-ld.net/latest/Reference> ;
+    <http://binary-array-ld.net/latest/childBroadcast> ($d1 $d2 $d3) ;
+    <http://binary-array-ld.net/latest/array> <$childEntity> .
+----
+
+`$dn` are all defined to be integers.  The object of this statement is an RDF list.
+
+There is an optional statement predicate available: `<http://binary-array-ld.net/latest/childBroadcast>`, for the rare cases where both parent and child arrays have to be broadcast to a common shape. 
+
+===== Mismatched reference 
+
+Where metadata schemes provide further variable reference predicates, it is possible for variable to variable references to be defined where a broadcast relationship does not exist.
+
+Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of statements, or as error conditions, and fail to create a graph.  This is an implementation detail.
+
+==== NetCDF Coordinate Variables
+
+NetCDF defines a special type of variable, called a Coordinate Variable, which is identified by being one-dimensional and having the same name as the single dimension used to size the variable.
+
+NetCDF-Classic_LD interprets Coordinate Variables as a case of variable referencing and includes entries as `bald:references` statements. 
+
+
+
+
