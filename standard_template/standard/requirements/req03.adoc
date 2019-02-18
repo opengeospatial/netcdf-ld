@@ -11,4 +11,7 @@ If a prefix variable is defined, that prefix variable shall contain the prefix:
 
 Prefixes defined within a prefix variable shall be used as the definitive list of prefixes for that file.
 
+ 
+ {set:cellbgcolor:#FFFFFF}
+
 |===

@@ -14,7 +14,7 @@ shall be interpreted as an unordered set of references to the other variables.
 An attribute declared by a metadata standard as a variable reference attribute where:
 - the attribute is a parenthesis wrapped, comma separated list of names, all of which match a variable name within the file;
 shall be interpreted as an ordered list of references to the other variables.
-
-
+ 
+ {set:cellbgcolor:#FFFFFF}
 
 |===

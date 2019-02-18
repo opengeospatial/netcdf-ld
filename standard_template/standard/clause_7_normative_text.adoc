@@ -1,10 +1,9 @@
 == Clause containing normative material
 Paragraph
 
-=== Requirement Class A or Requirement A Example
+=== Requirement Class A: URIs
 Paragraph – intro text for the requirement class.
 
-Use the following table for Requirements Classes.
 
 include::requirements/requirements_class.adoc[]
 
@@ -14,6 +13,15 @@ include::requirements/req01.adoc[]
 ==== Requirement 2
 
 include::requirements/req02.adoc[]
+
+
+
+=== Requirement Class B: Prefixing
+
+Paragraph – intro text for the requirement class.
+
+include::requirements/requirements_class_b.adoc[]
+
 ==== Requirement 3
 
 include::requirements/req03.adoc[]
@@ -23,6 +31,16 @@ include::requirements/req04.adoc[]
 ==== Requirement 5
 
 include::requirements/req05.adoc[]
+
+
+
+=== Requirement Class C: Aliasing
+
+Paragraph – intro text for the requirement class.
+
+
+include::requirements/requirements_class_c.adoc[]
+
 ==== Requirement 6
 
 include::requirements/req06.adoc[]
@@ -32,6 +50,15 @@ include::requirements/req07.adoc[]
 
 ==== Requirement 8
 include::requirements/req08.adoc[]
+
+
+
+=== Requirement Class D: Attribute names
+
+Paragraph – intro text for the requirement class.
+
+
+include::requirements/requirements_class_d.adoc[]
 
 ==== Requirement 9
 include::requirements/req09.adoc[]
@@ -45,10 +72,20 @@ include::requirements/req11.adoc[]
 ==== Requirement 12
 include::requirements/req12.adoc[]
 
+
+
+=== Requirement Class E: Variable-to-variable referencing
+
+Paragraph – intro text for the requirement class.
+
+
+include::requirements/requirements_class_e.adoc[]
+
 ==== Requirement 13
 include::requirements/req13.adoc[]
 
 ==== Requirement 14
 include::requirements/req14.adoc[]
+
 
 

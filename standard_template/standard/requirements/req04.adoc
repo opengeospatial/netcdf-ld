@@ -11,5 +11,7 @@ A prefix attribute name, defined in a prefix variable, shall end with the sub-st
 
 
 
+ 
+ {set:cellbgcolor:#FFFFFF}
 
 |===

@@ -4,5 +4,7 @@
  +
 
 If an attribute name in a netCDF file does not match a prefix definition, or attribute alias,  then that attribute name shall be interpreted locally, as a URI relative to the file identity.
+ 
+ {set:cellbgcolor:#FFFFFF}
 
 |===

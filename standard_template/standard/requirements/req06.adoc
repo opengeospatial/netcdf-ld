@@ -4,4 +4,7 @@
  +
 
 Aliases shall be defined as one or more RDF graphs.
+ 
+ {set:cellbgcolor:#FFFFFF}
+
 |===
