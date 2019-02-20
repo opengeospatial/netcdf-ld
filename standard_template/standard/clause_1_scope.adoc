@@ -2,9 +2,9 @@
 
 NetCDF-LD is an approach for constructing Linked Data descriptions using the metadata 
 and structures found in netCDF files. 
-Linked Data is a set of practices to allow structured data to be published 
+Linked Data is a set of World Wide Web Consortium (W3C) best practices to allow structured data to be published 
 so that it can be interlinked on the web and support semantic queries. 
-It uses the W3 Resource Description Framework (RDF) to express the information and relationships.
+Linked Data uses the W3C Resource Description Framework (RDF) to express the information and relationships.
 
 NetCDF-LD enhances netCDF metadata, enabling information found in netCDF files 
 to be linked with published conventions and controlled vocabularies used to express the content.
