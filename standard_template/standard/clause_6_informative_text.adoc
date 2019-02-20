@@ -2,20 +2,20 @@
 
 === Design principles and Rationale ===
 
-netCDF-Classic-LD allows existing netCDF files to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
+netCDF-Classic-LD allows existing netCDF files, which use the netCDF-classic data model of the legacy netSDF-3 encoding, to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
 
 A design principle of netCDF-Classic-LD is that it works with existing netCDF classic encoded files. This means existing netCDF libraries can be used to parse files encoded as netCDF-Classic-LD. This also ensures that netCDF-Classic-LD files can be used as simply as netCDF, with no knowledge of RDF.
 
-A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to IRIs via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
-netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies like SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
+netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies including the RDF query language, SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
 
 
 === Resource Description Framework
 
-The _Resource Description Framework (RDF)_ is a W3 standard (Hayes and Patel-Schneider 2014).  Information elements are statements which have three parts: _Subject_, _Predicate_, and _Object_.
+The _Resource Description Framework (RDF)_ is a W3C standard (Hayes and Patel-Schneider 2014).  Information elements are statements which have three parts: _Subject_, _Predicate_, and _Object_.
 
-_Subjects_ and _Predicates_ are _Universal Resource Identifiers (URIs)_ whilst Objects may be URIs or Literals.  Where an _Object_ is a _URI_, this may also be a subject for another statement.
+_Subjects_ and _Predicates_ are _Uniform Resource Identifiers (URIs)_ whilst Objects may be URIs or Literals.  Where an _Object_ is a _URI_, this may also be a subject for another statement.
 
 Statements are collected together within an _RDF Graph_.
 
@@ -30,18 +30,238 @@ An _RDF graph_ representing the metadata of multiple files provides a valuable r
 
 The numerical data within the file is not encoded within the graph, only the metadata.  In general this means that the graph is orders of magnitude smaller than the data file it summarises.
 
-Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata in a variety of ways.
+Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways.
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
 Multiple graphs may be combined into a single multi-file metadata graph as long as individual file identity is unique across the multi-file metadata graph.
 
-==== Universal Resource Identifiers within netCDF files
+==== Uniform Resource Identifiers within netCDF files
 
-At the core of this standard is the mechanism for encoding and interpreting Universal Resource Identifiers (URIs) within netCDF files.
+At the core of this standard is the mechanism for encoding and interpreting Uniform Resource Identifiers (URIs) within netCDF files.
 
 These URIs may be declared explicitly within the files, or interpreted from file metadata and external information sources.
 
+
+==== Identity
+
+
+A _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
+
+An explicit identity may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
+
+Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a `/`.
+
+==== Prefix Definition
+
+The prefix is the most straightforward and the most powerful way to encode explicit URIs in this standard.  It has two parts: the first part is the declaration of a prefix, the second part is the use of the prefix.
+
+Prefixes are in wide use in a number of domains, including XML and RDF. They allow a URI to be expressed in a compact fashion that saves space, enhances human readability and can mitigate issues with reserved characters.
+
+A prefix is declared using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix.
+
+The 'double underscore' character pair: `__` is used as an identifier and suffix for the prefix, the double underscore is part of the prefix.
+
+The double underscore is interpreted as a special character by this standard: all uses of the double underscore shall be interpreted as prefixed entities and will be unpacked into full URIs by aware software if a full URI is defined.
+
+Prefixes are applied across the file they are declared within.  A single dedicated variable shall be used to contain all of the prefixes applied to that file by that file.
+
+The prefix variable is optional.
+
+If included the prefixes variable shall be identified within the file by a single global attribute, using the attribute name `bald__isPrefixedBy`.
+
+If included, the prefixes variable shall include the prefix declaration
+----
+`bald__ = http://binary-array-ld.net/latest/`
+----
+
+A prefix is used with netCDF file elements as:
+----
+<prefix><name>
+----
+
+This is interpreted within this standard as a URI, a concatenation of the matching value within the prefix variable and the remainder of the attribute name or value.
+
+The attribute name
+----
+`bald__isPrefixedBy` 
+----
+together with the prefix definition
+----
+`bald__ = http://binary-array-ld.net/latest/`
+----
+is interpreted as
+----
+`bald__ = http://binary-array-ld.net/latest/isPrefixedBy`
+----
+
+Prefixes shall end in a URI separator, either a `/` or a `#`.  
+
+
+
+The following example, in netCDF Common Data Language (CDL), uses the link:++binary-array-ld.net++[binary-array-ld.net] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
+
+----
+netcdf tmpMwXy8U {
+dimensions:
+	pdim0 = 11 ;
+	pdim1 = 17 ;
+variables:
+	int a_variable(pdim0, pdim1) ;
+		parent_variable:rdf__type = "bald__Array" ;
+		parent_variable:bald__references = "b_variable" ;
+	int b_variable(pdim0, pdim1) ;
+		child_variable:rdf__type = "bald__Reference" ;
+		child_variable:bald__array = "b_variable" ;
+	int prefix_list ;
+		prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+		prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+
+// global attributes:
+		:bald__isPrefixedBy = "prefix_list" ;
+}
+----
+
+In this example:
+
+* `rdf__type` is interpreted as http://www.w3.org/1999/02/22-rdf-syntax-ns#type
+* `bald__array` is interpreted as http://binary-array-ld.net/latest/array
+
+
+
+==== Alias Definition
+
+Alongside the definition of prefixes, explicit aliases may be defined within the file, or as a scope for a file during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
+
+The aliases mechanism is less flexible than the prefixes mechanism.  It does enable interpretation of atribute names directly, making it useful for existing standards and existing files.
+
+
+Aliases are applied across the file they are declared for.
+
+Aliases are declared as a set of RDF graphs. These RDF graphs are commonly provided as URIs, to be obtained during parsing and file metadata interpretation.
+
+The RDF graphs shall be combined and treated as a single alias scope for the file.
+
+For an entity in an alias graph to be considered as an alias, the entity will define a statement:
+
+<$entity> <http://purl.org/dc/terms/identified> "$Literal"
+
+The Literal object of this statement is the alias name.
+
+An alias that may be used as an attribute name alias shall define its Type as
+
+<$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/1999/02/22-rdf-syntax-ns#Property> 
+
+or
+
+<$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty>
+
+
+==== Attribute Names
+
+In order to map netCDF metadata to RDF, all global and variable attributes are interpreted as RDF statements.  This requires that all attribute names are interpreted as URIs.
+
+A parsing process shall map attribute names to URIs using prefix definitions first, then map attribute names to URIs aliases.
+
+
+An attribute name shall be mapped to an alias URI if and only if there is an exact match for the full attribute name as a dct:notation (expand to full uri) for an entity within the alias graph where that entity declares a statement <entity> <rdf:type> <rdfs:ObjectProperty> (full URIs).
+
+If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
+
+
+
+All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (ref{}) to form a locally applicable URI.
+
+==== Variable to Variable References
+
+The value of an attribute may be a reference to another variable, or multiple variables, within the file.
+The process of establishing identity for each variable within the file enables this reference to be interpreted as a URI.
+In this way, the RDF approach to having objects that are links to subjects, chaining statements into graphs, is implemented.
+
+For a reference to be identified, the predicate that defines that reference must identify itself as suitable for variable to variable referencing.  No references will be inferred for predicates that do not identify themselves in this way.
+
+To identify a predicate as a variable to variable reference predicate, that predicate shall provide a statement that explicitly opts into this behaviour.  The simplest way to do this is to include the statement
+
+  <{predicate}> rdfs:range bald:Subject .
+
+This standard recognises that some vocabularies already use the rdfs:range for specific purposes.  To enable particular scenarios to be supported, then a subClassOf approach may be used.  This has potential implications for reasoning, so should be adopted only where it has value, and the implications are understood.  The simple statement above is the advised option where it can be implemented.
+
+This standard shall infer a variable to variable reference where an rdfs:range target is also identifed as an rdfs:subClassOf bald:Subject
+
+ <{predicate}> rdfs:range <{AClass}> .
+ <{AClass}> rdfs:subClassOf bald:Subject .
+
+
+
+References to variables are implemented in netCDF files by defining the value of an attribute as the name of a variable, or as a space separated set of names of variables, or as a parenthesis bound space separated list of names of variables.
+
+A set of references is explicitly unordered whilst a list of references is explicitly ordered.
+
+CDL defining a set of references:
+----
+    int set_collection ;
+        set_collection:bald__references = "data_variable1 data_variable2" ;
+----
+
+will be interpreted into RDF(turtle) as:
+----
+    ns1:set_collection a bald:Subject ;
+        bald:references ns1:data_variable1_pdim0_ref,
+                        ns1:data_variable2_pdim0_ref .
+----
+
+
+CDL defining a list of references:
+----
+    int list_collection ;
+        list_collection:bald__references = "( data_variable1 data_variable2 )" ;
+----
+
+will be interpreted into RDF(turtle) as:
+----
+    ns1:list_collection a bald:Subject ;
+        bald:references ( ns1:data_variable1_pdim0_ref ns1:data_variable2_pdim0_ref ) .
+----
+
+All variable names shall be within the file, or no references shall be interpreted.  There shall be no partial matching.
+
+If such matching fails, the fall back option is to ignore the potential for references and leave the attribute value as a Literal.
+
+==== Attribute Values
+
+In RDF, objects may be Literals or URIs, therefore attribute values are conditionally interpreted as Literals or as URIs.
+
+A parsing process shall map attribute values to URIs using identified prefixes first.
+
+===== Attribute Variable References
+
+The value of a variable attribute may be an internal reference to another variable within the file.
+
+For a variable reference to be declared, three conditions shall be met.
+
+Condition one: the value is a string which exactly matches the name of a variable within the file.
+
+Condition two: the attribute name is already interpreted as a URI, defining an entity, external to the file.
+
+Condition three: the attribute name entity declares and <rdfs:range> of <bald:subject>.
+
+An identified attribute reference shall map the attribute value to the identify of the matched variable within the file.
+
+This identification takes place after prefixes are identified and mapped.
+
+===== Attribute Value Aliases
+
+After prefix and reference interpretation, remaining attribute values are mapped to URIs using the alias graph.
+
+An attribute value shall be mapped to an alias URI if and only if there is an exact match for the full attribute value as a dct:notation (expand to full uri) for an entity within the alias graph.
+
+If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
+
+===== Attribute Value Literals
+
+All remaining attribute values shall be left unchanged and declared as instances of <rdf:Literal>.
+
+=== NetCDF Dimensions
 
 ==== Identity
 
