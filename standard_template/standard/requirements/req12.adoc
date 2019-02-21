@@ -1,6 +1,6 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 12* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+|*Requirement D-4* {set:cellbgcolor:#CACCCE}|/req/req-class-d/requirement-4 +
  +
 
 If an attribute name in a netCDF file does not match a prefix definition, or attribute alias,  then that attribute name shall be interpreted locally, as a URI relative to the file identity.

@@ -1,6 +1,6 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 14* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+|*Requirement E-2* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-2 +
  +
 
 An attribute declared by a metadata standard as a variable reference attribute where:

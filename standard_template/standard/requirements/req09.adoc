@@ -1,6 +1,6 @@
 [width="90%",cols="2,6"]
 |===
-|*Requirement 9* {set:cellbgcolor:#CACCCE}|/req/req-class-a/req-name-1 +
+|*Requirement D-1* {set:cellbgcolor:#CACCCE}|/req/req-class-d/requirement-1 +
  +
 
 All attribute names in a netCDF file shall be interpreted as URIs.
