@@ -2,20 +2,20 @@
 
 === Design principles and Rationale ===
 
-netCDF-Classic-LD allows existing netCDF files to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
+netCDF-Classic-LD allows existing netCDF files, which use the netCDF-classic data model of the legacy netSDF-3 encoding, to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
 
 A design principle of netCDF-Classic-LD is that it works with existing netCDF classic encoded files. This means existing netCDF libraries can be used to parse files encoded as netCDF-Classic-LD. This also ensures that netCDF-Classic-LD files can be used as simply as netCDF, with no knowledge of RDF.
 
-A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to IRIs via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
-netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies like SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
+netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies including the RDF query language, SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
 
 
 === Resource Description Framework
 
-The _Resource Description Framework (RDF)_ is a W3 standard (Hayes and Patel-Schneider 2014).  Information elements are statements which have three parts: _Subject_, _Predicate_, and _Object_.
+The _Resource Description Framework (RDF)_ is a W3C standard (Hayes and Patel-Schneider 2014).  Information elements are statements which have three parts: _Subject_, _Predicate_, and _Object_.
 
-_Subjects_ and _Predicates_ are _Universal Resource Identifiers (URIs)_ whilst Objects may be URIs or Literals.  Where an _Object_ is a _URI_, this may also be a subject for another statement.
+_Subjects_ and _Predicates_ are _Uniform Resource Identifiers (URIs)_ whilst Objects may be URIs or Literals.  Where an _Object_ is a _URI_, this may also be a subject for another statement.
 
 Statements are collected together within an _RDF Graph_.
 
@@ -30,15 +30,15 @@ An _RDF graph_ representing the metadata of multiple files provides a valuable r
 
 The numerical data within the file is not encoded within the graph, only the metadata.  In general this means that the graph is orders of magnitude smaller than the data file it summarises.
 
-Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata in a variety of ways.
+Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways.
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
 Multiple graphs may be combined into a single multi-file metadata graph as long as individual file identity is unique across the multi-file metadata graph.
 
-==== Universal Resource Identifiers within netCDF files
+==== Uniform Resource Identifiers within netCDF files
 
-At the core of this standard is the mechanism for encoding and interpreting Universal Resource Identifiers (URIs) within netCDF files.
+At the core of this standard is the mechanism for encoding and interpreting Uniform Resource Identifiers (URIs) within netCDF files.
 
 These URIs may be declared explicitly within the files, or interpreted from file metadata and external information sources.
 
@@ -58,7 +58,7 @@ The prefix is the most straightforward and the most powerful way to encode expli
 
 Prefixes are in wide use in a number of domains, including XML and RDF. They allow a URI to be expressed in a compact fashion that saves space, enhances human readability and can mitigate issues with reserved characters.
 
-A prefix is declared using a name : value pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix.
+A prefix is declared using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix.
 
 The 'double underscore' character pair: `__` is used as an identifier and suffix for the prefix, the double underscore is part of the prefix.
 
@@ -99,7 +99,7 @@ Prefixes shall end in a URI separator, either a `/` or a `#`.
 
 
 
-The following example CDL uses the link:++binary-array-ld.net++[binary-array-ld.net] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
+The following example, in netCDF Common Data Language (CDL), uses the link:++binary-array-ld.net++[binary-array-ld.net] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
 
 ----
 netcdf tmpMwXy8U {
@@ -184,9 +184,9 @@ To identify a predicate as a variable to variable reference predicate, that pred
 
   <{predicate}> rdfs:range bald:Subject .
 
-Binary array linked data recognises that some vocabularies already use the rdfs:range for specific purposes.  To enable particular scenarios to be supported, then a subClassOf approach may be used.  This has potential implications for reasoning, so should be adopted only where it has value, and the implications are understood.  The simple statement above is the advised option where it can be implemented.
+This standard recognises that some vocabularies already use the rdfs:range for specific purposes.  To enable particular scenarios to be supported, then a subClassOf approach may be used.  This has potential implications for reasoning, so should be adopted only where it has value, and the implications are understood.  The simple statement above is the advised option where it can be implemented.
 
-Binary array linked data shall infer a variable to variable reference where an rdfs:range target is also identifed as an rdfs:subClassOf bald:Subject
+This standard shall infer a variable to variable reference where an rdfs:range target is also identifed as an rdfs:subClassOf bald:Subject
 
  <{predicate}> rdfs:range <{AClass}> .
  <{AClass}> rdfs:subClassOf bald:Subject .

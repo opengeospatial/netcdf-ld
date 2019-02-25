@@ -2,13 +2,13 @@
 
 netCDF is a format for encoding array-oriented scientific data, particularly in many Earth & Space Science domains, 
 and is an Open Geospatial Consortium (OGC) standard.
-It is common practice to aid interoperability is to use the Climate and Forecasting (CF) 
+It is common practice to aid interoperability of netCDF files in the Earth sciences by using the Climate and Forecasting (CF) 
 convention and the Attribute Convention for Data Discovery (ACDD) convention. 
 Several communities are defining additional netCDF conventions for describing the semantics relating of their different domains. 
-As the concurrent use of multiple, and possibly clashing, netCDF conventions spreads the challenge of finding a common mechanism 
+As the concurrent use of multiple, and possibly clashing or conflicting, netCDF conventions spreads the challenge of finding a common mechanism 
 to validate and interpret metadata being embedded inside netCDF files grows.
 
-Linked Data (LD) describes a method for encoding and publishing metadata to expose and connect data both within individual datasets and across multiple datasets. 
+Linked Data (LD) is a World Wide Web Consortium best practice for encoding and publishing metadata to expose and connect data both within individual datasets and across multiple datasets. 
 LD also allows dataset descriptions to become more useful through the ability to run semantically-enabled queries across datasets. 
 Publishing netCDF file descriptions using LD methods presents the user community with an opportunity to address this exposure and connection and, 
 further, to enhance data findability and re-use.
@@ -51,6 +51,24 @@ All questions regarding this submission should be directed to the editor or the 
 |===
 |Name  
 |Affiliation
+
+|Mark Hedley
+|UK Met Office
+
+|Jonathan Yu
+|CSIRO
+
+|James Biard
+|NOAA
+
+|Adam Leadbetter
+|Marine Institute, Ireland
+
+|Aleksander Jelenak
+|HDF Group
+|===
+
+
 
 |Mark Hedley
 |UK Met Office
