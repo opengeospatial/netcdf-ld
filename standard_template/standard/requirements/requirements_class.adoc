@@ -1,8 +1,6 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
-2+|http://www.opengis.net/spec/ABCD/m.n/req/req-class-a {set:cellbgcolor:#FFFFFF}
+2+|http://www.opengis.net/spec/19-002/m.n/req/req-class-a {set:cellbgcolor:#FFFFFF}
 |Target type |Core
-|Dependency |http://www.example.org/req/blah
-|Dependency |urn:iso:ts:iso:19139:clause:6
 |===

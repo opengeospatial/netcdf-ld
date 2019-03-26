@@ -1,0 +1,24 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement E-4* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-4 +
++
+
+Each variable to variable reference between two variables, both of which are defined with respect to one or more dimensions, shall be described by the statement.
+
+
+ `+<$parentEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity> .+`
+
+and the definition of a `+<$referenceEntity>+`, an instance of `+<http://binary-array-ld.net/latest/Reference>+`.  This entity carries the broadcast relationship details and the reference to the child variable.
+
+
+ `+<$referenceEntity> a <http://binary-array-ld.net/latest/Reference> ;+`
+
+`+<http://binary-array-ld.net/latest/childBroadcast> ($d1 $d2 $d3) ;+`
+
+`+<http://binary-array-ld.net/latest/array> <$childEntity> .+`
+
+`$dn` are all defined to be integers.  The object of this statement is an RDF list.
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===

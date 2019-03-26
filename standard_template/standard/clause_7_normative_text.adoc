@@ -1,16 +1,16 @@
 == Clause containing normative material
-Paragraph
+
 
 === Requirement Class A: URIs
-Paragraph – intro text for the requirement class.
+Requirements for Universal Resource Identifiers definition and interpretation.
 
 
 include::requirements/requirements_class.adoc[]
 
-==== Requirement 1
+==== Requirement A-1
 
 include::requirements/req01.adoc[]
-==== Requirement 2
+==== Requirement A-2
 
 include::requirements/req02.adoc[]
 
@@ -18,17 +18,19 @@ include::requirements/req02.adoc[]
 
 === Requirement Class B: Prefixing
 
-Paragraph – intro text for the requirement class.
+Requirements for Prefix definition and interpretation.
 
 include::requirements/requirements_class_b.adoc[]
 
-==== Requirement 3
+==== Requirement B-1
 
 include::requirements/req03.adoc[]
-==== Requirement 4
+
+==== Requirement B-2
 
 include::requirements/req04.adoc[]
-==== Requirement 5
+
+==== Requirement B-3
 
 include::requirements/req05.adoc[]
 
@@ -36,56 +38,63 @@ include::requirements/req05.adoc[]
 
 === Requirement Class C: Aliasing
 
-Paragraph – intro text for the requirement class.
+Requirements for Alias definition and interpretation.
 
 
 include::requirements/requirements_class_c.adoc[]
 
-==== Requirement 6
+==== Requirement C-1
 
 include::requirements/req06.adoc[]
 
-==== Requirement 7
+==== Requirement C-2
 include::requirements/req07.adoc[]
 
-==== Requirement 8
+==== Requirement C-3
 include::requirements/req08.adoc[]
 
 
 
 === Requirement Class D: Attribute names
 
-Paragraph – intro text for the requirement class.
+Requirements for Attribute name definition and interpretation.
 
 
 include::requirements/requirements_class_d.adoc[]
 
-==== Requirement 9
+==== Requirement D-1
 include::requirements/req09.adoc[]
 
-==== Requirement 10
+==== Requirement D-2
 include::requirements/req10.adoc[]
 
-==== Requirement 11
+==== Requirement D-3
 include::requirements/req11.adoc[]
 
-==== Requirement 12
+==== Requirement D-4
 include::requirements/req12.adoc[]
 
 
 
 === Requirement Class E: Variable-to-variable referencing
 
-Paragraph – intro text for the requirement class.
+Requirements for variable to variable definition and interpretation.
 
 
 include::requirements/requirements_class_e.adoc[]
 
-==== Requirement 13
+==== Requirement E-1
 include::requirements/req13.adoc[]
 
-==== Requirement 14
+==== Requirement E-2
 include::requirements/req14.adoc[]
 
+==== Requirement E-3
+include::requirements/req15.adoc[]
 
+==== Requirement E-4
+include::requirements/req16.adoc[]
+
+==== Requirement E-5
+include::requirements/req17.adoc[]
 
