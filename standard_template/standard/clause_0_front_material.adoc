@@ -68,22 +68,3 @@ All questions regarding this submission should be directed to the editor or the 
 |HDF Group
 |===
 
-
-
-|Mark Hedley
-|UK Met Office
-
-|Jonathan Yu
-|CSIRO
-
-|James Biard
-|NOAA
-
-|Adam Leadbetter
-|Marine Institute, Ireland
-
-|Aleksander Jelenak
-|HDF Group
-|===
-
-
