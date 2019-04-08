@@ -5,11 +5,15 @@ Patrick J. Hayes, Peter F. Patel-Schneider. RDF 1.1 Semantics. W3C Recommendatio
 
 Eric Prud'hommeaux, Gavin Carothers. RDF 1.1 Turtle: Terse RDF Triple Language. W3C Recommendation, 25 February 2014. URL: http://www.w3.org/TR/2014/REC-turtle-20140225/. The latest edition is available at http://www.w3.org/TR/turtle/
 
+Steve Harris, Andy Seaborne. SPARQL 1.1 Query Language, W3C Recommendation, 21 March 2013, URL: ttp://www.w3.org/TR/sparql11-query/, (2013).
+
 Miles, A., Bechhofer, S.: SKOS Simple Knowledge Organization System Reference. (2008).
 
 Rew, R., Davis, G.: NetCDF: An interface for scientific data access. IEEE Comput. Graph. Appl. 10, 76–82 (1990).
 
 Eaton, B., Gregory, J., Drach, B., Taylor, K., Hankin, S.: NetCDF Climate and Forecast (CF) Metadata Conventions, (2011).
+
+Binary Array Linked Data ontology (BALD), http://binary-array-ld.net/_latest
 
 Gregory, J.: The CF metadata standard. CLIVAR Exch. 8, 4 (2003).
 

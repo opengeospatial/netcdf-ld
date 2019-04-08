@@ -2,35 +2,37 @@
 
 === Design principles and Rationale ===
 
-netCDF-Classic-LD allows existing netCDF files, which use the netCDF-classic data model of the legacy netSDF-3 encoding, to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
+netCDF-Classic-LD allows existing netCDF files, which use the netCDF-classic data model of the legacy netCDF-3 encoding, to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
 
-A design principle of netCDF-Classic-LD is that it works with existing netCDF classic encoded files. This means existing netCDF libraries can be used to parse files encoded as netCDF-Classic-LD. This also ensures that netCDF-Classic-LD files can be used as simply as netCDF, with no knowledge of RDF.
+A design principle of netCDF-Classic-LD is that it works with existing netCDF classic encoded files. This means existing netCDF libraries can be used to parse files which have been encoded as netCDF-Classic-LD. This also ensures that netCDF-Classic-LD encoded files can be used as simply as netCDF, with no knowledge of RDF.
 
-A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via prefixes and aliases mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
-netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies including the RDF query language, SPARQL. People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
+netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013). People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
 
 
 === Resource Description Framework
 
-The _Resource Description Framework (RDF)_ is a W3C standard (Hayes and Patel-Schneider 2014).  Information elements are statements which have three parts: _Subject_, _Predicate_, and _Object_.
+The _Resource Description Framework (RDF)_ is a W3C standard (Hayes and Patel-Schneider 2014).  Information elements consist of RDF statements. An RDF statement consist of three parts: _Subject_, _Predicate_, and _Object_. This is called a _triple_.
 
-_Subjects_ and _Predicates_ are _Uniform Resource Identifiers (URIs)_ whilst Objects may be URIs or Literals.  Where an _Object_ is a _URI_, this may also be a subject for another statement.
+Identifiers are a key building block of RDF and _Uniform Resource Identifiers (URIs)_ are used to identify a resource. URIs can appear in each part of a triple, i.e. _Subjects_, _Predicates_ and _Objects_. Where an _Object_ is a _URI_, this may also be a subject for another statement.
 
-Statements are collected together within an _RDF Graph_.
+Literals are another key part of RDF and are used to capture basic values other than a URI. e.g. strings such as "Gerald", dates such as "1 April 2019", and numbers such as "4897". Literals are associated with a datatype so that it can be parsed. Literals may only appear in the object part of a RDF statement. 
 
-This standard maps the netCDF Classic data model encoding onto the RDF information model.
+RDF statements are collected together within an _RDF Graph_.
 
-
+The netCDF-Classic-LD standard maps the netCDF Classic data model encoding onto the RDF information model.
 
 
 === Metadata RDF Graph
 
 An _RDF graph_ representing the metadata of multiple files provides a valuable resource for summarising the file collection.
 
-The numerical data within the file is not encoded within the graph, only the metadata.  In general this means that the graph is orders of magnitude smaller than the data file it summarises.
+The numerical data within the file is not encoded within the graph, only the metadata.  In general, this means that the graph is orders of magnitude smaller than the data file it summarises.
 
 Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways.
+
+**_TODO: insert diagram visualising an RDF graph_**  
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
@@ -45,20 +47,25 @@ These URIs may be declared explicitly within the files, or interpreted from file
 
 ==== Identity
 
+In netCDF-Classic-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
 
-A _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
-
-An explicit identity may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
+An explicit identity, i.e. a URL or URI, may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
 
 Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a `/`.
 
 ==== Prefix Definition
 
-The prefix is the most straightforward and the most powerful way to encode explicit URIs in this standard.  It has two parts: the first part is the declaration of a prefix, the second part is the use of the prefix.
+In netCDF-Classic-LD, the _prefix_ is a mechanism to encode explicit URIs from elements in the _netCDF file_. It is the most straightforward and the most powerful way of doing so. It has two parts: the first part is the declaration of a prefix (or a set of prefixes), the second part is the use of the prefix.
 
 Prefixes are in wide use in a number of domains, including XML and RDF. They allow a URI to be expressed in a compact fashion that saves space, enhances human readability and can mitigate issues with reserved characters.
 
-A prefix is declared using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix.
+===== Prefix declaration
+
+A prefix is declared using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix. e.g.
+
+----
+  `bald__ = http://binary-array-ld.net/latest/`
+----
 
 The 'double underscore' character pair: `__` is used as an identifier and as the termination of the prefix; the double underscore is part of the prefix.
 
@@ -70,10 +77,9 @@ The prefix variable is optional.
 
 If included the prefixes variable shall be identified within the file by a single global attribute, using the attribute name `bald__isPrefixedBy`.
 
-If included, the prefixes variable shall include the prefix declaration
-----
-  `bald__ = http://binary-array-ld.net/latest/`
-----
+If included, the prefixes variable shall include the `bald` prefix declaration.
+
+===== Prefix use
 
 A prefix is used with netCDF file elements as:
 ----
@@ -96,8 +102,6 @@ is interpreted as
 ----
 
 Prefixes shall end in a URI separator, either a `/` or a `#`.  
-
-
 
 The following example, in netCDF Common Data Language (CDL), uses the link:++binary-array-ld.net++[binary-array-ld.net] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
 
@@ -131,16 +135,7 @@ In this example:
 
 ==== Alias Definition
 
-Alongside the definition of prefixes, explicit aliases may be defined within the file, or as a scope for a file during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
-
-The aliases mechanism is less flexible than the prefixes mechanism.  It does enable interpretation of atribute names directly, making it useful for existing standards and existing files.
-
-
-Aliases are applied across the file they are declared for.
-
-Aliases are declared as a set of RDF graphs. These RDF graphs are commonly provided as URIs, to be obtained during parsing and file metadata interpretation.
-
-The RDF graphs shall be combined and treated as a single alias scope for the file.
+Alongside the definition of prefixes, explicit aliases may be defined via netCDF-Classic-LD conventions within the _netCDF file_, or as a scope for a _netCDF file_ during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
 
 For an entity in an alias graph to be considered as an alias, the entity will define a statement:
 
@@ -162,24 +157,31 @@ or
   <$entity> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://www.w3.org/2002/07/owl#ObjectProperty> .
 ----
 
+
+The alias mechanism is less flexible than the prefix mechanism. It does enable interpretation of atribute names directly, making it useful for existing standards and existing files.
+
+Aliases are applied across the file they are declared for.
+
+Aliases are declared as a set of RDF graphs. These RDF graphs are commonly provided as URIs, to be obtained during parsing and file metadata interpretation.
+
+The RDF graphs shall be combined and treated as a single alias scope for the file.
+
+
 ==== Attribute Names
 
 In order to map netCDF metadata to RDF, all global and variable attributes are interpreted as RDF statements.  This requires that all attribute names are interpreted as URIs.
 
 A parsing process shall map attribute names to URIs using prefix definitions first, then map attribute names to URIs aliases.
 
-
-An attribute name shall be mapped to an alias URI if and only if there is an exact match for the full attribute name as a dct:notation (expand to full uri) for an entity within the alias graph where that entity declares a statement within its defining graph.
+An attribute name shall be mapped to an alias URI if, and only if, there is an exact match for the full attribute name as a `dct:notation` (expand to full uri) for an entity within the alias graph where that entity declares a statement within its defining graph.
 
 ----
   <entity> <rdf:type> <rdfs:ObjectProperty> .
 ----
 
-That defining graph needs to be provided to software at the time of parsing the file, so that it can be interpreted.
+That defining graph needs to be provided to netCDF-Classic-LD aware software at the time of parsing the file, so that it can be interpreted.
 
-If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
-
-
+An error is thrown if multiple aliases match an attribute name in a _netCDF file_ due to a conflict in unambiguously identifying the declared alias scope.
 
 All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (ref{}) to form a locally applicable URI.
 
