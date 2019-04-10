@@ -98,7 +98,7 @@ together with the prefix definition
 ----
 is interpreted as
 ----
-  `bald__ = http://binary-array-ld.net/latest/isPrefixedBy`
+  `bald__isPrefixedBy = http://binary-array-ld.net/latest/isPrefixedBy`
 ----
 
 Prefixes shall end in a URI separator, either a `/` or a `#`.  
