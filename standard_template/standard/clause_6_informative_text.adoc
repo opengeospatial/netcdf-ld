@@ -19,7 +19,15 @@ Identifiers are a key building block of RDF and _Uniform Resource Identifiers (U
 
 Literals are another key part of RDF and are used to capture basic values other than a URI. e.g. strings such as "Gerald", dates such as "1 April 2019", and numbers such as "4897". Literals are associated with a datatype so that it can be parsed. Literals may only appear in the object part of a RDF statement. 
 
-RDF statements are collected together within an _RDF Graph_.
+RDF statements are collected together within an _RDF Graph_. Figure 1 below show an example of an RDF graph encoding information about the singer B.B. King.
+
+image::images/bb-king-rdf-example.png[RDF Example: BB king]
+
+```
+<B.B. King> <is a> <person>.
+<B.B. King> <is born on> <the 16th of September 1925>. 
+<B.B. King> <plays instrument> <guitar>
+```
 
 The netCDF-Classic-LD standard maps the netCDF Classic data model encoding onto the RDF information model.
 
@@ -32,7 +40,7 @@ The numerical data within the file is not encoded within the graph, only the met
 
 Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways.
 
-**_TODO: insert diagram visualising an RDF graph_**  
+
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
