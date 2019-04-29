@@ -148,13 +148,13 @@ In this example:
 
 Alongside the definition of prefixes, explicit aliases may be defined via netCDF-Classic-LD conventions within the _netCDF file_, or as a scope for a _netCDF file_ during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
 
-For an entity in an alias graph to be considered as an alias, the entity will define a statement:
+For an entity in an alias graph to be considered as an alias, the entity will define a RDF statement:
 
 ----
   <$entity> <http://purl.org/dc/terms/identified> "$Literal" .
 ----
 
-The Literal object of this statement is the alias name.
+The Literal object of this RDF statement is the alias name.
 
 An alias that may be used as an attribute name alias shall define its Type as
 
@@ -184,7 +184,7 @@ In order to map netCDF metadata to RDF, all global and variable attributes are i
 
 A parsing process shall map attribute names to URIs using prefix definitions first, then map attribute names to URIs aliases.
 
-An attribute name shall be mapped to an alias URI if, and only if, there is an exact match for the full attribute name as a `dct:notation` (expand to full uri) for an entity within the alias graph where that entity declares a statement within its defining graph.
+An attribute name shall be mapped to an alias URI if, and only if, there is an exact match for the full attribute name as a `dct:notation` (expand to full uri) for an entity within the alias graph where that entity declares a RDF statement within its defining graph.
 
 ----
   <entity> <rdf:type> <rdfs:ObjectProperty> .
@@ -194,17 +194,17 @@ That defining graph needs to be provided to netCDF-Classic-LD aware software at 
 
 An error is thrown if multiple aliases match an attribute name in a _netCDF file_ due to a conflict in unambiguously identifying the declared alias scope.
 
-All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (ref{}) to form a locally applicable URI.
+All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (`ref{}`) to form a locally applicable URI.
 
 ==== Variable to Variable References
 
 The value of an attribute may be a reference to another variable, or multiple variables, within the file.
 The process of establishing identity for each variable within the file enables this reference to be interpreted as a URI.
-In this way, the RDF approach to having objects that are links to subjects, chaining statements into graphs, is implemented.
+In this way, the RDF approach to having objects that are links to subjects, chaining RDF statements into graphs, is implemented.
 
 For a reference to be identified, the predicate that defines that reference must identify itself as suitable for variable to variable referencing.  No references will be inferred for predicates that do not identify themselves in this way.
 
-To identify a predicate as a variable to variable reference predicate, that predicate shall provide a statement that explicitly opts into this behaviour.  The simplest way to do this is to include the statement
+To identify a predicate as a variable to variable reference predicate, that predicate shall provide a RDF statement that explicitly opts into this behaviour.  The simplest way to do this is to include the RDF statement.
 
 ----
   <{predicate}> rdfs:range bald:Subject .
@@ -212,7 +212,7 @@ To identify a predicate as a variable to variable reference predicate, that pred
 
 This standard recognises that some vocabularies already use the rdfs:range for specific purposes.  To enable particular scenarios to be supported, then a subClassOf approach may be used.  This has potential implications for reasoning, so should be adopted only where it has value, and the implications are understood.  The simple statement above is the advised option where it can be implemented.
 
-This standard shall infer a variable to variable reference where an rdfs:range target is also identifed as an rdfs:subClassOf bald:Subject
+This standard shall infer a variable-to-variable reference where an `rdfs:range` target is also identifed as an `rdfs:subClassOf bald:Subject`.
 
 ----
   <{predicate}> rdfs:range <{AClass}> .
@@ -270,7 +270,7 @@ Condition one: the value is a string which exactly matches the name of a variabl
 
 Condition two: the attribute name is already interpreted as a URI, defining an entity, external to the file.
 
-Condition three: the attribute name entity declares and <rdfs:range> of <bald:subject>.
+Condition three: the attribute name entity declares and `<rdfs:range>` of `<bald:subject>`.
 
 An identified attribute reference shall map the attribute value to the identify of the matched variable within the file.
 
@@ -280,7 +280,7 @@ This identification takes place after prefixes are identified and mapped.
 
 After prefix and reference interpretation, remaining attribute values are mapped to URIs using the alias graph.
 
-An attribute value shall be mapped to an alias URI if and only if there is an exact match for the full attribute value as a dct:notation (expand to full uri) for an entity within the alias graph.
+An attribute value shall be mapped to an alias URI if and only if there is an exact match for the full attribute value as a `dct:notation` (expand to full uri) for an entity within the alias graph.
 
 If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
 
@@ -291,7 +291,7 @@ All remaining attribute values shall be left unchanged and declared as instances
 
 === NetCDF Dimensions
 
-NetCDF makes strong inferences regarding how variables are defined by dimensions
+NetCDF makes strong inferences regarding how variables are defined by dimensions.
 
 NetCDF files define named dimensions, `dims`.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other.
 
@@ -301,9 +301,9 @@ NetCDF-Classic-LD does not explicity encode the dimensions: only the sizing and 
 
 Extensive Variables are variables defined with respect to one or more dimensions.
 
-In netCDF-Classic-LD, the size and shape of each extensive variable is explicitly stored as a statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be `rdf:Literal` instances.
+In netCDF-Classic-LD, the size and shape of each extensive variable is explicitly stored as a RDF statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be `rdf:Literal` instances.
 
-Each extensive variable shall be described by a statement.
+Each extensive variable shall be described by a RDF statement.
 
 ----
   <$entity> <http://binary-array-ld.net/latest/shape> ($d0 $d1 $d2)
@@ -330,8 +330,8 @@ The inferencing of how array dimensions are matched and how this enables the int
 
 This information is unpacked and stored in a general fashion within the RDF graph.
 
-All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
-NetCDf-Classic-LD explicitly includes all reference statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
+All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a RDF statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
+NetCDf-Classic-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
 
 A reshape array has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
 
@@ -351,7 +351,7 @@ The `<$referenceEntity>` is defined to be of type `<http://binary-array-ld.net/l
       <http://binary-array-ld.net/latest/array> <$childEntity> .
 ----
 
-`$dn` are all defined to be integers.  The object of this statement is an RDF list.
+`$dn` are all defined to be integers.  The object of this RDF statement is an RDF list.
 
 There is an optional statement predicate available: `<http://binary-array-ld.net/latest/childBroadcast>`, for the rare cases where both parent and child arrays have to be broadcast to a common shape. 
 
@@ -359,7 +359,7 @@ There is an optional statement predicate available: `<http://binary-array-ld.net
 
 Where metadata schemes provide further variable reference predicates, it is possible for variable-to-variable references to be defined where a broadcast relationship does not exist.
 
-Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of statements, or as error conditions, and fail to create a graph.  This is an implementation detail.
+Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements, or as error conditions, and fail to create a graph.  This is an implementation detail.
 
 ==== NetCDF Coordinate Variables
 

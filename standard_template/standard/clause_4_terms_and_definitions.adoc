@@ -21,5 +21,7 @@ text of the definition
 === *Literal*
 text of the definition
 
-=== *term name*
+=== *CDL*
 text of the definition
+
+
