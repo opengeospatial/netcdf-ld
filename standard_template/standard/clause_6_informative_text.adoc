@@ -38,10 +38,12 @@ An _RDF graph_ representing the metadata of multiple files provides a valuable r
 
 The numerical data within the file is not encoded within the graph, only the metadata.  In general, this means that the graph is orders of magnitude smaller than the data file it summarises.
 
-Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways. In Figure 2, an example is given showing the CF standard name attribute value across multiple files. Representing this an other metadata enables queries across, e.g. show me netCDF files that has data values on  `sea_surface_temperature`.
+Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways. In Figure 2, an example is given showing the CF standard name attribute value across multiple files.
 
 
 image::images/metadata-across-files-example.png[Figure 2. Example showing cf:standard_name property values across different files.]
+
+ Representing this and other metadata enables queries across netCDF files, e.g. show me netCDF files that has data values on  `sea_surface_temperature`.
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
@@ -60,7 +62,7 @@ In netCDF-Classic-LD, a _netCDF file_ has an identity.  This identity provides t
 
 An explicit identity, i.e. a URL or URI, may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
 
-Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a `/`.
+Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a ``/``.
 
 ==== Prefix Definition
 
@@ -284,13 +286,14 @@ If multiple aliases match an attribute name, this is an error condition, the dec
 
 ===== Attribute Value Literals
 
-All remaining attribute values shall be left unchanged and declared as instances of <rdf:Literal>.
+All remaining attribute values shall be left unchanged and declared as instances of `<rdf:Literal>`.
+
 
 === NetCDF Dimensions
 
 NetCDF makes strong inferences regarding how variables are defined by dimensions
 
-NetCDF files define named dimensions, 'dims'.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other.
+NetCDF files define named dimensions, `dims`.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other.
 
 NetCDF-Classic-LD uses the dimensions to interpret the size and shape of a variable array.
 
@@ -298,7 +301,7 @@ NetCDF-Classic-LD does not explicity encode the dimensions: only the sizing and 
 
 Extensive Variables are variables defined with respect to one or more dimensions.
 
-In netCDF-Classic-LD, the size and shape of each extensive variable is explicitly stored as a statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be rdf:Literal instances.
+In netCDF-Classic-LD, the size and shape of each extensive variable is explicitly stored as a statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be `rdf:Literal` instances.
 
 Each extensive variable shall be described by a statement.
 
@@ -315,13 +318,13 @@ The object of this statement is an RDF List.
 
 NetCDF-Classic-LD uses the dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
 
-Each variable reference between variables defined with respect to netCDF dimensions is assumed to be an array to array relationship and that the arrays can be broadcast to enable a common indexing approach.
+Each variable reference between variables defined with respect to netCDF dimensions is assumed to be an array-to-array relationship and that the arrays can be broadcast to enable a common indexing approach.
 
 This interpretation means that it can be expected that the child in the reference relationship can be viewed with the same dimensionality as the parent, with size one values for dimensions that are to be broadcast over.
 
 Note: this is a key feature of netCDF dimensions: defining the size and commonality of array dimensions for variables.
 
-In each case where a variable to variable reference is inferred within a netCDF file and both of the variables are defined with respect to one or more dimensions, the nature of that reference from the perspective of the arrays will be explicitly encoded within the RDF graph.
+In each case where a variable-to-variable reference is inferred within a netCDF file and both of the variables are defined with respect to one or more dimensions, the nature of that reference from the perspective of the arrays will be explicitly encoded within the RDF graph.
 
 The inferencing of how array dimensions are matched and how this enables the interpretation of array broadcasting is subtle and implicit in netCDF, and specific to netCDF.
 
@@ -354,18 +357,18 @@ There is an optional statement predicate available: `<http://binary-array-ld.net
 
 ===== Mismatched reference 
 
-Where metadata schemes provide further variable reference predicates, it is possible for variable to variable references to be defined where a broadcast relationship does not exist.
+Where metadata schemes provide further variable reference predicates, it is possible for variable-to-variable references to be defined where a broadcast relationship does not exist.
 
 Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of statements, or as error conditions, and fail to create a graph.  This is an implementation detail.
 
 ==== NetCDF Coordinate Variables
 
-NetCDF defines a special type of variable, called a Coordinate Variable, which is identified by being one-dimensional and having the same name as the single dimension used to size the variable.
+NetCDF defines a special type of variable, called a _Coordinate Variable_, which is identified by being one-dimensional and having the same name as the single dimension used to size the variable.
 
 NetCDF-Classic_LD interprets Coordinate Variables as a case of variable referencing and includes entries as `bald:references` statements. 
 
 
-=== Worked Example
+==== Worked Example
 
 Here the definition of a netCDF file, in CDL, with all data array elements set as missing, is presented. It is followed by an RDF graph interpretation of the netCDF, illustrating many of the interpretation features desribed in this chapter.
 
@@ -413,7 +416,7 @@ variables:
 }
 ----
 
-According to this standard, the netCDF file as defeined above is interpreted into RDF, in the terse triple language (TTL) as
+According to this standard, the netCDF file as defined above is interpreted into RDF, in the terse triple language (TTL) as
 
 ----
 @prefix bald: <http://binary-array-ld.net/latest/> .
