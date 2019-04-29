@@ -21,7 +21,7 @@ Literals are another key part of RDF and are used to capture basic values other 
 
 RDF statements are collected together within an _RDF Graph_. Figure 1 below show an example of an RDF graph encoding information about the singer B.B. King.
 
-image::images/bb-king-rdf-example.png[RDF Example: BB king]
+image::images/bb-king-rdf-example.png[Figure 1. RDF Example: BB king]
 
 ```
 <B.B. King> <is a> <person>.
@@ -38,9 +38,10 @@ An _RDF graph_ representing the metadata of multiple files provides a valuable r
 
 The numerical data within the file is not encoded within the graph, only the metadata.  In general, this means that the graph is orders of magnitude smaller than the data file it summarises.
 
-Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways.
+Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways. In Figure 2, an example is given showing the CF standard name attribute value across multiple files. Representing this an other metadata enables queries across, e.g. show me netCDF files that has data values on  `sea_surface_temperature`.
 
 
+image::images/metadata-across-files-example.png[Figure 2. Example showing cf:standard_name property values across different files.]
 
 The following sections of this standard define how to interpret a netCDF file as an RDF metadata graph.
 
