@@ -5,15 +5,82 @@
 [NOTE]
 Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
 
-=== Conformance Class A
+=== Conformance Class A: URIs
+
+Conformance class for Universal Resource Identifiers definition and interpretation.
 
 ==== Requirement 1
 [cols=">20h,<80d",width="100%"]
 |===
-|Test id: |/conf/conf-class-a/req-name-1
-|Requirement: |/req/req-class-a/req-name-1
-|Test purpose: | Verify that...
-|Test method: | Inspect...
+|Test id: |/conf/conf-class-a/requirement-1
+|Requirement: |/req/req-class-a/requirement-1
+|Test purpose: | Verify that the identity of a file is always present within the RDF graph parsed from that file.
+|Test method: | Inspect the identity of the Container, within the parsed RDF graph, representing the root group of the netCDF file and validate that it matches the input parameter, or default value, for that file.
 |===
 
 ==== Requirement 2
+
+[cols=">20h,<80d",width="100%"]
+|===
+|Test id: |/conf/conf-class-a/requirement-2
+|Requirement: |/req/req-class-a/requirement-2
+|Test purpose: | Verify that the identity of variables and groups within a file are defined relative to the defined file identity.
+|Test method: | Inspect the identity of the variables and containers, within the parsed RDF graph, representing the contents of the root group of the netCDF file and validate that their identifiers are all defined as a combination of the file identity and the variable / container identity.
+|===
+
+
+Identity:
+----
+http://secret.binary-array-ld.net/identity.nc
+----
+
+Input NetCDF File - Defined in CDL:
+----
+netcdf ogcClassA {
+dimensions:
+        d0 = 1 ;
+        d1 = 1 ;
+variables:
+        int var0 ;
+        int var1 ;
+
+data:
+}
+
+----
+
+Validated output graph:
+----
+@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix this: <http://secret.binary-array-ld.net/identity.nc/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://secret.binary-array-ld.net/identity.nc> a bald:Container ;
+    bald:contains this:var0,
+        this:var1 .
+
+this:var0 a bald:Subject .
+
+this:var1 a bald:Subject .
+
+----
+
+
+=== Conformance Class B: Prefixing
+
+
+
+=== Conformance Class C: Aliasing
+
+
+
+=== Conformance Class D: Attribute Names
+
+
+
+=== Conformance Class E: Variable-to-variable Referencing
+
+
