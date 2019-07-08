@@ -181,6 +181,62 @@ this:var1 a bald:Subject .
 
 === Conformance Class D: Attribute Names
 
+Identity:
+----
+http://secret.binary-array-ld.net/attributes.nc
+----
+
+Input NetCDF File - Defined in CDL:
+----
+netcdf ogcClassD {
+dimensions:
+        d0 = 1 ;
+	d1 = 1 ;
+variables:
+	int var0 ;
+	    var0:rdfs__label = "rdfs__label" ;
+	int var1 ;
+	    var1:rdfs__label = "rdfs__label" ;
+        int prefix_list ;
+            prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+            prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
+            prefix_list:rdfs__ = "http://www.w3.org/2000/01/rdf-schema#" ;
+        :bald__isPrefixedBy = "prefix_list" ;
+	:title = "Sample netCDF file definition with alias terms from the netCDF user guide" ;
+data:
+}
+----
+
+Alias Graph
+----
+http://def.scitools.org.uk/NetCDF
+----
+
+
+Validated output RDF graph:
+----
+@prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
+@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix this: <http://secret.binary-array-ld.net/attributes.nc/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://secret.binary-array-ld.net/attributes.nc> a bald:Container ;
+    bald:contains this:var0,
+        this:var1 ;
+    bald:isPrefixedBy "prefix_list" ;
+    NetCDF:title "Sample netCDF file definition with alias terms from the netCDF user guide" .
+
+this:var0 a bald:Subject ;
+    rdfs:label rdfs:label .
+
+this:var1 a bald:Subject ;
+    rdfs:label rdfs:label .
+
+----
+
 
 
 === Conformance Class E: Variable-to-variable Referencing
