@@ -316,11 +316,13 @@ The object of this statement is an RDF List.
 
 ==== Variable References and Dimensions
 
-NetCDF-Classic-LD uses the dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
+NetCDF-Classic-LD uses the defined netCDF dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
 
 Each variable reference between variables defined with respect to netCDF dimensions is assumed to be an array-to-array relationship and that the arrays can be broadcast to enable a common indexing approach.
 
-This interpretation means that it can be expected that the child in the reference relationship can be viewed with the same dimensionality as the parent, with size one values for dimensions that are to be broadcast over.
+Broadcast is defined as extending an array along each of a set of defined dimensions, each of size 1, by copying the contents of the array for each array index up to the defined size.  This enables an array to match shape with another array. 
+
+This interpretation means that it can be expected that the target in the reference relationship can be viewed with a consistent dimensionality to the source.  A reshape shape is defined for the source and target, with size one values for dimensions that are to be broadcast over.  This imposes dimension ordering for the broadcast operation.
 
 Note: this is a key feature of netCDF dimensions: defining the size and commonality of array dimensions for variables.
 
@@ -337,29 +339,35 @@ A reshape array has the same total number of elements as the original array, but
 
 To hold this information, netCDF-Classic-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
 
-This `<$referenceEntity>` is referenced by the `<$parentEntity>` using the predicate `<http://binary-array-ld.net/latest/references>`, i.e.:
+This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predicate `<http://binary-array-ld.net/latest/references>`, i.e.:
 
 ----
-  <$parentEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity>
+  <$sourceEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity>
 ----
 
-The `<$referenceEntity>` is defined to be of type `<http://binary-array-ld.net/latest/Reference>` and is expected to carry a single reference to the child entity in the relationship and a `bald:childBroadcast` statement defining the expansion of the child array to the same shape as the parent. i.e.:
+The `<$referenceEntity>` is defined to be of type `<http://binary-array-ld.net/latest/Reference>` and shall define a single statement defining the target entity in the relationship, another variable in the file, using the predicate `bald:target`. The `<$referenceEntity>` shall define a `bald:targetShape` statement defining the reshape expansion of the target array.
+The `<$referenceEntity>` may  define a `bald:sourceShape`, where that source shape is required to be different from the defining shape of the source array.
+The `<$referenceEntity>` shall  define a `bald:sourceShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
+
+In this manner, the source array and the target array are defined in a common dimensionality enabing the shape to be unambiguously defined for broadcasting; i.e.:
 
 ----
   <$referenceEntity> a <http://binary-array-ld.net/latest/Reference> ;
-      <http://binary-array-ld.net/latest/childBroadcast> ($d1 $d2 $d3) ;
-      <http://binary-array-ld.net/latest/array> <$childEntity> .
+      <http://binary-array-ld.net/latest/sourceShape> ($d1 $d2 $d3) ;
+      <http://binary-array-ld.net/latest/targetShape> ($d4 $d5 $d6) ;
+      <http://binary-array-ld.net/latest/target> <$targetEntity> .
 ----
 
-`$dn` are all defined to be integers.  The object of this RDF statement is an RDF list.
+`$dn` are all defined to be integers.  The object of these RDF statements are each an RDF list.
 
-There is an optional statement predicate available: `<http://binary-array-ld.net/latest/childBroadcast>`, for the rare cases where both parent and child arrays have to be broadcast to a common shape. 
+The object of the `bald:sourceShape` statement and `bald:targetShape` shall be an RDF list with equal numbers of elements.
+
 
 ===== Mismatched reference 
 
 Where metadata schemes provide further variable reference predicates, it is possible for variable-to-variable references to be defined where a broadcast relationship does not exist.
 
-Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements, or as error conditions, and fail to create a graph.  This is an implementation detail.
+Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements. In this case, it is recommended to continue to create a graph and omit references.  It is accepted that an implementation may treat this as an error condition, and fail to create a graph.  This is an implementation detail.
 
 ==== NetCDF Coordinate Variables
 
