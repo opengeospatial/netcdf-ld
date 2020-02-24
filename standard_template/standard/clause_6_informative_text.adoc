@@ -139,7 +139,7 @@ Prefixes are in wide use in a number of domains, including XML and RDF. They all
 A prefix is declared using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix. e.g.
 
 ----
-  bald__ = http://binary-array-ld.net/latest/
+  bald__ = https://www.opengis.net/def/binary-array-ld/
 ----
 
 The 'double underscore' character pair: `__` is used as an identifier and as the termination of the prefix; the double underscore is part of the prefix.
@@ -169,11 +169,11 @@ The attribute name
 ----
 together with the prefix definition
 ----
-  bald__ = http://binary-array-ld.net/latest/
+  bald__ = https://www.opengis.net/def/binary-array-ld/
 ----
 is interpreted as
 ----
-  bald__isPrefixedBy = http://binary-array-ld.net/latest/isPrefixedBy
+  bald__isPrefixedBy = https://www.opengis.net/def/binary-array-ld/isPrefixedBy
 ----
 
 Prefixes shall end in a URI separator, either a `/` or a `#`.  
@@ -193,7 +193,7 @@ variables:
 		b_variable:rdf__type = "bald__Reference" ;
 		b_variable:bald__array = "b_variable" ;
 	int prefix_list ;
-		prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+		prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
 		prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
 
 // global attributes:
@@ -204,7 +204,7 @@ variables:
 In this example:
 
 * `rdf__type` is interpreted as http://www.w3.org/1999/02/22-rdf-syntax-ns#type
-* `bald__array` is interpreted as http://binary-array-ld.net/latest/array
+* `bald__array` is interpreted as https://www.opengis.net/def/binary-array-ld/array
 
 
 
@@ -373,7 +373,7 @@ In netCDF-Classic-LD, the size and shape of each extensive variable is explicitl
 Each extensive variable shall be described by a RDF statement.
 
 ----
-  <$entity> <http://binary-array-ld.net/latest/shape> ($d0 $d1 $d2)
+  <$entity> <https://www.opengis.net/def/binary-array-ld/shape> ($d0 $d1 $d2)
 ----
 
 where `$dn` is an integer, taken from the defined dimension size in the netCDF file and the count of the number of values is the dimensionality of the variable.
@@ -445,23 +445,23 @@ A reshape array has the same total number of elements as the original array, but
 
 To hold this information, netCDF-Classic-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
 
-This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predicate `<http://binary-array-ld.net/latest/references>`, i.e.:
+This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predicate `<https://www.opengis.net/def/binary-array-ld/references>`, i.e.:
 
 ----
-  <$sourceEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity>
+  <$sourceEntity> <https://www.opengis.net/def/binary-array-ld/references> <$referenceEntity>
 ----
 
-The `<$referenceEntity>` is defined to be of type `<http://binary-array-ld.net/latest/Reference>` and shall define a single statement defining the target entity in the relationship, another variable in the file, using the predicate `bald:target`. The `<$referenceEntity>` shall define a `bald:targetShape` statement defining the reshape expansion of the target array.
+The `<$referenceEntity>` is defined to be of type `<https://www.opengis.net/def/binary-array-ld/Reference>` and shall define a single statement defining the target entity in the relationship, another variable in the file, using the predicate `bald:target`. The `<$referenceEntity>` shall define a `bald:targetShape` statement defining the reshape expansion of the target array.
 The `<$referenceEntity>` may  define a `bald:sourceShape`, where that source shape is required to be different from the defining shape of the source array.
 The `<$referenceEntity>` shall  define a `bald:sourceShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
 
 In this manner, the source array and the target array are defined in a common dimensionality enabing the shape to be unambiguously defined for broadcasting; i.e.:
 
 ----
-  <$referenceEntity> a <http://binary-array-ld.net/latest/Reference> ;
-      <http://binary-array-ld.net/latest/sourceShape> ($d1 $d2 $d3) ;
-      <http://binary-array-ld.net/latest/targetShape> ($d4 $d5 $d6) ;
-      <http://binary-array-ld.net/latest/target> <$targetEntity> .
+  <$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;
+      <https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;
+      <https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;
+      <https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .
 ----
 
 `$dn` are all defined to be integers.  The object of these RDF statements are each an RDF list.
@@ -493,7 +493,7 @@ dimensions:
 	pdim1 = 17 ;
 variables:
         int prefix_list ;
-  		prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+  		prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
 		prefix_list:metce__ = "http://codes.wmo.int/common/observation-type/METCE/2013/" ;
   		prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
 		
@@ -533,7 +533,7 @@ variables:
 According to this standard, the netCDF file as defined above is interpreted into RDF, in the terse triple language (TTL) as
 
 ----
-@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix metce: <http://codes.wmo.int/common/observation-type/METCE/2013/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .

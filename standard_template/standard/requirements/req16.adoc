@@ -6,22 +6,22 @@
 Each variable to variable reference between two variables, both of which are defined with respect to one or more dimensions, shall be described by the statement.
 
 
- `+<$sourceEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity> .+`
+ `+<$sourceEntity> <https://www.opengis.net/def/binary-array-ld/references> <$referenceEntity> .+`
 
-and the definition of a `+<$referenceEntity>+`, an instance of `+<http://binary-array-ld.net/latest/Reference>+`.  This entity carries the broadcast relationship details and the reference to the target variable.
+and the definition of a `+<$referenceEntity>+`, an instance of `+<https://www.opengis.net/def/binary-array-ld/Reference>+`.  This entity carries the broadcast relationship details and the reference to the target variable.
 
 
- `+<$referenceEntity> a <http://binary-array-ld.net/latest/Reference> ;+`
+ `+<$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;+`
 
-`+<http://binary-array-ld.net/latest/sourceShape> ($d1 $d2 $d3) ;+`
+`+<https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;+`
 
-`+<http://binary-array-ld.net/latest/targetShape> ($d4 $d5 $d6) ;+`
+`+<https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;+`
 
-`+<http://binary-array-ld.net/latest/target> <$targetEntity> .+`
+`+<https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .+`
 
 `$dn` are all defined to be integers.
 
-The object of the `<http://binary-array-ld.net/latest/sourceShape>` and `<http://binary-array-ld.net/latest/targetShape>` statements are each an RDF list of integer elements.
+The object of the `<https://www.opengis.net/def/binary-array-ld/sourceShape>` and `<https://www.opengis.net/def/binary-array-ld/targetShape>` statements are each an RDF list of integer elements.
 
 The lengths of these two lists shall be the same.
 
