@@ -632,18 +632,18 @@ this:pdim1 a bald:Array,
 
 ----
 
-=== Optimisation ===
+=== Implementation Adaptions ===
 
 This standard recognises that there are myriad opportunities for optimisation of large collections of graphs of netCDF files contents.
 
-For example, a series of netCDF files may share the vast majority of metadata, differing in only one or two key elements, such as a different value for a temporal coordinate.
+For example, a series, or collection of netCDF files may share the vast majority of metadata, differing in only one or two key elements, such as a different value for a temporal coordinate, along with different data values.
 
 Implementations may implement many different strategies, reducing the volume of data stored, constructing shared entities to aid query construction or optimisation.
 
-As this standard is targeted at a single file, it is important that a method for validating consistency is provided which does not preclude useful optimisation steps.
+As this standard is targeted at standardising the representation of a single file, it is important that a method for validating consistency is provided which does not preclude useful optimisation steps.
 
-On this basis, an implementation may provide a transformation, such that the graph for an individual file may be derived from a compressed or engineered storage format.
+On this basis, it is suggested that an implementation may provide a transformation, such that the graph for an individual file may be derived from a compressed or engineered storage format.
 
 The data storage shall be deemed compliant with this standard if a graph representing a single file may be transformed by the provided transformation into a single file graph that meets the validation rules within this standard.
 
-The format for such transformations is not specified by this standard, it need only provide a suitable RDF graph.
+The format for such transformations is not specified by this standard, it need only provide a suitable RDF graph output.
