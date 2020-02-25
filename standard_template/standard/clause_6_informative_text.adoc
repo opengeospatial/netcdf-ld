@@ -8,7 +8,19 @@ A design principle of netCDF-Classic-LD is that it works with existing netCDF cl
 
 A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
-netCDF-Classic-LD aims to enable any netCDF file to be represented as RDF, if desired, for use with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013). People intending to use netCDF-LD with RDF tools will find it can be used as another RDF syntax, like Turtle (Prud'hommeaux and Carothers 2014).
+netCDF-Classic-LD aims to enable summary metadata from any netCDF file to be extracted to provide an external description of the file in RDF.  This enables references to externally published resources in RDF specifiy metadata conventions.  If desired, these descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013).
+
+==== Motivating Scenario
+
+For example .. ....   why I care
+
+interpret files and index contents
+
+
+
+extend conventions, with prefixes
+
+prefixes adding to aliases, stable content
 
 
 === Resource Description Framework
@@ -21,7 +33,7 @@ Literals are another key part of RDF and are used to capture basic values other 
 
 RDF statements are collected together within an _RDF Graph_. Figure 1 below show an example of an RDF graph encoding information about the singer B.B. King.
 
-image::images/bb-king-rdf-example.png[Figure 1. RDF Example: BB king]
+image::bb-king-rdf-example.png[Figure 1. RDF Example: BB king]
 
 ```
 <B.B. King> <is a> <person>.
@@ -30,6 +42,40 @@ image::images/bb-king-rdf-example.png[Figure 1. RDF Example: BB king]
 ```
 
 The netCDF-Classic-LD standard maps the netCDF Classic data model encoding onto the RDF information model.
+
+
+=== NetCDF File
+
+The Unidata network Common Data Form (netCDF) is an interface for scientific data access and a freely-distributed software library that provides an implementation of the interface. The netCDF library also defines a machine-independent format for representing scientific data.
+
+(https://github.com/Unidata/netcdf-c)
+
+
+conventions
+
+example diagram from scitools
+
+image::multi_array.png[Figure 2. Multi-dimensional Array]
+
+image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
+
+variables
+
+references
+
+dimensions
+
+(one of the core issue to address in this specification is how to provide variable to variable referencing)
+
+
+=== RDF Vocabularies
+
+bald
+
+dct
+
+rdfs
+
 
 
 === Metadata RDF Graph
@@ -49,6 +95,17 @@ The following sections of this standard define how to interpret a netCDF file as
 
 Multiple graphs may be combined into a single multi-file metadata graph as long as individual file identity is unique across the multi-file metadata graph.
 
+==== Processing Model
+
+indicative
+
+one identifier
+plus
+external aliases
+plus
+input file
+produces one rdf graph output
+
 ==== Uniform Resource Identifiers within netCDF files
 
 At the core of this standard is the mechanism for encoding and interpreting Uniform Resource Identifiers (URIs) within netCDF files.
@@ -64,6 +121,13 @@ An explicit identity, i.e. a URL or URI, may be provided during file interpretat
 
 Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a ``/``.
 
+
+==== Containment
+
+define bald:contains behaviour
+
+include 
+
 ==== Prefix Definition
 
 In netCDF-Classic-LD, the _prefix_ is a mechanism to encode explicit URIs from elements in the _netCDF file_. It is the most straightforward and the most powerful way of doing so. It has two parts: the first part is the declaration of a prefix (or a set of prefixes), the second part is the use of the prefix.
@@ -75,7 +139,7 @@ Prefixes are in wide use in a number of domains, including XML and RDF. They all
 A prefix is declared using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI. A single prefix declaration is an attribute and a value: the attribute name is the prefix name and the attribute value is the full URI for that prefix. e.g.
 
 ----
-  `bald__ = http://binary-array-ld.net/latest/`
+  bald__ = https://www.opengis.net/def/binary-array-ld/
 ----
 
 The 'double underscore' character pair: `__` is used as an identifier and as the termination of the prefix; the double underscore is part of the prefix.
@@ -101,15 +165,15 @@ This is interpreted within this standard as a URI, a concatenation of the matchi
 
 The attribute name
 ----
-  `bald__isPrefixedBy` 
+  bald__isPrefixedBy
 ----
 together with the prefix definition
 ----
-  `bald__ = http://binary-array-ld.net/latest/`
+  bald__ = https://www.opengis.net/def/binary-array-ld/
 ----
 is interpreted as
 ----
-  `bald__isPrefixedBy = http://binary-array-ld.net/latest/isPrefixedBy`
+  bald__isPrefixedBy = https://www.opengis.net/def/binary-array-ld/isPrefixedBy
 ----
 
 Prefixes shall end in a URI separator, either a `/` or a `#`.  
@@ -123,13 +187,13 @@ dimensions:
 	pdim1 = 17 ;
 variables:
 	int a_variable(pdim0, pdim1) ;
-		parent_variable:rdf__type = "bald__Array" ;
-		parent_variable:bald__references = "b_variable" ;
+		a_variable:rdf__type = "bald__Array" ;
+		a_variable:bald__references = "b_variable" ;
 	int b_variable(pdim0, pdim1) ;
-		child_variable:rdf__type = "bald__Reference" ;
-		child_variable:bald__array = "b_variable" ;
+		b_variable:rdf__type = "bald__Reference" ;
+		b_variable:bald__array = "b_variable" ;
 	int prefix_list ;
-		prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+		prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
 		prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
 
 // global attributes:
@@ -140,13 +204,17 @@ variables:
 In this example:
 
 * `rdf__type` is interpreted as http://www.w3.org/1999/02/22-rdf-syntax-ns#type
-* `bald__array` is interpreted as http://binary-array-ld.net/latest/array
+* `bald__array` is interpreted as https://www.opengis.net/def/binary-array-ld/array
 
 
 
 ==== Alias Definition
 
 Alongside the definition of prefixes, explicit aliases may be defined via netCDF-Classic-LD conventions within the _netCDF file_, or as a scope for a _netCDF file_ during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
+
+Alias definitions do not exist with file CDL.  They are provided as RDF input to a parsing process at parse time, from external vocabularies.
+
+Alias URIs are interpreted from a reverse lookup from the file into the graph.  As such name clashes are not protected against.
 
 For an entity in an alias graph to be considered as an alias, the entity will define a RDF statement:
 
@@ -184,7 +252,7 @@ In order to map netCDF metadata to RDF, all global and variable attributes are i
 
 A parsing process shall map attribute names to URIs using prefix definitions first, then map attribute names to URIs aliases.
 
-An attribute name shall be mapped to an alias URI if, and only if, there is an exact match for the full attribute name as a `dct:notation` (expand to full uri) for an entity within the alias graph where that entity declares a RDF statement within its defining graph.
+An attribute name shall be mapped to an alias URI if, and only if, there is an exact match for the full attribute name as a `dct:identifier` (expand to full uri) for an entity within the alias graph where that entity declares a RDF statement within its defining graph.
 
 ----
   <entity> <rdf:type> <rdfs:ObjectProperty> .
@@ -195,6 +263,8 @@ That defining graph needs to be provided to netCDF-Classic-LD aware software at 
 An error is thrown if multiple aliases match an attribute name in a _netCDF file_ due to a conflict in unambiguously identifying the declared alias scope.
 
 All remaining attribute names shall be mapped to local identifiers, using the file identity and variable identity (`ref{}`) to form a locally applicable URI.
+
+In the examples, the prefix `this:` is used within the graphs as the file identifier.
 
 ==== Variable to Variable References
 
@@ -208,15 +278,6 @@ To identify a predicate as a variable to variable reference predicate, that pred
 
 ----
   <{predicate}> rdfs:range bald:Subject .
-----
-
-This standard recognises that some vocabularies already use the rdfs:range for specific purposes.  To enable particular scenarios to be supported, then a subClassOf approach may be used.  This has potential implications for reasoning, so should be adopted only where it has value, and the implications are understood.  The simple statement above is the advised option where it can be implemented.
-
-This standard shall infer a variable-to-variable reference where an `rdfs:range` target is also identifed as an `rdfs:subClassOf bald:Subject`.
-
-----
-  <{predicate}> rdfs:range <{AClass}> .
-  <{AClass}> rdfs:subClassOf bald:Subject .
 ----
 
 
@@ -233,8 +294,8 @@ CDL defining a set of references:
 will be interpreted into RDF(turtle) as:
 ----
   ns1:set_collection a bald:Subject ;
-      bald:references ns1:data_variable1_pdim0_ref,
-                      ns1:data_variable2_pdim0_ref .
+      bald:references ns1:data_variable1_ref,
+                      ns1:data_variable2_ref .
 ----
 
 
@@ -247,7 +308,7 @@ CDL defining a list of references:
 will be interpreted into RDF(turtle) as:
 ----
   ns1:list_collection a bald:Subject ;
-      bald:references ( ns1:data_variable1_pdim0_ref ns1:data_variable2_pdim0_ref ) .
+      bald:references ( ns1:data_variable1 ns1:data_variable2 ) .
 ----
 
 All variable names shall be within the file, or no references shall be interpreted.  There shall be no partial matching.
@@ -270,7 +331,7 @@ Condition one: the value is a string which exactly matches the name of a variabl
 
 Condition two: the attribute name is already interpreted as a URI, defining an entity, external to the file.
 
-Condition three: the attribute name entity declares and `<rdfs:range>` of `<bald:subject>`.
+Condition three: the attribute name entity declares and `<rdfs:range>` of `<bald:Subject>`.
 
 An identified attribute reference shall map the attribute value to the identify of the matched variable within the file.
 
@@ -280,7 +341,7 @@ This identification takes place after prefixes are identified and mapped.
 
 After prefix and reference interpretation, remaining attribute values are mapped to URIs using the alias graph.
 
-An attribute value shall be mapped to an alias URI if and only if there is an exact match for the full attribute value as a `dct:notation` (expand to full uri) for an entity within the alias graph.
+An attribute value shall be mapped to an alias URI if and only if there is an exact match for the full attribute value as a `dct:identifier` (expand to full uri) for an entity within the alias graph.
 
 If multiple aliases match an attribute name, this is an error condition, the declared alias scope cannot be uniquely applied to the file.
 
@@ -295,6 +356,12 @@ NetCDF makes strong inferences regarding how variables are defined by dimensions
 
 NetCDF files define named dimensions, `dims`.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other.
 
+In this way the netCDF variables are defined with respect to shared dimensions.
+
+image::multi_array.png[Figure 2. Multi-dimensional Array]
+
+image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
+
 NetCDF-Classic-LD uses the dimensions to interpret the size and shape of a variable array.
 
 NetCDF-Classic-LD does not explicity encode the dimensions: only the sizing and referencing information.  In cases where dimensions do not have a netCDF coordinate variable defined, this results in the name of the dimension being lost.
@@ -306,21 +373,62 @@ In netCDF-Classic-LD, the size and shape of each extensive variable is explicitl
 Each extensive variable shall be described by a RDF statement.
 
 ----
-  <$entity> <http://binary-array-ld.net/latest/shape> ($d0 $d1 $d2)
+  <$entity> <https://www.opengis.net/def/binary-array-ld/shape> ($d0 $d1 $d2)
 ----
 
 where `$dn` is an integer, taken from the defined dimension size in the netCDF file and the count of the number of values is the dimensionality of the variable.
 
 The object of this statement is an RDF List.
 
+==== Broadcasting
+
+In order to interpret netCDf dimensions within RDF graphs, the concept of Broadcasting is used.
+
+Broadcasting enables array which share some dimensions, but have different overall dimensionality, to be interpreted together.  Two arrays may be broadcast if the dimensions they share are ordered the same and extra dimensions can be interpted unambiguously.
+
+The result of broadcasting is an array shape which can represent the contents of each of the two input arrays, with extra dimensions comtaining copies of the defined values.  In other words, an array may be stretched 
+
+In this way an array location in the broadcast result array can interpret one and only one value from each of the input arrays.
+
+The concept of broadcasting defined in the Python Numpy library https://numpy.org/devdocs/user/theory.broadcasting.html, where some of these images and descriptions are sourced from.
+
+image::theory.broadcast_1.gif[]
+
+image::theory.broadcast_2.gif[]
+
+image::theory.broadcast_3.gif[]
+
+image::theory.broadcast_4.gif[]
+
+==== Shape and Reshape
+
+In order to describe the results of the broadcast concepts in an implementation neutral fashion, this standard uses the shape and the concept of reshape.
+
+The shape of an array is an ordered list of integers, representing the dimensionality of a multi-dimensional array and the size of each dimension.
+
+Reshape is an operation which changes the dimensionality of an array, whilst preserving the number of values within the array.
+
+Any array shape may be reshaped by adding elements to the array shape list, where the added items are of size 1.  In situ elements of the shape that are not size 1 may not be reordered by a reshape.
+
+For example:
+
+----
+bald:sourceShape (5, 9)
+bald:sourceReshape (1, 1, 5, 9, 1)
+----
+
+
+
 
 ==== Variable References and Dimensions
 
-NetCDF-Classic-LD uses the dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
+NetCDF-Classic-LD uses the defined netCDF dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
 
 Each variable reference between variables defined with respect to netCDF dimensions is assumed to be an array-to-array relationship and that the arrays can be broadcast to enable a common indexing approach.
 
-This interpretation means that it can be expected that the child in the reference relationship can be viewed with the same dimensionality as the parent, with size one values for dimensions that are to be broadcast over.
+Broadcast is defined as extending an array along each of a set of defined dimensions, each of size 1, by copying the contents of the array for each array index up to the defined size.  This enables an array to match shape with another array. 
+
+This interpretation means that it can be expected that the target in the reference relationship can be viewed with a consistent dimensionality to the source.  A reshape shape is defined for the source and target, with size one values for dimensions that are to be broadcast over.  This imposes dimension ordering for the broadcast operation.
 
 Note: this is a key feature of netCDF dimensions: defining the size and commonality of array dimensions for variables.
 
@@ -337,29 +445,35 @@ A reshape array has the same total number of elements as the original array, but
 
 To hold this information, netCDF-Classic-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
 
-This `<$referenceEntity>` is referenced by the `<$parentEntity>` using the predicate `<http://binary-array-ld.net/latest/references>`, i.e.:
+This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predicate `<https://www.opengis.net/def/binary-array-ld/references>`, i.e.:
 
 ----
-  <$parentEntity> <http://binary-array-ld.net/latest/references> <$referenceEntity>
+  <$sourceEntity> <https://www.opengis.net/def/binary-array-ld/references> <$referenceEntity>
 ----
 
-The `<$referenceEntity>` is defined to be of type `<http://binary-array-ld.net/latest/Reference>` and is expected to carry a single reference to the child entity in the relationship and a `bald:childBroadcast` statement defining the expansion of the child array to the same shape as the parent. i.e.:
+The `<$referenceEntity>` is defined to be of type `<https://www.opengis.net/def/binary-array-ld/Reference>` and shall define a single statement defining the target entity in the relationship, another variable in the file, using the predicate `bald:target`. The `<$referenceEntity>` shall define a `bald:targetShape` statement defining the reshape expansion of the target array.
+The `<$referenceEntity>` may  define a `bald:sourceShape`, where that source shape is required to be different from the defining shape of the source array.
+The `<$referenceEntity>` shall  define a `bald:sourceShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
+
+In this manner, the source array and the target array are defined in a common dimensionality enabing the shape to be unambiguously defined for broadcasting; i.e.:
 
 ----
-  <$referenceEntity> a <http://binary-array-ld.net/latest/Reference> ;
-      <http://binary-array-ld.net/latest/childBroadcast> ($d1 $d2 $d3) ;
-      <http://binary-array-ld.net/latest/array> <$childEntity> .
+  <$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;
+      <https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;
+      <https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;
+      <https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .
 ----
 
-`$dn` are all defined to be integers.  The object of this RDF statement is an RDF list.
+`$dn` are all defined to be integers.  The object of these RDF statements are each an RDF list.
 
-There is an optional statement predicate available: `<http://binary-array-ld.net/latest/childBroadcast>`, for the rare cases where both parent and child arrays have to be broadcast to a common shape. 
+The object of the `bald:sourceShape` statement and `bald:targetShape` shall be an RDF list with equal numbers of elements.
+
 
 ===== Mismatched reference 
 
 Where metadata schemes provide further variable reference predicates, it is possible for variable-to-variable references to be defined where a broadcast relationship does not exist.
 
-Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements, or as error conditions, and fail to create a graph.  This is an implementation detail.
+Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements. In this case, it is recommended to continue to create a graph and omit references.  It is accepted that an implementation may treat this as an error condition, and fail to create a graph.  This is an implementation detail.
 
 ==== NetCDF Coordinate Variables
 
@@ -379,7 +493,7 @@ dimensions:
 	pdim1 = 17 ;
 variables:
         int prefix_list ;
-  		prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+  		prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
 		prefix_list:metce__ = "http://codes.wmo.int/common/observation-type/METCE/2013/" ;
   		prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
 		
@@ -419,7 +533,7 @@ variables:
 According to this standard, the netCDF file as defined above is interpreted into RDF, in the terse triple language (TTL) as
 
 ----
-@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix metce: <http://codes.wmo.int/common/observation-type/METCE/2013/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -518,3 +632,18 @@ this:pdim1 a bald:Array,
 
 ----
 
+=== Implementation Adaptions ===
+
+This standard recognises that there are myriad opportunities for optimisation of large collections of graphs of netCDF files contents.
+
+For example, a series, or collection of netCDF files may share the vast majority of metadata, differing in only one or two key elements, such as a different value for a temporal coordinate, along with different data values.
+
+Implementations may implement many different strategies, reducing the volume of data stored, constructing shared entities to aid query construction or optimisation.
+
+As this standard is targeted at standardising the representation of a single file, it is important that a method for validating consistency is provided which does not preclude useful optimisation steps.
+
+On this basis, it is suggested that an implementation may provide a transformation, such that the graph for an individual file may be derived from a compressed or engineered storage format.
+
+The data storage shall be deemed compliant with this standard if a graph representing a single file may be transformed by the provided transformation into a single file graph that meets the validation rules within this standard.
+
+The format for such transformations is not specified by this standard, it need only provide a suitable RDF graph output.

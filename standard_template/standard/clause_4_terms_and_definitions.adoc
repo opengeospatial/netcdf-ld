@@ -22,3 +22,6 @@ Within RDF, literals the lexical representations of values such as numbers or da
 The Common Data Language (CDL) is a human readable notation for describing netCDF objects and data.
 
 
+=== *Broadcast*
+
+

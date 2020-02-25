@@ -9,7 +9,7 @@ A list of prefixes may be defined within a netCDF file, within a variable that i
 
 If a prefix variable is defined, that prefix variable shall contain the prefix:
 
-`+bald__ = http://binary-array-ld.net/latest/+`
+`+bald__ = https://www.opengis.net/def/binary-array-ld/+`
 
 Prefixes defined within a prefix variable shall be used as the definitive list of prefixes for that file.
 

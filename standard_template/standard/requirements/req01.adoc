@@ -8,7 +8,9 @@
 A netCDF file shall be provided along with its own identity, as a URI, external to the file contents.
 
 If no identity is provided, then the path used by a library to access the file is used as a default identity.
- 
+
+The identity of the root group shall always terminate in a '/' character.
+
  {set:cellbgcolor:#FFFFFF}
 
 |===
