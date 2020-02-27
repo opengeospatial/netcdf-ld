@@ -10,7 +10,7 @@ All requirements and conformance tests that appear in this document are denoted 
 
 === UML model
 UML diagrams are included in this standard to illustrate the conceptual model 
-that underpins netCDF-classic-LD. 
+that underpins netCDF-LD. 
 The UML model is not normative. 
 The UML profile used is specified in ISO 19103:2015.
 
