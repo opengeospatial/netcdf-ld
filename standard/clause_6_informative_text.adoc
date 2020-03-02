@@ -117,7 +117,18 @@ These URIs may be declared explicitly within the files, or interpreted from file
 
 In netCDF-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
 
-An explicit identity, i.e. a URL or URI, may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
+An explicit identity, i.e. a URL or URI, may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.  A local file URI will always use the '/' forward slash as a separator, even on systems where local identifiers use back slash separators.
+
+The identity is the identity of the root group, the base entity within the netCDF file.  This is the identity of the contents of the file.  For this reason, this standard mandates that the identifier string will always terminate in a '/' character separator.  In this way the root group is identified and is recognised as a conceptual entity identifiably different from the file itself.
+
+For example, a file may be available from a location, via a URL, which also serves as a URI for that file.  The root group within that file may reuse the identity string, as a compound part, with the addition of the extra '/' character, there by differentiating itself from the file object identity.
+
+* https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc
+** the URI identity of the netCDF file object
+* https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc/
+** the URI identity of the root group contained within that netCDF file object
+
+===== Variable Identity 
 
 Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a ``/``.
 
