@@ -2,13 +2,13 @@
 
 === Design principles and Rationale ===
 
-netCDF-Classic-LD allows existing netCDF files, which use the netCDF-classic data model of the legacy netCDF-3 encoding, to be interpreted as Linked Data with minimal changes. netCDF-Classic-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
+netCDF-LD allows existing netCDF files to be interpreted as Linked Data with minimal changes. netCDF-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
 
-A design principle of netCDF-Classic-LD is that it works with existing netCDF classic encoded files. This means existing netCDF libraries can be used to parse files which have been encoded as netCDF-Classic-LD. This also ensures that netCDF-Classic-LD encoded files can be used as simply as netCDF, with no knowledge of RDF.
+A design principle of netCDF-LD is that it works with existing netCDF encoded files. This means existing netCDF libraries can be used to parse files which have been encoded as netCDF-LD. This also ensures that netCDF-LD encoded files can be used as simply as netCDF, with no knowledge of RDF.
 
-A key aspect of netCDF-Classic-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. Using these mechanisms, netCDF-Classic-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+A key aspect of netCDF-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. Using these mechanisms, netCDF-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
-netCDF-Classic-LD aims to enable summary metadata from any netCDF file to be extracted to provide an external description of the file in RDF.  This enables references to externally published resources in RDF specifiy metadata conventions.  If desired, these descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013).
+netCDF-LD aims to enable summary metadata from any netCDF file to be extracted to provide an external description of the file in RDF.  This enables references to externally published resources in RDF specifiy metadata conventions.  If desired, these descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013).
 
 ==== Motivating Scenario
 
@@ -41,7 +41,7 @@ image::bb-king-rdf-example.png[Figure 1. RDF Example: BB king]
 <B.B. King> <plays instrument> <guitar>
 ```
 
-The netCDF-Classic-LD standard maps the netCDF Classic data model encoding onto the RDF information model.
+The netCDF-LD standard maps the netCDF data model encoding onto the RDF information model.
 
 
 === NetCDF File
@@ -115,9 +115,20 @@ These URIs may be declared explicitly within the files, or interpreted from file
 
 ==== Identity
 
-In netCDF-Classic-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
+In netCDF-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As such it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
 
-An explicit identity, i.e. a URL or URI, may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.
+An explicit identity, i.e. a URL or URI, may be provided during file interpretation.  If no identity is provided, a default identity, a local file URI, will be used.  A local file URI will always use the '/' forward slash as a separator, even on systems where local identifiers use back slash separators.
+
+The identity is the identity of the root group, the base entity within the netCDF file.  This is the identity of the contents of the file.  For this reason, this standard mandates that the identifier string will always terminate in a '/' character separator.  In this way the root group is identified and is recognised as a conceptual entity identifiably different from the file itself.
+
+For example, a file may be available from a location, via a URL, which also serves as a URI for that file.  The root group within that file may reuse the identity string, as a compound part, with the addition of the extra '/' character, there by differentiating itself from the file object identity.
+
+* https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc
+** the URI identity of the netCDF file object
+* https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc/
+** the URI identity of the root group contained within that netCDF file object
+
+===== Variable Identity 
 
 Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a ``/``.
 
@@ -130,7 +141,7 @@ include
 
 ==== Prefix Definition
 
-In netCDF-Classic-LD, the _prefix_ is a mechanism to encode explicit URIs from elements in the _netCDF file_. It is the most straightforward and the most powerful way of doing so. It has two parts: the first part is the declaration of a prefix (or a set of prefixes), the second part is the use of the prefix.
+In netCDF-LD, the _prefix_ is a mechanism to encode explicit URIs from elements in the _netCDF file_. It is the most straightforward and the most powerful way of doing so. It has two parts: the first part is the declaration of a prefix (or a set of prefixes), the second part is the use of the prefix.
 
 Prefixes are in wide use in a number of domains, including XML and RDF. They allow a URI to be expressed in a compact fashion that saves space, enhances human readability and can mitigate issues with reserved characters.
 
@@ -210,7 +221,7 @@ In this example:
 
 ==== Alias Definition
 
-Alongside the definition of prefixes, explicit aliases may be defined via netCDF-Classic-LD conventions within the _netCDF file_, or as a scope for a _netCDF file_ during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
+Alongside the definition of prefixes, explicit aliases may be defined via netCDF-LD conventions within the _netCDF file_, or as a scope for a _netCDF file_ during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
 
 Alias definitions do not exist with file CDL.  They are provided as RDF input to a parsing process at parse time, from external vocabularies.
 
@@ -258,7 +269,7 @@ An attribute name shall be mapped to an alias URI if, and only if, there is an e
   <entity> <rdf:type> <rdfs:ObjectProperty> .
 ----
 
-That defining graph needs to be provided to netCDF-Classic-LD aware software at the time of parsing the file, so that it can be interpreted.
+That defining graph needs to be provided to netCDF-LD aware software at the time of parsing the file, so that it can be interpreted.
 
 An error is thrown if multiple aliases match an attribute name in a _netCDF file_ due to a conflict in unambiguously identifying the declared alias scope.
 
@@ -362,13 +373,13 @@ image::multi_array.png[Figure 2. Multi-dimensional Array]
 
 image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
 
-NetCDF-Classic-LD uses the dimensions to interpret the size and shape of a variable array.
+NetCDF-LD uses the dimensions to interpret the size and shape of a variable array.
 
-NetCDF-Classic-LD does not explicity encode the dimensions: only the sizing and referencing information.  In cases where dimensions do not have a netCDF coordinate variable defined, this results in the name of the dimension being lost.
+NetCDF-LD does not explicity encode the dimensions: only the sizing and referencing information.  In cases where dimensions do not have a netCDF coordinate variable defined, this results in the name of the dimension being lost.
 
 Extensive Variables are variables defined with respect to one or more dimensions.
 
-In netCDF-Classic-LD, the size and shape of each extensive variable is explicitly stored as a RDF statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be `rdf:Literal` instances.
+In netCDF-LD, the size and shape of each extensive variable is explicitly stored as a RDF statement made with respect to that variable.  The predicate bald:shape is used.  Objects of this predicate shall be `rdf:Literal` instances.
 
 Each extensive variable shall be described by a RDF statement.
 
@@ -422,7 +433,7 @@ bald:sourceReshape (1, 1, 5, 9, 1)
 
 ==== Variable References and Dimensions
 
-NetCDF-Classic-LD uses the defined netCDF dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
+NetCDF-LD uses the defined netCDF dimensions to interpret references between variables and to interpret how the shapes of the variable arrays relate.
 
 Each variable reference between variables defined with respect to netCDF dimensions is assumed to be an array-to-array relationship and that the arrays can be broadcast to enable a common indexing approach.
 
@@ -439,11 +450,11 @@ The inferencing of how array dimensions are matched and how this enables the int
 This information is unpacked and stored in a general fashion within the RDF graph.
 
 All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a RDF statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
-NetCDf-Classic-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
+NetCDf-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
 
 A reshape array has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
 
-To hold this information, netCDF-Classic-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
+To hold this information, netCDF-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
 
 This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predicate `<https://www.opengis.net/def/binary-array-ld/references>`, i.e.:
 
@@ -479,7 +490,7 @@ Applications may treat mismatches between reference definitions and the ability 
 
 NetCDF defines a special type of variable, called a _Coordinate Variable_, which is identified by being one-dimensional and having the same name as the single dimension used to size the variable.
 
-NetCDF-Classic_LD interprets Coordinate Variables as a case of variable referencing and includes entries as `bald:references` statements. 
+NetCDF-LD interprets Coordinate Variables as a case of variable referencing and includes entries as `bald:references` statements. 
 
 
 ==== Worked Example
