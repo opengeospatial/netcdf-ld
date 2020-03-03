@@ -1,4 +1,4 @@
-:Title: OGC Encoding Linked Data Graphs in NetCDF Classic Files
+:Title: OGC Encoding Linked Data Graphs in NetCDF Files
 :titletext: OGC (add title text)
 :doctype: book
 :encoding: utf-8
@@ -9,6 +9,7 @@
 :numbered:
 :sectanchors:
 :source-highlighter: pygments
+:imagesdir: images
 
 = {title}
 

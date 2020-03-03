@@ -1,0 +1,30 @@
+[width="90%",cols="2,6"]
+|===
+|*Requirement E-4* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-4 +
++
+
+Each variable to variable reference between two variables, both of which are defined with respect to one or more dimensions, shall be described by the statement.
+
+
+ `+<$sourceEntity> <https://www.opengis.net/def/binary-array-ld/references> <$referenceEntity> .+`
+
+and the definition of a `+<$referenceEntity>+`, an instance of `+<https://www.opengis.net/def/binary-array-ld/Reference>+`.  This entity carries the broadcast relationship details and the reference to the target variable.
+
+
+ `+<$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;+`
+
+`+<https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;+`
+
+`+<https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;+`
+
+`+<https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .+`
+
+`$dn` are all defined to be integers.
+
+The object of the `<https://www.opengis.net/def/binary-array-ld/sourceShape>` and `<https://www.opengis.net/def/binary-array-ld/targetShape>` statements are each an RDF list of integer elements.
+
+The lengths of these two lists shall be the same.
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===

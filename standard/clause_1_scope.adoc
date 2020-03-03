@@ -9,9 +9,9 @@ Linked Data uses the W3C Resource Description Framework (RDF) to express the inf
 NetCDF-LD enhances netCDF metadata, enabling information found in netCDF files 
 to be linked with published conventions and controlled vocabularies used to express the content.
 
-The netCDF Classic Linked Data standard: netCDF-Classic-LD provides 
-the encoding standard for encoding linked data semantics into netCDF Classic files 
-and interpreting netCDF Classic files as RDF graphs.
+The netCDF  Linked Data standard: netCDF-LD provides 
+the encoding standard for encoding linked data semantics into netCDF  files 
+and interpreting netCDF  files as RDF graphs.
 
-NetCDF Classic files may use the HDF5 based netCDF-4 encoding, as long as 
-it is limited to the netCDF classic data model, or the legacy netCDF-3 encoding.
+NetCDF  files may use the HDF5 based netCDF-4 encoding, as long as 
+it is limited to the netCDF  data model, or the legacy netCDF-3 encoding.
