@@ -10,7 +10,16 @@ A key aspect of netCDF-LD is the introduction of rules for mapping identifiers f
 
 netCDF-LD aims to enable summary metadata from any netCDF file to be extracted to provide an external description of the file in RDF.  This enables references to externally published resources in RDF specifiy metadata conventions.  If desired, these descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013).
 
-==== Motivating Scenario
+==== Motivating Scenarios
+
+There are key objectives motivating this standard.
+
+# To provide a mechanism for extracting the metadata of netCDF files and aggregating the extracted metadata.
+## 
+# To enhance the clarity of metadata contained within netCDF files, which may be from multiple metadata conventions.
+## 
+
+
 
 For example .. ....   why I care
 
@@ -50,8 +59,9 @@ The Unidata network Common Data Form (netCDF) is an interface for scientific dat
 
 (https://github.com/Unidata/netcdf-c)
 
+NetCDF is an encoding format with open semantics and inferred referencing.  Metadata may be defined on all variables and groups within a netCDF file, with each entity having it's own name space for locally unique attribute names and each attribute containing a single value.
 
-conventions
+For targeted metadata specification, such as defining referenced spatiotemporal coordinates, metadata conventions are used.
 
 example diagram from scitools
 
@@ -70,12 +80,17 @@ dimensions
 
 === RDF Vocabularies
 
-bald
+A set of RDF vocabularies are used within this standard.
 
-dct
+A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array Linked Data vocabulary: 'bald'.  The bald vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
 
+This standard also makes use of the core RDF vocabularies:
+rdf
 rdfs
 
+This standard also makes use of the dublin core vocabulary
+dct
+and the schema.org vocabulary sdo.
 
 
 === Metadata RDF Graph
@@ -189,7 +204,7 @@ is interpreted as
 
 Prefixes shall end in a URI separator, either a `/` or a `#`.  
 
-The following example, in netCDF Common Data Language (CDL), uses the link:++binary-array-ld.net++[binary-array-ld.net] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
+The following example, in netCDF Common Data Language (CDL), uses the link:++binary-array-ld.net++[https://www.opengis.net/def/binary-array-ld] and the `w3.org rdf-syntax-ns` vocabularies to describe a reference relationship between two variables.
 
 ----
 netcdf tmpMwXy8U {
