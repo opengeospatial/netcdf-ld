@@ -7,8 +7,10 @@ An alias, defined in an alias graph, shall declare the statement
 
 `+<$entity> <http://purl.org/dc/terms/identifier> "$Literal" .+`
 
-The defined `"$Literal"` shall be used as the string to match on when interpreting aliases.
- 
+The defined `"$Literal"` shall be used as the exact string to match on when interpreting aliases.
+
+If multiple exact string matches exist across the provided alias graphs, then this is an error condition, no preference is implied.
+
  {set:cellbgcolor:#FFFFFF}
 
 |===
