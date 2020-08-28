@@ -3,15 +3,17 @@
 |*Requirement B-1* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-1 +
  +
 
-A list of prefixes may be defined within a netCDF file, within a variable that is referenced by the global attribute:
+A list of prefixes, defined within a netCDF file, within a single variable or group that is referenced by the global root group attribute:
 
 `+bald__isPrefixedBy+`
 
-If a prefix variable is defined, that prefix variable shall contain the prefix:
+shall be interpreted as Prefixes and used to interpret prefixed contents within the file.
+
+If a prefix variable or group is defined, that prefix variable shall contain the prefix:
 
 `+bald__ = https://www.opengis.net/def/binary-array-ld/+`
 
-Prefixes defined within a prefix variable shall be used as the definitive list of prefixes for that file.
+Prefixes defined within a prefix variable shall be used as prefixes for the parsing of that file.
 
  
  {set:cellbgcolor:#FFFFFF}
