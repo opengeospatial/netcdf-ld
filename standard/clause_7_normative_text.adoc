@@ -147,17 +147,17 @@ Information on the NetCDF Coordinate Variables' data payload, which are limited 
 
 The first value of the coordinate variable data payload shall be included in the created graph, using the predicate:
 
-`bald:firstValue`
+`bald:arrayFirstValue`
 
 Optionally the last value, if there is more than one value, of the coordinate variable data payload shall be included in the created graph, using the predicate:
 
-`bald:lastValue`
+`bald:arrayLastValue`
 
 
 The first and last positions are taken from the order of the coordinate variable array values, as presented within the file.
 
 
-
+If the value is encoded as a missing value, then no statement is included within the metadata graph.
 
  {set:cellbgcolor:#FFFFFF}
 

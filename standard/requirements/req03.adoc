@@ -15,6 +15,7 @@ If a prefix variable or group is defined, that prefix variable shall contain the
 
 Prefixes defined within a prefix variable shall be used as prefixes for the parsing of that file.
 
+The definition of multiple prefix resources within a single file is invalid in this standard.  Implementations may choose to combine prefix collections in invalid cases, but no precendence is implied, and prefix conflict is unresolved.
  
  {set:cellbgcolor:#FFFFFF}
 
