@@ -34,6 +34,7 @@ include::requirements/req04.adoc[]
 
 include::requirements/req05.adoc[]
 
+include::requirements/reqb4p.adoc[]
 
 
 === Requirement Class C: Aliasing
@@ -97,4 +98,68 @@ include::requirements/req16.adoc[]
 
 ==== Requirement E-5
 include::requirements/req17.adoc[]
+
+
+=== Requirement Class F: NetCDF Coordinate Variables
+
+Requirements for netCDF Coordinate Variables.
+
+
+[cols="1,4",width="90%"]
+|===
+2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
+2+|http://www.opengis.net/spec/ABCD/m.n/req/req-class-f {set:cellbgcolor:#FFFFFF}
+|Target type | Coordinate Variables
+|===
+
+
+==== Requirement F-1
+
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement F-1* {set:cellbgcolor:#CACCCE}|/req/req-class-f/requirement-1 +
+ +
+
+
+NetCDF Coordinate Variables, which are limited to 1 Dimensional variables of data,  shall be interpreted as cases of variable to variable referencing and produce
+
+`bald:references`
+
+statements within created graphs. 
+
+
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===
+
+==== Requirement F-2
+
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement F-2* {set:cellbgcolor:#CACCCE}|/req/req-class-f/requirement-2 +
+ +
+
+
+Information on the NetCDF Coordinate Variables' data payload, which are limited to 1 Dimensional variables of data, shall be included in created graphs.
+
+The first value of the coordinate variable data payload shall be included in the created graph, using the predicate:
+
+`bald:arrayFirstValue`
+
+Optionally the last value, if there is more than one value, of the coordinate variable data payload shall be included in the created graph, using the predicate:
+
+`bald:arrayLastValue`
+
+
+The first and last positions are taken from the order of the coordinate variable array values, as presented within the file.
+
+
+If the value is encoded as a missing value, then no statement is included within the metadata graph.
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===
 

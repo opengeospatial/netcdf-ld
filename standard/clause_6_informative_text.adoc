@@ -194,7 +194,7 @@ Prefixes are in wide use in a number of domains, including XML and RDF. They all
 
 Prefixes may be declared inside the file using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI.
 
-The attributes defining prefixes shall be in a seperate netCDF group, as global attributes.
+The attributes defining prefixes shall be in a seperate netCDF group or variable, as attributes.
 
 The prefixes group shall not be interpreted as part of the graph, it is used only in the interpretation of URIs, which will be encoded as explicit RDF prefixes in RDF encodings.
 
@@ -204,9 +204,11 @@ A single prefix declaration is an attribute and a value: the attribute name is t
   bald__ = https://www.opengis.net/def/binary-array-ld/
 ----
 
-The 'double underscore' character pair: `__` is used as an identifier and as the termination of the prefix; the double underscore is part of the prefix.
+The 'double underscore' character pair: `__` is used as an identifier and as the termination of the prefix; the double underscore is part of the prefix string within the netCDF file.
 
 The double underscore is interpreted as a special character by this standard: the first use of a double underscore from the start of any string shall be interpreted as a prefixed entity and shall be unpacked into full URIs by aware software if a full URI is defined.
+
+A prefix defined within a file shall only be used as a prefix if it ends in a double-underscore character pair, `__`.
 
 Prefixes are applied across the file they are declared within.  A single dedicated group shall be used to contain all of the internally defined prefixes applied to that file.
 
@@ -216,31 +218,59 @@ If included the prefixes group shall be identified within the file by a single g
 
 If included, the prefixes group shall include the `bald` prefix declaration.
 
+The definition of multiple prefix resources within a single file is invalid in this standard.  Implementations may choose to combine prefix collections in invalid cases, but no precendence is implied, and prefix conflict is unresolved.
+
+Implementations may treat this condition as a warning condition and as a validation error.
+
+
 ===== Externally Defined Prefixes
 
-Prefixes may be defined at runtime, by providing resolvable, parseable graphs of entities to be prefixed.
+Prefixes may be defined at runtime, by providing parseable JSON-LD context files or contents.
 
-Prefix graphs will be resolved and parsed at runtime and added to the prefix definition for interpretation.
+Prefixes will be interpreted during parsing from all context files and internally defined prefixes in combination.
 
-Prefixes will be derived from graphs by capturing identifiers which use the VANN vocabulary to provide preferred namespace URI and prefix statements.
+Prefixes in context files shall be defined as RDF prefixes in JSON-LD.  This means that there is no prefix separator within the JSON-LD context file.  The prefix, defined in the JSON-LD context file shall be interpreted as the prefix string appended by a double-underscore `__` within the netCDF-LD contextual interpretation.
 
-For example, entities should be identified by the SPARQL query:
+For example, the prefix `bald` would be defined witin a JSON-LD context file as:
+----
+{'@context': {'bald': 'https://www.opengis.net/def/binary-array-ld/'}}
+----
+(JSON-LD)
+
+The parsing library would interpret this as equivalent to the definition of a prefix within a file:
 
 ----
-select ?prefix ?uri where \n
-      {\n
-      ?s <http://purl.org/vocab/vann/preferredNamespacePrefix> ?prefix ;\n
-      <http://purl.org/vocab/vann/preferredNamespaceUri> ?uri . \n
-      }
+group: prefix_list {
+    :bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
+    }
 ----
+(CDL)
+
+and thus match to attributes within the file, such as:
+----
+// global attributes:
+                :bald__isPrefixedBy = "prefix_list" ;
+----
+(CDL)
+
+
 
 ===== Prefix Conflict
 
-If a prefix string is defined multiple times with different URI interpretations, then implementations shall ignore that prefix and treat the prefix as locally unresolved.
+If a prefix string is defined multiple times in JSON-LD context files, with different URI interpretations, then implementations shall ignore that prefix and treat the prefix as locally unresolved.
 
 Implementations may choose to raise warnings, validation errors, etc. in these cases.
 
-It is expected that files will be able to be parsed, even if prefix conflicts exist.
+It is expected that files will be able to be parsed, even if prefix conflicts exist. Conflict in prefix definitions is not a violation of this standard, the fallback position is to ignore conflicting prefixes as not well defined at runtime.
+
+Prefix definitions provided explicitly within a file shall not be overwridden be context files.  Prefixes defined within a file have precedence.
+
+If a prefix defined within a file is also defined within provided JSON-LD context files with different URI interpretations, then implementations shall ignore that JSON-LD context definition and treat the prefix as locally resolved.
+
+This standard does not consider this as a parsing error.
+
+Implementations may treat this condition as a warning condition and as a validation error within the provided context.
+
 
 ===== Prefix use
 
@@ -382,7 +412,7 @@ CDL defining a set of references:
 
 will be interpreted into RDF(turtle) as:
 ----
-  ns1:set_collection a bald:Subject ;
+  ns1:set_collection a bald:Resource ;
       bald:references ns1:data_variable1_ref,
                       ns1:data_variable2_ref .
 ----
@@ -396,7 +426,7 @@ CDL defining a list of references:
 
 will be interpreted into RDF(turtle) as:
 ----
-  ns1:list_collection a bald:Subject ;
+  ns1:list_collection a bald:Resource ;
       bald:references ( ns1:data_variable1 ns1:data_variable2 ) .
 ----
 
@@ -572,6 +602,11 @@ NetCDF defines a special type of variable, called a _Coordinate Variable_, which
 
 NetCDF-LD interprets Coordinate Variables as a case of variable referencing and includes entries as `bald:references` statements. 
 
+NetCDF-LD adds information on the Coordinate Variables, providing the first value, and optionally the last value, if there is more than one value.  The first and last are taken from the order as presented within the file. If the value is encoded as a missing value, then no statement is included within the metadata graph.
+
+NetCDF-LD uses the terms `bald:arrayFirstValue` and `bald:arrayLastValue` to identify these extracts from the Coordinate Data payload within individual statements in the resulting graph.
+
+In this way, searchable information on the location in geospatial and conceptual coordinate space is extracted from the files, whilst the graph size increases by two statements per coordinate variable.  The full coordinate array is not encoded within the metadata graph.
 
 ==== Worked Example
 
