@@ -3,7 +3,7 @@
 |*Requirement A-2* {set:cellbgcolor:#CACCCE}|/req/req-class-a/requirement-2 +
  +
 
-Each netCDF variable within the root group shall take its identity as a URI, relative to the file identity.
+Each netCDF variable within the root group, each netCDF group and each netCDF variable within each group shall take its identity as a URI, relative to the file identity.
 
 This identity is defined using the full variable name, including any owning groups, appended to the file identity. All element separation uses the `/` character.
  
