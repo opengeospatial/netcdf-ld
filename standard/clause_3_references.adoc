@@ -13,7 +13,7 @@ Rew, R., Davis, G.: NetCDF: An interface for scientific data access. IEEE Comput
 
 Eaton, B., Gregory, J., Drach, B., Taylor, K., Hankin, S.: NetCDF Climate and Forecast (CF) Metadata Conventions, (2011).
 
-Binary Array Linked Data ontology (BALD), http://binary-array-ld.net/
+Binary Array Linked Data ontology (BALD), https://opengis.net/def/binary-array-ld
 
 Gregory, J.: The CF metadata standard. CLIVAR Exch. 8, 4 (2003).
 

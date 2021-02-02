@@ -7,7 +7,7 @@ A prefix attribute name, defined in a prefix variable, shall use the limited cha
 
 `+[a-zA-z0-9_]+`
 
-A prefix attribute name, defined in a prefix variable, shall end with the sub-string:
+A prefix attribute name, defined in a prefix variable, shall end with the double-underscore sub-string:
 
 `+__+`
 

@@ -62,9 +62,9 @@ Validated output RDF graph:
     bald:contains this:var0,
         this:var1 .
 
-this:var0 a bald:Subject .
+this:var0 a bald:Resource .
 
-this:var1 a bald:Subject .
+this:var1 a bald:Resource .
 
 ----
 
@@ -122,10 +122,10 @@ Validated output RDF graph:
         this:var1 ;
     bald:isPrefixedBy "prefix_list" .
 
-this:var0 a bald:Subject ;
+this:var0 a bald:Resource ;
     rdfs:label rdfs:label .
 
-this:var1 a bald:Subject ;
+this:var1 a bald:Resource ;
     rdfs:label rdfs:label .
 
 ----
@@ -172,9 +172,9 @@ Validated output RDF graph:
         this:var1 ;
     NetCDF:title "Sample netCDF file definition with alias terms from the netCDF user guide" .
 
-this:var0 a bald:Subject .
+this:var0 a bald:Resource .
 
-this:var1 a bald:Subject .
+this:var1 a bald:Resource .
 
 ----
 
@@ -229,10 +229,10 @@ Validated output RDF graph:
     bald:isPrefixedBy "prefix_list" ;
     NetCDF:title "Sample netCDF file definition with alias terms from the netCDF user guide" .
 
-this:var0 a bald:Subject ;
+this:var0 a bald:Resource ;
     rdfs:label rdfs:label .
 
-this:var1 a bald:Subject ;
+this:var1 a bald:Resource ;
     rdfs:label rdfs:label .
 
 ----
