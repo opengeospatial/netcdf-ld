@@ -331,7 +331,7 @@ In this example:
 
 Alongside the definition of prefixes, explicit aliases may be defined via netCDF-LD conventions within the _netCDF file_, or as a scope for a _netCDF file_ during parsing.  Aliases enable controlled attribute names to be interpreted as URIs.
 
-Alias definitions do not exist with file CDL.  They are provided as RDF input to a parsing process at parse time, from external vocabularies.
+Alias definitions do not exist with file CDL.  They are provided as input (either as RDF or JSON) to a parsing process at parse time, from external vocabularies.
 
 Alias URIs are interpreted from a reverse lookup from the file into the graph.  As such name clashes are not protected against.
 
@@ -364,6 +364,42 @@ Aliases are declared as a set of RDF graphs. These RDF graphs are commonly provi
 
 The RDF graphs shall be combined and treated as a single alias scope for the file.
 
+An example of alias definitions in an external file is shown below encoded as TTL as separate files for names.
+
+----
+# Names Aliases
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix acdd: <https://def.scitools.org.uk/ACDD/> .
+@prefix cfterms: <https://def.scitools.org.uk/CFTerms/> .
+@prefix nc: <https://def.scitools.org.uk/NetCDF/> .
+
+skos:prefLabel          dct:identifier "prefLabel" .
+acdd:id                 dct:identifier "id" .
+acdd:title              dct:identifier "title" .
+cfterms:units           dct:identifier "units" .
+cfterms:standard_name   dct:identifier "standard_name" .
+nc:valid_min            dct:identifier "valid_min" .
+nc:valid_max            dct:identifier "valid_max" .
+op:matrix               dct:identifier "matrix" .
+op:objectOfInterest     dct:identifier "substanceOrTaxon" .
+----
+
+
+Example of aliases for both names and values captured in a JSON file:
+----
+{
+        "id"                             : "https://def.scitools.org.uk/ACDD/id",
+        "standard_name"                  : "https://def.scitools.org.uk/CFTerms/standard_name",
+        "title"                          : "https://def.scitools.org.uk/ACDD/title",
+        "units"                          : "https://def.scitools.org.uk/CFTerms/units",
+        "valid_max"                      : "https://def.scitools.org.uk/NetCDF/valid_max",
+        "valid_min"                      : "https://def.scitools.org.uk/NetCDF/valid_min",
+        "matrix"                         : "http://environment.data.gov.au/def/op#matrix",
+        "substanceOrTaxon"               : "http://environment.data.gov.au/def/op#objectOfInterest"
+        "prefLabel"                      : "http://www.w3.org/2004/02/skos/core#prefLabel"
+}
+----
 
 ==== Attribute Names
 
