@@ -689,7 +689,7 @@ this:location_variable a bald:Array ;
 
 === NetCDF Linked Data on Schema.org ===
 
-This standard recognises that while domain specific vocabularies and detailed RDF representations of datasets in NetCDF are important, there is a growing movement to make use of standardised vocabularies, such as Schema.org, to harmonise the higher-level descriptions of digital assests such as datasets. The goal of this activity is often the promotion of datastes in portals through Search Ebgine Optimisation and also to provide a common syntax and understanding of the datasets in a consistent language.
+This standard recognises that while domain specific vocabularies and detailed RDF representations of datasets in NetCDF are important, there is a growing movement to make use of standardised vocabularies, such as Schema.org, to harmonise the higher-level descriptions of digital assets such as datasets. The goal of this activity is often the promotion of datasets in portals through Search Engine Optimisation and also to provide a common syntax and understanding of the datasets in a consistent language.
 
 To this end, NetCDF-LD also supports a limited description of a netCDF file as Schema.org Dataset through mapping a bald:Container to the Schema.org Dataset class. 
 
