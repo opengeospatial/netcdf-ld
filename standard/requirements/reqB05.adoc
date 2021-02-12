@@ -1,0 +1,24 @@
+==== Requirement B-5
+
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement B-5* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-5 +
+ +
+
+
+
+A prefix attribute name, defined in a JSON-LD context file, shall use the limited character set:
+
+`+[a-zA-z0-9_]+`
+
+A prefix attribute name, defined in a JSON-LD context file, shall have the double-underscore sub-string:
+
+`+__+`
+
+appended to the provided string.
+
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===

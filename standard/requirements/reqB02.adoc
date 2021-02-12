@@ -1,3 +1,5 @@
+==== Requirement B-2
+
 [width="90%",cols="2,6"]
 |===
 |*Requirement B-2* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-2 +
