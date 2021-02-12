@@ -9,13 +9,13 @@ An attribute may be declared by a metadata standard as a variable reference attr
 
 In order to do this, the attribute shall declare itself in a resolveable RDF graph and include the statement:
 
- `+<{attribute}> rdfs:range <https://www.opengis.net/def/binary-array-ld/Subject> .+`
+ `+<{attribute}> rdfs:range <https://www.opengis.net/def/binary-array-ld/Resource> .+`
 
-It is also permissable to provide an rdfs:range statement targeting another resource and for that resource to declare that it is an rdfs:subClassOf bald:Subject, for example:
+It is also permissable to provide an rdfs:range statement targeting another resource and for that resource to declare that it is an rdfs:subClassOf bald:Resource, for example:
 
  `+<{attribute}> rdfs:range <{AClass}> .+`
 
- `+<{AClass}> rdfs:subClassOf <https://www.opengis.net/def/binary-array-ld/Subject> .+`
+ `+<{AClass}> rdfs:subClassOf <https://www.opengis.net/def/binary-array-ld/Resource> .+`
  
  {set:cellbgcolor:#FFFFFF}
 

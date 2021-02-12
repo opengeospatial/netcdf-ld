@@ -11,6 +11,8 @@ include::requirements/reqA01.adoc[]
 
 include::requirements/reqA02.adoc[]
 
+include::requirements/reqA03.adoc[]
+
 
 
 === Requirement Class B: Prefixing

@@ -149,6 +149,43 @@ For example, a file may be available from a location, via a URL, which also serv
 
 Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a ``/``.
 
+===== Variable Type Declaration
+
+Each netCDF variable shall declare a type statement, and RDF triple of the form
+
+----
+
+<variableURI> rdf:type <type>
+
+----
+
+There are two recognised type identifiers within the standard. 
+
+If the variable contains an array data payload (which may be missing data) then the type shall be defined as bald:Array and shall include a statement defining the shape of the data payload array as a Literal encoded tuple of integer values, using bald:shape.
+
+The shape Literal is the shape as defined and ordered within the netCDF file, using the numerical values of the dimensions to define the actual shape.
+
+The names of dimensions within the netCDF file encoding are not stored within the metadata summary graph.
+
+----
+
+<variableURI> rdf:type bald:Array ;
+              bald shape (1,1,16,9) .
+
+----
+
+If there is no array payload and the variable is single valued (which may be missing data) then the type shall be defined as bald:Resource.  
+
+In the bald vocabulary, bald:Resource is the general type, bald:Array is a specialiasation of this type.
+
+
+----
+
+<variableURI> rdf:type bald:Resource .
+
+----
+ 
+
 ===== Download URL
 
 The identity is conceptually distinct from the resolvable location of a file.  This may be simply invovlde the appending of a '/' character to the location, but it can be more distinct.
