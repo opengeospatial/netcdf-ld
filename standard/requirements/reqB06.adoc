@@ -1,0 +1,16 @@
+==== Requirement B-6
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement B-6* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-6 +
+ +
+
+
+A prefix value, defined in a JSON-LD context file, shall be a HTTP URI or a HTTPS URI.
+
+A prefix value, defined in a JSON-LD context file, shall end in either a `/` or a `#` (a valid URI separator).
+
+ 
+ {set:cellbgcolor:#FFFFFF}
+
+|===

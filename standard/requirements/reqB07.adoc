@@ -1,0 +1,14 @@
+==== Requirement B-7
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement B-7* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-7 +
+ +
+
+
+If a prefix string is defined multiple times in provided JSON-LD context files with different URI interpretations, then implementations shall ignore that prefix and treat the prefix as locally unresolved.
+
+ 
+ {set:cellbgcolor:#FFFFFF}
+
+|===
