@@ -86,7 +86,7 @@ A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array 
 
 * bald (https://www.opengis.net/def/binary-array-ld/)
 
-The bald vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
+The `bald` vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
 
 This standard also makes use of the core RDF vocabularies, the dublin core vocabulary and the schema.org vocabulary:
 
@@ -94,6 +94,9 @@ This standard also makes use of the core RDF vocabularies, the dublin core vocab
 * rdfs (http://www.w3.org/2000/01/rdf-schema#)
 * dct (http://purl.org/dc/terms/)
 * sdo (http://schema.org)
+
+
+image::images/bald-ont-1.png[Figure X. BALD vocabulary]
 
 
 === Metadata RDF Graph
