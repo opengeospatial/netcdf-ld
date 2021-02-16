@@ -759,6 +759,39 @@ this:location_variable a bald:Array ;
 ----
 
 
+=== NetCDF Linked Data on Schema.org ===
+
+This standard recognises that while domain specific vocabularies and detailed RDF representations of datasets in NetCDF are important, there is a growing movement to make use of standardised vocabularies, such as Schema.org, to harmonise the higher-level descriptions of digital assets such as datasets. The goal of this activity is often the promotion of datasets in portals through Search Engine Optimisation and also to provide a common syntax and understanding of the datasets in a consistent language.
+
+To this end, NetCDF-LD also supports a limited description of a netCDF file as Schema.org Dataset through mapping a bald:Container to the Schema.org Dataset class. 
+
+Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properites.
+
+image::images/netcdf_ld_as_schema_dot_org.png
+
+A worked example follows in RDF, encoded using the terse triple language (TTL):
+
+----
+
+@prefix so: <http://schema.org/> .
+
+<https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc> a so:Dataset;
+	so:name "Extended AVHRR Polar Pathfinder Fundamental Climate Data Record (APPx CDR)" ;
+	so:description "The Extended AVHRR Polar Pathfinder (APP-x) version-2 Thematic Climate Data Record (CDR) includes surface temperature, surface albedo, surface and the Top Of the Atmosphere (TOA) shortwave and longwave radiative fluxes, cloud properties (amount, phase, particle size, optical depth,top pressure and temperature, surface and TOA radiative effect), and ice thickness and age. The APP-x CDR has twice daily data at local solar times of 14 and 04(02) for the Arctic(Antarctic) at a spatial resolution of 25 km for both poles." ;
+	so:identifier "Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc" ;
+	so:keywords:
+        "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC RADIATION > RADIATIVE FLUX",
+        "EARTH SCIENCE > TERRESTRIAL HYDROSPHERE > SNOW and ICE > ALBEDO" ;
+	so:license "No restrictions on access or use" ;
+	so:url <https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc/>;
+	so:distribution [
+		a so:DataDownload ;
+		so:contentUrl <https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc/> ;
+		so:encodingFormat "application/x-netcdf", "http://vocab.nerc.ac.uk/collection/M01/current/NC/"
+	] .
+	
+----
+
 === Implementation Adaptions ===
 
 This standard recognises that there are myriad opportunities for optimisation of large collections of graphs of netCDF files contents.
