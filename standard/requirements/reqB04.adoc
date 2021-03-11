@@ -1,0 +1,15 @@
+==== Requirement B-4
+
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement B-4* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-4 +
+ +
+
+Prefixes shall be interpreted from provided JSON-LD context files at run time.
+
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===
+

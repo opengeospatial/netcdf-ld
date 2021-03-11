@@ -86,7 +86,7 @@ A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array 
 
 * bald (https://www.opengis.net/def/binary-array-ld/)
 
-The bald vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
+The `bald` vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
 
 This standard also makes use of the core RDF vocabularies, the dublin core vocabulary and the schema.org vocabulary:
 
@@ -94,6 +94,9 @@ This standard also makes use of the core RDF vocabularies, the dublin core vocab
 * rdfs (http://www.w3.org/2000/01/rdf-schema#)
 * dct (http://purl.org/dc/terms/)
 * sdo (http://schema.org)
+
+
+image::images/bald-ont-1.png[Figure X. BALD vocabulary]
 
 
 === Metadata RDF Graph
@@ -148,6 +151,43 @@ For example, a file may be available from a location, via a URL, which also serv
 ===== Variable Identity 
 
 Each variable within that file has its own identity, defined relative to the file identity.  This is defined using the variable name appended to the file identity and separated by a ``/``.
+
+===== Variable Type Declaration
+
+Each netCDF variable shall declare a type statement, and RDF triple of the form
+
+----
+
+<variableURI> rdf:type <type>
+
+----
+
+There are two recognised type identifiers within the standard. 
+
+If the variable contains an array data payload (which may be missing data) then the type shall be defined as bald:Array and shall include a statement defining the shape of the data payload array as a Literal encoded tuple of integer values, using bald:shape.
+
+The shape Literal is the shape as defined and ordered within the netCDF file, using the numerical values of the dimensions to define the actual shape.
+
+The names of dimensions within the netCDF file encoding are not stored within the metadata summary graph.
+
+----
+
+<variableURI> rdf:type bald:Array ;
+              bald shape (1,1,16,9) .
+
+----
+
+If there is no array payload and the variable is single valued (which may be missing data) then the type shall be defined as bald:Resource.  
+
+In the bald vocabulary, bald:Resource is the general type, bald:Array is a specialiasation of this type.
+
+
+----
+
+<variableURI> rdf:type bald:Resource .
+
+----
+ 
 
 ===== Download URL
 
@@ -757,6 +797,39 @@ this:location_variable a bald:Array ;
 
 ----
 
+
+=== NetCDF Linked Data on Schema.org ===
+
+This standard recognises that while domain specific vocabularies and detailed RDF representations of datasets in NetCDF are important, there is a growing movement to make use of standardised vocabularies, such as Schema.org, to harmonise the higher-level descriptions of digital assets such as datasets. The goal of this activity is often the promotion of datasets in portals through Search Engine Optimisation and also to provide a common syntax and understanding of the datasets in a consistent language.
+
+To this end, NetCDF-LD also supports a limited description of a netCDF file as Schema.org Dataset through mapping a bald:Container to the Schema.org Dataset class. 
+
+Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properites.
+
+image::images/netcdf_ld_as_schema_dot_org.png
+
+A worked example follows in RDF, encoded using the terse triple language (TTL):
+
+----
+
+@prefix so: <http://schema.org/> .
+
+<https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc> a so:Dataset;
+	so:name "Extended AVHRR Polar Pathfinder Fundamental Climate Data Record (APPx CDR)" ;
+	so:description "The Extended AVHRR Polar Pathfinder (APP-x) version-2 Thematic Climate Data Record (CDR) includes surface temperature, surface albedo, surface and the Top Of the Atmosphere (TOA) shortwave and longwave radiative fluxes, cloud properties (amount, phase, particle size, optical depth,top pressure and temperature, surface and TOA radiative effect), and ice thickness and age. The APP-x CDR has twice daily data at local solar times of 14 and 04(02) for the Arctic(Antarctic) at a spatial resolution of 25 km for both poles." ;
+	so:identifier "Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc" ;
+	so:keywords:
+        "EARTH SCIENCE > ATMOSPHERE > ATMOSPHERIC RADIATION > RADIATIVE FLUX",
+        "EARTH SCIENCE > TERRESTRIAL HYDROSPHERE > SNOW and ICE > ALBEDO" ;
+	so:license "No restrictions on access or use" ;
+	so:url <https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc/>;
+	so:distribution [
+		a so:DataDownload ;
+		so:contentUrl <https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc/> ;
+		so:encodingFormat "application/x-netcdf", "http://vocab.nerc.ac.uk/collection/M01/current/NC/"
+	] .
+	
+----
 
 === Implementation Adaptions ===
 
