@@ -1,0 +1,13 @@
+[appendix]
+:appendix-caption: Annex
+== Relationship to other OGC Standards ( {Informative} )
+
+This standard is related to a number of other standards in the OGC community. 
+
+First and foremost, this standard provides a set of conventions to encode knowledge graphs built upon the https://www.ogc.org/standards/netcdf[OGC Network Common Data Form (NetCDF) Core Encoding Standard version 1.0]. Further, this standard makes explicit use of the rules for variables across groups defined by the Climate and Forecast (CF) Conventions for netCDF files, with CF adopted by OGC in the CF-netCDF Core and Extensions Primer.
+
+It should be noted that practical usage of this standard should allow for representation of the content of netCDF files using other OGC standards. For example, the European Commission's INSPIRE Spatial Data Infrastructure makes use of the ISO/OGC Abstract Specification https://www.ogc.org/standards/om[Observations and Measurements] as an encoding mechanism for, amongst other themes, meteorological and oceanographic data. INSPIRE also allows for the use of netCDF files as a data transport format from the Observation's result attribute. It can then be seen that graph patterns to identify the result within a broader netCDF file could be encoded in Observations and Measurements as Linked Data by following the standard laid out here. Further examples of this increased connectivity from this standard to others in the OGC suite of standards 
+* Geospatial features in the netCDF file could be mapped to the ontology of the https://www.ogc.org/standards/geosparql[GeoSPARQL standard] to express the spatial extent of the netCDF file in Linked Data
+* Explicit linkages could be made from variables described in netCDF files to, for example, descriptions of the sensor making the measurements expressed in the https://www.ogc.org/standards/sensorml[Sensor Model Language]
+
+Finally, whilst this standard is targeted at netCDF files, the Binary Array Linked Data vocabulary may also be used to describe files adhering to the https://www.ogc.org/standards/HDF5[Hierarchical Data Format Version 5] standard.
