@@ -485,7 +485,7 @@ An example of aliases for both names and values expressed as dictionary encoded 
         "valid_min"                      : "https://def.scitools.org.uk/NetCDF/valid_min",
         "valid_max"                      : "https://def.scitools.org.uk/NetCDF/valid_max",
         "matrix"                         : "http://environment.data.gov.au/def/op#matrix",
-        "substanceOrTaxon"               : "http://environment.data.gov.au/def/op#objectOfInterest"
+        "substanceOrTaxon"               : "http://environment.data.gov.au/def/op#objectOfInterest",
         "prefLabel"                      : "http://www.w3.org/2004/02/skos/core#prefLabel"
 }
 ----
