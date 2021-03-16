@@ -4,7 +4,7 @@ This document uses the terms defined in Sub-clause 5.3 of [OGC 06-121r8], which 
 For the purposes of this document, the following additional terms and definitions apply.
 
 === *RDF*
-The Resource Description Framework (RDF) is a standard model for data exchange on the World Wide Web. RDF is specifically designed to allow the exchange of data even where underlying schemas are different through the use of a normalised data model of subject-predicate-object triples and using Uniform Resource Identifiers as to define termsa within the triples.
+The Resource Description Framework (RDF) is a standard model for data exchange on the World Wide Web. RDF is specifically designed to allow the exchange of data even where underlying schemas are different through the use of a normalised data model of subject-predicate-object triples and using Uniform Resource Identifiers as to define terms within the triples.
 
 === *RDF statement (or triple)*
 A triple is the atomic data entity in RDF. It is a set of three entitites used to make a statement about the subject of the triple. The triple takes the form subject-predicate-object (e.g. "The sea - has colour - blue"). In a Linked Data system, as many of the portions of the expression as possible are defined by URIs. RDF statements are often referred to more simple as "triples".
