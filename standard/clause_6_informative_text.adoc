@@ -186,6 +186,19 @@ In the bald vocabulary, bald:Resource is the general type, bald:Array is a speci
 
 ----
  
+If the bald:Array instance has a single dimension, then the first and last values from the data payload, as ordered within the netCDF file, shall be endcoded as Literals within the metadata graph, using bald:firstValue and bald:lastValue.
+
+For example:
+----
+
+<variableURI> rdf:type bald:Array ;
+              bald shape '(72,)' ;
+              bald:firstValue -90 ;
+              bald:lastValue 90 .
+
+----
+
+
 
 ===== Download URL
 
