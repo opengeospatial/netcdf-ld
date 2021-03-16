@@ -5,14 +5,13 @@
 Requirements for Universal Resource Identifiers definition and interpretation.
 
 
-include::requirements/requirements_class.adoc[]
+include::requirements/requirements_class_a.adoc[]
 
-==== Requirement A-1
+include::requirements/reqA01.adoc[]
 
-include::requirements/req01.adoc[]
-==== Requirement A-2
+include::requirements/reqA02.adoc[]
 
-include::requirements/req02.adoc[]
+include::requirements/reqA03.adoc[]
 
 
 
@@ -22,19 +21,23 @@ Requirements for Prefix definition and interpretation.
 
 include::requirements/requirements_class_b.adoc[]
 
-==== Requirement B-1
+include::requirements/reqB01.adoc[]
 
-include::requirements/req03.adoc[]
+include::requirements/reqB02.adoc[]
 
-==== Requirement B-2
+include::requirements/reqB03.adoc[]
 
-include::requirements/req04.adoc[]
+include::requirements/reqB04.adoc[]
 
-==== Requirement B-3
+include::requirements/reqB05.adoc[]
 
-include::requirements/req05.adoc[]
+include::requirements/reqB06.adoc[]
 
-include::requirements/reqb4p.adoc[]
+include::requirements/reqB07.adoc[]
+
+include::requirements/reqB08.adoc[]
+
+
 
 
 === Requirement Class C: Aliasing
@@ -44,15 +47,11 @@ Requirements for Alias definition and interpretation.
 
 include::requirements/requirements_class_c.adoc[]
 
-==== Requirement C-1
+include::requirements/reqC01.adoc[]
 
-include::requirements/req06.adoc[]
+include::requirements/reqC02.adoc[]
 
-==== Requirement C-2
-include::requirements/req07.adoc[]
-
-==== Requirement C-3
-include::requirements/req08.adoc[]
+include::requirements/reqC03.adoc[]
 
 
 
@@ -63,41 +62,32 @@ Requirements for Attribute name definition and interpretation.
 
 include::requirements/requirements_class_d.adoc[]
 
-==== Requirement D-1
-include::requirements/req09.adoc[]
+include::requirements/reqD01.adoc[]
 
-==== Requirement D-2
-include::requirements/req10.adoc[]
+include::requirements/reqD02.adoc[]
 
-==== Requirement D-3
-include::requirements/req11.adoc[]
+include::requirements/reqD03.adoc[]
 
-==== Requirement D-4
-include::requirements/req12.adoc[]
+include::requirements/reqD04.adoc[]
 
 
 
 === Requirement Class E: Variable-to-variable referencing
 
-Requirements for variable to variable definition and interpretation.
+Requirements for variable-to-variable definition and interpretation.
 
 
 include::requirements/requirements_class_e.adoc[]
 
-==== Requirement E-1
-include::requirements/req13.adoc[]
+include::requirements/reqE01.adoc[]
 
-==== Requirement E-2
-include::requirements/req14.adoc[]
+include::requirements/reqE02.adoc[]
 
-==== Requirement E-3
-include::requirements/req15.adoc[]
+include::requirements/reqE03.adoc[]
 
-==== Requirement E-4
-include::requirements/req16.adoc[]
+include::requirements/reqE04.adoc[]
 
-==== Requirement E-5
-include::requirements/req17.adoc[]
+include::requirements/reqE05.adoc[]
 
 
 === Requirement Class F: NetCDF Coordinate Variables
@@ -105,61 +95,8 @@ include::requirements/req17.adoc[]
 Requirements for netCDF Coordinate Variables.
 
 
-[cols="1,4",width="90%"]
-|===
-2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
-2+|http://www.opengis.net/spec/ABCD/m.n/req/req-class-f {set:cellbgcolor:#FFFFFF}
-|Target type | Coordinate Variables
-|===
+include::requirements/reqF01.adoc
 
+include::requirements/reqF02.adoc
 
-==== Requirement F-1
-
-
-[width="90%",cols="2,6"]
-|===
-|*Requirement F-1* {set:cellbgcolor:#CACCCE}|/req/req-class-f/requirement-1 +
- +
-
-
-NetCDF Coordinate Variables, which are limited to 1 Dimensional variables of data,  shall be interpreted as cases of variable to variable referencing and produce
-
-`bald:references`
-
-statements within created graphs. 
-
-
-
- {set:cellbgcolor:#FFFFFF}
-
-|===
-
-==== Requirement F-2
-
-
-[width="90%",cols="2,6"]
-|===
-|*Requirement F-2* {set:cellbgcolor:#CACCCE}|/req/req-class-f/requirement-2 +
- +
-
-
-Information on the NetCDF Coordinate Variables' data payload, which are limited to 1 Dimensional variables of data, shall be included in created graphs.
-
-The first value of the coordinate variable data payload shall be included in the created graph, using the predicate:
-
-`bald:arrayFirstValue`
-
-Optionally the last value, if there is more than one value, of the coordinate variable data payload shall be included in the created graph, using the predicate:
-
-`bald:arrayLastValue`
-
-
-The first and last positions are taken from the order of the coordinate variable array values, as presented within the file.
-
-
-If the value is encoded as a missing value, then no statement is included within the metadata graph.
-
- {set:cellbgcolor:#FFFFFF}
-
-|===
 

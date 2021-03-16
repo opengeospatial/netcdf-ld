@@ -51,7 +51,7 @@ data:
 
 Validated output RDF graph:
 ----
-@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix this: <http://secret.binary-array-ld.net/identity.nc/> .
@@ -100,7 +100,7 @@ variables:
 	int var1 ;
 	    var1:rdfs__label = "rdfs__label" ;
         int prefix_list ;
-            prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+            prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
             prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
             prefix_list:rdfs__ = "http://www.w3.org/2000/01/rdf-schema#" ;
         :bald__isPrefixedBy = "prefix_list" ;
@@ -110,7 +110,7 @@ data:
 
 Validated output RDF graph:
 ----
-@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix this: <http://secret.binary-array-ld.net/prefix.nc/> .
@@ -160,7 +160,7 @@ http://def.scitools.org.uk/NetCDF
 Validated output RDF graph:
 ----
 @prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
-@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix this: <http://secret.binary-array-ld.net/alias.nc/> .
@@ -198,7 +198,7 @@ variables:
 	int var1 ;
 	    var1:rdfs__label = "rdfs__label" ;
         int prefix_list ;
-            prefix_list:bald__ = "http://binary-array-ld.net/latest/" ;
+            prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
             prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
             prefix_list:rdfs__ = "http://www.w3.org/2000/01/rdf-schema#" ;
         :bald__isPrefixedBy = "prefix_list" ;
@@ -216,7 +216,7 @@ http://def.scitools.org.uk/NetCDF
 Validated output RDF graph:
 ----
 @prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
-@prefix bald: <http://binary-array-ld.net/latest/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix this: <http://secret.binary-array-ld.net/attributes.nc/> .

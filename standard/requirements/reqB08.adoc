@@ -1,0 +1,19 @@
+==== Requirement B-8
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement B-8* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-8 +
+ +
+
+Prefix definitions provided explicitly within a file shall not be overwridden be context files.  Prefixes defined within a file have precedence.
+
+If a prefix defined within a file is also defined within provided JSON-LD context files with different URI interpretations, then implementations shall ignore that JSON-LD context definition and treat the prefix as locally resolved.
+
+This standard does not consider this as a parsing error.
+
+Implementations may treat this condition as a warning condition and as a validation error within the provided context.
+
+ 
+ {set:cellbgcolor:#FFFFFF}
+
+|===
