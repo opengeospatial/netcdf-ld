@@ -74,7 +74,7 @@ include::requirements/reqD04.adoc[]
 
 === Requirement Class E: Variable-to-variable referencing
 
-Requirements for variable to variable definition and interpretation.
+Requirements for variable-to-variable definition and interpretation.
 
 
 include::requirements/requirements_class_e.adoc[]
