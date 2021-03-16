@@ -406,26 +406,16 @@ An example of alias definitions in an external file is shown below encoded as TT
 @prefix acdd: <https://def.scitools.org.uk/ACDD/> .
 @prefix cfterms: <https://def.scitools.org.uk/CFTerms/> .
 @prefix nc: <https://def.scitools.org.uk/NetCDF/> .
-<<<<<<< HEAD
 @prefix op: <http://environment.data.gov.au/def/op#> .
 
 acdd:id                 dct:identifier "id" .
 acdd:title              dct:identifier "title" .
 cfterms:standard_name   dct:identifier "standard_name" .
 cfterms:units           dct:identifier "units" .
-=======
-
-skos:prefLabel          dct:identifier "prefLabel" .
-acdd:id                 dct:identifier "id" .
-acdd:title              dct:identifier "title" .
-cfterms:units           dct:identifier "units" .
-cfterms:standard_name   dct:identifier "standard_name" .
->>>>>>> 3bd50d44b39cd77c501d004caff04041f7f33e2d
 nc:valid_min            dct:identifier "valid_min" .
 nc:valid_max            dct:identifier "valid_max" .
 op:matrix               dct:identifier "matrix" .
 op:objectOfInterest     dct:identifier "substanceOrTaxon" .
-<<<<<<< HEAD
 skos:prefLabel          dct:identifier "prefLabel" .
 ----
 
@@ -494,20 +484,6 @@ An example of aliases for both names and values expressed as dictionary encoded 
         "units"                          : "https://def.scitools.org.uk/CFTerms/units",
         "valid_min"                      : "https://def.scitools.org.uk/NetCDF/valid_min",
         "valid_max"                      : "https://def.scitools.org.uk/NetCDF/valid_max",
-=======
-----
-
-
-Example of aliases for both names and values captured in a JSON file:
-----
-{
-        "id"                             : "https://def.scitools.org.uk/ACDD/id",
-        "standard_name"                  : "https://def.scitools.org.uk/CFTerms/standard_name",
-        "title"                          : "https://def.scitools.org.uk/ACDD/title",
-        "units"                          : "https://def.scitools.org.uk/CFTerms/units",
-        "valid_max"                      : "https://def.scitools.org.uk/NetCDF/valid_max",
-        "valid_min"                      : "https://def.scitools.org.uk/NetCDF/valid_min",
->>>>>>> 3bd50d44b39cd77c501d004caff04041f7f33e2d
         "matrix"                         : "http://environment.data.gov.au/def/op#matrix",
         "substanceOrTaxon"               : "http://environment.data.gov.au/def/op#objectOfInterest"
         "prefLabel"                      : "http://www.w3.org/2004/02/skos/core#prefLabel"
