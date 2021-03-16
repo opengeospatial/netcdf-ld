@@ -91,7 +91,7 @@ This standard also makes use of the core RDF vocabularies, the Dublin Core vocab
 * dcat (http://www.w3.org/ns/dcat#)
 
 
-image::images/bald-ont-1.png[Figure X. BALD vocabulary]
+image::bald-ont-1.png[Figure X. BALD vocabulary]
 
 
 === Metadata RDF Graph
@@ -103,7 +103,7 @@ The numerical data within the file is not encoded within the graph, only the met
 Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways. In Figure 2, an example is given showing the CF standard name attribute value across multiple files.
 
 
-image::images/metadata-across-files-example.png[Figure 2. Example showing cf:standard_name property values across different files.]
+image::metadata-across-files-example.png[Figure 2. Example showing cf:standard_name property values across different files.]
 
 Representing this and other metadata enables queries across netCDF files, e.g. show me netCDF files that has data values on  `sea_surface_temperature`.
 
@@ -811,7 +811,7 @@ To this end, NetCDF-LD also supports a limited description of a netCDF file as S
 
 Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properites.
 
-image::images/netcdf_ld_as_schema_dot_org.png
+image::netcdf_ld_as_schema_dot_org.png
 
 A worked example follows in RDF, encoded using the terse triple language (TTL):
 
