@@ -15,15 +15,15 @@ and the definition of a `+<$referenceEntity>+`, an instance of `+<https://www.op
 
  `+<$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;+`
 
-`+<https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;+`
+`+<https://www.opengis.net/def/binary-array-ld/sourceRefShape> ($d1 $d2 $d3) ;+`
 
-`+<https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;+`
+`+<https://www.opengis.net/def/binary-array-ld/targetRefShape> ($d4 $d5 $d6) ;+`
 
 `+<https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .+`
 
 `$dn` are all defined to be integers.
 
-The object of the `<https://www.opengis.net/def/binary-array-ld/sourceShape>` and `<https://www.opengis.net/def/binary-array-ld/targetShape>` statements are each an RDF list of integer elements.
+The object of the `<https://www.opengis.net/def/binary-array-ld/sourceRefShape>` and `<https://www.opengis.net/def/binary-array-ld/targetRefShape>` statements are each an RDF list of integer elements.
 
 The lengths of these two lists shall be the same.
 
