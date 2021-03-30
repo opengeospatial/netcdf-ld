@@ -13,6 +13,7 @@ include::requirements/reqA02.adoc[]
 
 include::requirements/reqA03.adoc[]
 
+include::requirements/reqA04.adoc[]
 
 
 === Requirement Class B: Prefixing
@@ -74,7 +75,7 @@ include::requirements/reqD04.adoc[]
 
 === Requirement Class E: Variable-to-variable referencing
 
-Requirements for variable to variable definition and interpretation.
+Requirements for variable-to-variable definition and interpretation.
 
 
 include::requirements/requirements_class_e.adoc[]
@@ -95,8 +96,8 @@ include::requirements/reqE05.adoc[]
 Requirements for netCDF Coordinate Variables.
 
 
-include::requirements/reqF01.adoc
+include::requirements/reqF01.adoc[]
 
-include::requirements/reqF02.adoc
+include::requirements/reqF02.adoc[]
 
 

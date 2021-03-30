@@ -1,0 +1,40 @@
+==== Requirement A-3
+
+[width="90%",cols="2,6"]
+|===
+|*Requirement A-3* {set:cellbgcolor:#CACCCE}|/req/req-class-a/requirement-3 +
+ +
+
+// {set:cellbgcolor:#FFFFFF}
+
+Each netCDF variable shall declare a type statement, and RDF triple of the form
+
+----
+
+<variableURI> rdf:type <type>
+
+----
+
+There are two recognised type identifiers within the standard. 
+
+If the variable contains an array data payload (which may be missing data) then the type shall be defined as bald:Array
+
+----
+
+<variableURI> rdf:type bald:Array .
+
+----
+
+If there is no array payload and the variable is single valued (which may be missing data) then the type shall be defined as bald:Resource.
+
+
+----
+
+<variableURI> rdf:type bald:Resource .
+
+----
+
+
+ {set:cellbgcolor:#FFFFFF}
+
+|===
