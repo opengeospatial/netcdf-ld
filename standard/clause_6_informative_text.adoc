@@ -3,20 +3,19 @@
 === Rationale and Design principles ===
 
 netCDF is used widely in the environmental sciences for data capture, analysis and archival. 
-While, netCDF allows metadata to be specified in each file, it lacks the mechanisms for specifying metadata that conforms to community or project conventions or standards. 
+While, netCDF allows metadata to be specified in each file, it lacks scalable mechanisms for specifying metadata that conforms to community or project conventions or standards. 
 Conformance to metadata conventions is usually achieved by one-off tools for validation or limited to manual checking.
 Linking to external resources on the web (e.g. controlled vocabulary terms, related files) can be implemented as simple strings in attribute values, however, the mechanism for implementing this is not standardised, nor are tools to form knowledge graphs from these resources.
 
-The netCDF-LD standard enables the annotation metadata in netCDF files in a way that is interoperable and reusable. 
-netCDF-LD allows existing netCDF files to be interpreted with minimal changes to current netCDF syntax. 
+The netCDF-LD standard enables the annotation metadata in netCDF files in a way that is interoperable and reusable, and with minimal changes to current netCDF syntax. This means existing files is able to be interpreted using netCDF-LD tools.  
 netCDF-LD proposes mechanisms such as encoding rules that allow users to precisely reference shared attribute names (e.g. property names) and shared values (e.g. controlled vocabulary terms). 
 This facilitates consistency in specifying metadata across netCDF files.
 These netCDF-LD mechanisms thus allow existing netCDF files to be interpreted as Linked Data, and this faciliates  interoperability between netCDF files (and potentially non-netCDF data files).
-Therefore, data providers adopting netCDF-LD are able to create metadata in netCDF files that conform to one or more metadata conventions in a consistent way.
+Therefore, data providers adopting netCDF-LD are able to interpret existing standard netCDF metadata as well as annotate additional metadata in netCDF files that conform to one or more metadata conventions in a consistent way.
 
 A key aspect of netCDF-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. 
+URIs or identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 Using these mechanisms, netCDF-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers.
-Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
 
 netCDF's current use allows up to petabytes of data to be written out, sometimes organised as data files in series across thematic (observable properties), temporal (daily, monthly, yearly) or geographic regions. 
 Users of the data may want to query or discover from those files.
@@ -27,6 +26,9 @@ This enables references to externally published resources in RDF-specified metad
 These descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013), and RDF triple stores.
 These descriptions can also be used to support data fusion from other data sources that have RDF representations also, i.e. non-netCDF data sources.
 
+In summary, netCDF-LD provides mechanisms that allow interpreting and annotation of metadata to conforms to community or project conventions/standards in a consistent way leveraging Linked Data approaches. In doing so, netCDF files are able to be interpreted into RDF graphs, which in turn can be used with other Linked Data technologies for data fusion, powerful querying and data discovery. 
+
+
 //In summary, the key objectives motivating this standard are:
 //* Provide a mechanism for precise annotation of metadata to enhance the clarity of metadata contained within netCDF files, which may implement multiple metadata conventions
 //* Provide a mechanism for extracting the metadata of netCDF files and aggregating the extracted metadata
@@ -35,9 +37,9 @@ These descriptions can also be used to support data fusion from other data sourc
 
 - **Compatible with existing netCDF encoded files**. netCDF-LD encoded files should be compatible with existing netCDF encoded files. This means existing netCDF libraries can be used to parse files which have been encoded as netCDF-LD. This also ensures that netCDF-LD encoded files can be used as simply as netCDF, with no knowledge of RDF.
 - **Existing netCDF encoded files can be used with netCDF-LD tools**. Existing netCDF files can be used with netCDF-LD files. That is, existing netCDF files can be represented as RDF using netCDF-LD tools.
-- **Default behaviour while preserving flexibility**. netCDF-LD mechanisms and implementations should have consistent and useful default behaviour/configuration, but allows user-defined configuration if needed.
-- **Explicit semantics**. netCDF-LD promotes expressing semantics explicitly even if they implicit in netCDF, e.g. aliases for well-known netCDF attribute names are made with explicit web-resolvable identifiers.
-- **Leverage existing Linked Data approaches and tools**. netCDF-LD should adopt leverage existing web and Linked Data approaches tools rather develop bespoke functionality, e.g. query language for netCDF-LD RDF content should use SPARQL.
+- **Default behaviour while preserving flexibility**. netCDF-LD mechanisms and implementations should have consistent and useful default behaviour/configuration, but allow for user-defined configuration if needed.
+- **Explicit semantics**. netCDF-LD promotes explicitly specifying semantics even if they implicit in netCDF files, e.g. aliases for well-known netCDF attribute names are made with explicit web-resolvable identifiers.
+- **Leverage existing Linked Data approaches and tools**. The netCDF-LD standard should promote and adopt existing web and Linked Data approaches tools rather develop bespoke functionality, e.g. query language for netCDF-LD RDF content should use SPARQL.
 
 
 //==== Motivating Scenarios
