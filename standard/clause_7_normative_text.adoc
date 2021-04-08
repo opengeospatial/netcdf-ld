@@ -90,6 +90,8 @@ include::requirements/reqE04.adoc[]
 
 include::requirements/reqE05.adoc[]
 
+include::requirements/reqE06.adoc[]
+
 
 === Requirement Class F: NetCDF Coordinate Variables
 
