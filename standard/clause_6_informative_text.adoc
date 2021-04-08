@@ -670,24 +670,110 @@ In this manner, the source array and the target array are defined in a common di
 
 The object of the `bald:sourceRefShape` statement and `bald:targetRefShape` shall be an RDF list with equal numbers of elements.
 
+The sourceRefShape is optional, it is assumed to be the same as the source array `bald:shape`, unless overridden by an explicit sourceRefShape statement.
+If the sourceRefShape is not provided, this is inferred to be the same as the defined `bald:shape`.
+
 RefShapes never change the number of elements in an array nor the ordering of extensive (greater than size 1) array shape elements.  A refShape array is only a higher dimensionality shape of a defined array shape, with dimensions of size 1 added to produce the desired dimensionality and dimension ordering.
+
+The lengths of these two RefShape lists shall be the same, they represent the same dimensionality.
+
+The product of the sourceRefShape (if provided) elements shall match the product of the `bald:shape`, the number of elements in the described arrays shall be the same.
+
+The product of the targetRefShape elements shall match the product of the `bald:shape` of the <$targetEntity>, the number of elements in the described arrays shall be the same.
+
 
 ===== Example Shapes and RefShapes
 
 Shapes and RefShapes explicitly define the array dimension relationships that are implicit in the netCDF structure through the named dimensions.
 
-If an array of shape (13,17,7) references an array of shape (17) then the effective reference shape for the relation is a targetRefShape of (1,17,1).
-If the same array of shape (13,17,7) references an array of shape (13) then the effective reference shape for the relation is a targetRefShape of (13,1,1).
+If an array is defined with respect to named nc dimensions (da, db, dc) giving it a shape of (13,17,7) and it references an array defined with respect to dimensions (db) a shape of (17) then the effective reference shape for the relation is a targetRefShape of (1,17,1).
+If the same array of shape (13,17,7) references an array defined with respect to dimensions (da) a shape of (13) then the effective reference shape for the relation is a targetRefShape of (13,1,1).
 
-This explicit reference is crucial for cases where there are unique dimensions of the same size, where inference could be used. Given the generality of these, the standard mandates that targetRefShape shall always be defined, even if it is implicit due to the dimensionality matching.  This is to aid implementations using this information.
+----
+dimensions:
+    da = 13 ;
+    db = 17 ;
+    dc = 7 ;
+variables:
+    int avar(da,db,dc) ;
+    int db(db) ;
+    int da(da) :
+----
+is represented as references in the metadata graph as:
+----
+this:avar a bald:array ;
+    bald:shape ( 13 17 7 ) ;
+    bald:references [ a bald:Reference ;
+            bald:target this:db ;
+            bald:targetRefshape ( 1 17 1 ) ],
+        [ a bald:Reference ;
+            bald:target this:da ;
+            bald:targetRefshape ( 13 1 1 ) ] ;
+    .
+this:db a bald:array ;
+   bald:shape ( 17 ) .
+this:da a bald:array ;
+   bald:shape ( 17 ) .
+----
+
+This explicit reference is crucial for cases where there are unique dimensions of the same size, where inference could not be used. Given the generality of these, the standard mandates that targetRefShape shall always be defined, even if it could be inferred by the dimensionality size matching.  This is to aid implementations using this information.
 
 This reflects the explicit dimension naming within netCDF files. The references are stated explicitly in the file using these named dimensions. This standartd does not preserve dimension names within the summary metadata graph but does represent these explicit array to array relationships and their numeracy.
 
-If an array of shape (13,13,13) references an array of shape (13) then there is no way to infer the correct targetRefShape, it must be specified, e.g. (1,13,1)
+If an array is defined with respect to named nc dimensions (de, df, dg), of shape (13,13,13), references an array defined with respect to dimensions (df), of shape (13), then there is no way to infer the correct targetRefShape, it must be specified, e.g. (1,13,1)
 
-If an array of shape (13,17,13,7) references an array of shape (13,3) then both the source and target reference shape must be defined, e.g. sourceRefShape (13,17,13,7,1) targetRefShape (1,1,13,1,3)
+----
+dimensions:
+    de = 13 ;
+    df = 13 ;
+    dg = 13 ;
+variables:
+    int bvar(de,df,dg) ;
+    int df(df) ;
+----
+is represented as references in the metadata graph as:
+----
+this:bvar a bald:array ;
+    bald:shape ( 13 13 13 ) ;
+    bald:references [ a bald:Reference ;
+            bald:target this:df ;
+            bald:targetRefshape ( 1 13 1 ) ] ;
+    .
+this:df  a bald:array ;
+    bald:shape ( 13 ) .
+----
 
-The sourceRefShape is optional, it is assumed to be the same as the shape, unless overridden by an explicit sourceRefShape statement.
+
+If an array defined with respect to nc dimensions (di,dj,dk,dl), of shape (13,17,13,7), references an array defined with respect to dimensions (dk, dm), of shape (13,3) then both the source and target reference shape must be defined, e.g. sourceRefShape (13,17,13,7,1) targetRefShape (1,1,13,1,3)
+
+----
+dimensions:
+    di = 13 ;
+    dj = 17 ;
+    dk = 13 ;
+    dl = 7 ;
+    dm = 3 ;
+variables:
+    int cvar(di,dj,dk,dl) ;
+      cvar:bald__references = "lvar" ;
+    int lvar(dk,dm) ;
+----
+is represented as references in the metadata graph as:
+----
+this:cvar a bald:array ;
+    bald:shape ( 13 17 13 7 ) ;
+    bald:references [ a bald:Reference ;
+            bald:target this:lvar ;
+            bald:sourceRefshape ( 13 17 13 7 1 ) ],
+            bald:targetRefshape ( 1 1 13 1 3 ) ],
+    .
+this:lvar a bald:array ;
+    bald:shape ( 13 3 ) .
+----
+
+Where any ambiguity in ordering exists in the netCDF file for explicitly defined sourceRefShape and targetRefShape instances, due to partial overlap of named dimensions for both netCDf variables, then source reference dimensions shall be ordered before target reference dimensions.
+
+In the above example the size 7 dimension is ordered before the size 3 dimension in the RefShape instances.
 
 ===== Mismatched reference 
 
@@ -821,7 +907,7 @@ this:data_variable1 a bald:Array ;
             bald:targetRefshape ( 11 17 2 ) ],
         [ a bald:Reference ;
             bald:target this:pdim0 ;
-            bald:targetRefshape ( 11 1 ) ],
+            bald:targetRefshape ( 11 1 ) ] ;
     bald:shape ( 11 17 ) .
 
 this:data_variable2 a bald:Array ;
@@ -836,7 +922,7 @@ this:data_variable2 a bald:Array ;
             bald:targetRefshape ( 11 17 2 ) ],
         [ a bald:Reference ;
             bald:target this:pdim1 ;
-            bald:targetRefshape ( 1 17 ) ],
+            bald:targetRefshape ( 1 17 ) ] ;
     bald:shape ( 11 17 ) .
 
 this:pdim0 a bald:Array ;
