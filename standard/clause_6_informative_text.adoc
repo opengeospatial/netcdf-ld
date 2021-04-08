@@ -615,8 +615,8 @@ Any array shape may be reshaped by adding elements to the array shape list, wher
 For example:
 
 ----
-bald:sourceShape (5, 9)
-bald:sourceReshape (1, 1, 5, 9, 1)
+bald:sourceRefShape (5, 9)
+bald:targetRefshape (1, 1, 5, 9, 1)
 ----
 
 
@@ -643,7 +643,7 @@ This information is unpacked and stored in a general fashion within the RDF grap
 All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a RDF statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
 NetCDf-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
 
-A reshape array has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
+A refshape array shape has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
 
 To hold this information, netCDF-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
 
@@ -654,28 +654,59 @@ This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predi
 ----
 
 The `<$referenceEntity>` is defined to be of type `<https://www.opengis.net/def/binary-array-ld/Reference>` and shall define a single statement defining the target entity in the relationship, another variable in the file, using the predicate `bald:target`. The `<$referenceEntity>` shall define a `bald:targetShape` statement defining the reshape expansion of the target array.
-The `<$referenceEntity>` may  define a `bald:sourceShape`, where that source shape is required to be different from the defining shape of the source array.
-The `<$referenceEntity>` shall  define a `bald:sourceShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
+The `<$referenceEntity>` may  define a `bald:sourceRefShape`, where that source shape is required to be different from the defining shape of the source array.
+The `<$referenceEntity>` shall  define a `bald:targetRefShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
 
 In this manner, the source array and the target array are defined in a common dimensionality enabing the shape to be unambiguously defined for broadcasting; i.e.:
 
 ----
   <$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;
-      <https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;
-      <https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;
+      <https://www.opengis.net/def/binary-array-ld/sourceRefShape> ($d1 <$d2 $d3 ...>) ;
+      <https://www.opengis.net/def/binary-array-ld/targetRefShape> ($d4 <$d5 $d6 ...>) ;
       <https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .
 ----
 
 `$dn` are all defined to be integers.  The object of these RDF statements are each an RDF list.
 
-The object of the `bald:sourceShape` statement and `bald:targetShape` shall be an RDF list with equal numbers of elements.
+The object of the `bald:sourceRefShape` statement and `bald:targetRefShape` shall be an RDF list with equal numbers of elements.
 
+RefShapes never change the number of elements in an array nor the ordering of extensive (greater than size 1) array shape elements.  A refShape array is only a higher dimensionality shape of a defined array shape, with dimensions of size 1 added to produce the desired dimensionality and dimension ordering.
+
+===== Example Shapes and RefShapes
+
+Shapes and RefShapes explicitly define the array dimension relationships that are implicit in the netCDF structure through the named dimensions.
+
+If an array of shape (13,17,7) references an array of shape (17) then the effective reference shape for the relation is a targetRefShape of (1,17,1).
+If the same array of shape (13,17,7) references an array of shape (13) then the effective reference shape for the relation is a targetRefShape of (13,1,1).
+
+This explicit reference is crucial for cases where there are unique dimensions of the same size, where inference could be used. Given the generality of these, the standard mandates that targetRefShape shall always be defined, even if it is implicit due to the dimensionality matching.  This is to aid implementations using this information.
+
+This reflects the explicit dimension naming within netCDF files. The references are stated explicitly in the file using these named dimensions. This standartd does not preserve dimension names within the summary metadata graph but does represent these explicit array to array relationships and their numeracy.
+
+If an array of shape (13,13,13) references an array of shape (13) then there is no way to infer the correct targetRefShape, it must be specified, e.g. (1,13,1)
+
+If an array of shape (13,17,13,7) references an array of shape (13,3) then both the source and target reference shape must be defined, e.g. sourceRefShape (13,17,13,7,1) targetRefShape (1,1,13,1,3)
+
+The sourceRefShape is optional, it is assumed to be the same as the shape, unless overridden by an explicit sourceRefShape statement.
 
 ===== Mismatched reference 
 
 Where metadata schemes provide further variable reference predicates, it is possible for variable-to-variable references to be defined where a broadcast relationship does not exist.
 
 Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements. In this case, it is recommended to continue to create a graph and omit references.  It is accepted that an implementation may treat this as an error condition, and fail to create a graph.  This is an implementation detail.
+
+
+===== Variable Reference Utility
+
+The definition of the variable reference with its numeracy delivers specific capability to the resulting metadata graph.
+
+References between arrays in a file are provided primarily to support partial access patterns from individual file objects.  Where an element of interest isidentified from a metadata graph, this element may be accessed directly, if supported by a suitable data supply interface, without the need to obtain the entire file object.
+
+In order to support partial retrieval, it is essential that the metadata graph provides details on which array variables depend on other array variables and the nature of that dependency.
+
+If two values from an array variable containing millions of elements in a file are requested, which other arrays within the file provide explicit metadata and need to be retrieved, and which elements within those arrays provide locational metadata?  How should the two requested data values be described by metadata?
+
+Without numerical array referencing, the alternative left to the user is to obtain the whole file and use an alternative netCDF tool to extract the values required with their associated metadata elements.
 
 ==== NetCDF Coordinate Variables
 
@@ -696,34 +727,35 @@ Here the definition of a netCDF file, in CDL, with all data array elements set a
 ----
 netcdf tmpMwXy8U {
 dimensions:
-	pdim0 = 11 ;
-	pdim1 = 17 ;
+        pdim0 = 11 ;
+        pdim1 = 17 ;
+        xy = 2 ;
 variables:
-	int data_variable1(pdim0, pdim1) ;
-		data_variable1:bald__references = "location_variable" ;
-		data_variable1:long_name = "Gerald";
-		data_variable1:obtype = "metce__SamplingObservation";
+        int data_variable1(pdim0, pdim1) ;
+                data_variable1:bald__references = "location_variable" ;
+                data_variable1:long_name = "Gerald";
+                data_variable1:obtype = "metce__SamplingObservation";
 
         int data_variable2(pdim0, pdim1) ;
-		data_variable2:bald__references = "location_variable" ;
-		data_variable2:long_name = "Imelda";
-		data_variable2:obtype = "metce__SamplingObservation";
+                data_variable2:bald__references = "location_variable" ;
+                data_variable2:long_name = "Imelda";
+                data_variable2:obtype = "metce__SamplingObservation";
 
         int pdim0(pdim0) ;
 
         int pdim1(pdim1) ;
 
-	int location_variable(pdim0, pdim1) ;
-		location_variable:bald__references = "location_reference_system" ;
+        int location_variable(pdim0, pdim1, xy) ;
+                location_variable:bald__references = "location_reference_system" ;
 
-	int location_reference_system;
-		location_reference_system:pcode = "4897";
+        int location_reference_system;
+                location_reference_system:pcode = "4897";
 
-	int set_collection ;
-	        set_collection:bald__references = "data_variable1 data_variable2" ;
+        int set_collection ;
+                set_collection:bald__references = "data_variable1 data_variable2" ;
 
-	int list_collection ;
-	        list_collection:bald__references = "( data_variable1 data_variable2 )" ;
+        int list_collection ;
+                list_collection:bald__references = "( data_variable1 data_variable2 )" ;
 
 // prefix group
 group: prefix_list {
@@ -732,7 +764,6 @@ group: prefix_list {
   :rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
 }
 // global attributes:
-		:_NCProperties = "version=1|netcdflibversion=4.4.1|hdf5libversion=1.8.17" ;
 		:bald__isPrefixedBy = "prefix_list" ;
 
 }
@@ -771,12 +802,6 @@ this: a bald:Container ;
 this:list_collection a bald:Resource ;
     bald:references ( this:data_variable1 this:data_variable2 ) .
 
-this:pdim0 a bald:Array ;
-    bald:shape ( 11 ) .
-
-this:pdim1 a bald:Array ;
-    bald:shape ( 17 ) .
-
 this:set_collection a bald:Resource ;
     bald:references this:data_variable1,
         this:data_variable2 .
@@ -787,18 +812,49 @@ this:location_reference_system a bald:Resource ;
 this:data_variable1 a bald:Array ;
     this:long_name "Gerald" ;
     this:obtype metce:SamplingObservation ;
-    bald:references this:location_variable ;
+    bald:references [ a bald:Reference ;
+            bald:target this:pdim1 ;
+            bald:targetRefshape ( 1 17 ) ],
+        [ a bald:Reference ;
+            bald:sourceRefshape ( 11 17 1 ) ;
+            bald:target this:location_variable ;
+            bald:targetRefshape ( 11 17 2 ) ],
+        [ a bald:Reference ;
+            bald:target this:pdim0 ;
+            bald:targetRefshape ( 11 1 ) ],
     bald:shape ( 11 17 ) .
 
 this:data_variable2 a bald:Array ;
     this:long_name "Imelda" ;
     this:obtype metce:SamplingObservation ;
-    bald:references this:location_variable ;
+    bald:references [ a bald:Reference ;
+            bald:target this:pdim0 ;
+            bald:targetRefshape ( 11 1 ) ],
+        [ a bald:Reference ;
+            bald:sourceRefshape ( 11 17 1 ) ;
+            bald:target this:location_variable ;
+            bald:targetRefshape ( 11 17 2 ) ],
+        [ a bald:Reference ;
+            bald:target this:pdim1 ;
+            bald:targetRefshape ( 1 17 ) ],
     bald:shape ( 11 17 ) .
 
+this:pdim0 a bald:Array ;
+    bald:shape ( 11 ) .
+
+this:pdim1 a bald:Array ;
+    bald:shape ( 17 ) .
+
 this:location_variable a bald:Array ;
-    bald:references this:location_reference_system ;
-    bald:shape ( 11 17 ) .
+    bald:references [ a bald:Reference ;
+            bald:target this:pdim1 ;
+            bald:targetRefshape ( 1 17 1 ) ],
+        [ a bald:Reference ;
+            bald:target this:pdim0 ;
+            bald:targetRefshape ( 11 1 1 ) ],
+        this:location_reference_system ;
+    bald:shape ( 11 17 2 ) .
+
 
 ----
 

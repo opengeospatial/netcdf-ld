@@ -15,7 +15,7 @@ and the definition of a `+<$referenceEntity>+`, an instance of `+<https://www.op
 
  `+<$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;+`
 
-`+<https://www.opengis.net/def/binary-array-ld/sourceRefShape> ($d1 $d2 $d3) ;+`
+`+OPTIONAL(<https://www.opengis.net/def/binary-array-ld/sourceRefShape> ($d1 $d2 $d3) ;)+`
 
 `+<https://www.opengis.net/def/binary-array-ld/targetRefShape> ($d4 $d5 $d6) ;+`
 
@@ -25,7 +25,14 @@ and the definition of a `+<$referenceEntity>+`, an instance of `+<https://www.op
 
 The object of the `<https://www.opengis.net/def/binary-array-ld/sourceRefShape>` and `<https://www.opengis.net/def/binary-array-ld/targetRefShape>` statements are each an RDF list of integer elements.
 
-The lengths of these two lists shall be the same.
+If the sourceRefShape is not provided, this is inferred to be the same as the defined `bald:shape`.
+
+The lengths of these two RefShape lists shall be the same.
+
+The product of the sourceRefShape (if provided) elements shall match the product of the `bald:shape`, the number of elements shall be the same.
+
+The product of the targetRefShape elements shall match the product of the `bald:shape` of the <$targetEntity>, the number of elements shall be the same.
+
 
  {set:cellbgcolor:#FFFFFF}
 
