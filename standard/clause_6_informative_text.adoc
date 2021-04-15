@@ -713,7 +713,7 @@ this:avar a bald:array ;
 this:db a bald:array ;
    bald:shape ( 17 ) .
 this:da a bald:array ;
-   bald:shape ( 17 ) .
+   bald:shape ( 13 ) .
 ----
 
 This explicit reference is crucial for cases where there are unique dimensions of the same size, where inference could not be used. Given the generality of these, the standard mandates that targetRefShape shall always be defined, even if it could be inferred by the dimensionality size matching.  This is to aid implementations using this information.
