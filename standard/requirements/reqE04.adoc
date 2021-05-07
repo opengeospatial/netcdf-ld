@@ -5,6 +5,9 @@
 |*Requirement E-4* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-4 +
 +
 
+A variable to variable reference is defined in Requirement E-2
+
+
 Each variable to variable reference between two variables, both of which are defined with respect to one or more dimensions, shall be described by the statement.
 
 
@@ -25,6 +28,8 @@ and the definition of a `+<$referenceEntity>+`, an instance of `+<https://www.op
 
 The object of the `<https://www.opengis.net/def/binary-array-ld/sourceRefShape>` and `<https://www.opengis.net/def/binary-array-ld/targetRefShape>` statements are each an RDF list of integer elements.
 
+Each integer element shall be taken directly from the named dimension size defined within the input netCDF file.
+
 If the sourceRefShape is not provided, this is inferred to be the same as the defined `bald:shape`.
 
 The lengths of these two RefShape lists shall be the same.
@@ -33,6 +38,8 @@ The product of the sourceRefShape (if provided) elements shall match the product
 
 The product of the targetRefShape elements shall match the product of the `bald:shape` of the <$targetEntity>, the number of elements shall be the same.
 
+The creation of this bald:references definition within the metadata graph is in addition to the ecxplicit statement interpreted from the netCDF file.
+The exception to this is where the netCDF file explicitly uses the bald:references attribute (bald__references). In this exception case, then the derived statement replaces the explicit statement.
 
  {set:cellbgcolor:#FFFFFF}
 

@@ -481,6 +481,17 @@ To identify a predicate as a variable-to-variable reference predicate, that pred
   <{predicate}> rdfs:range bald:Resource .
 ----
 
+Alternatively, it is permissable to provide an rdfs:range statement targeting another resource and for that resource to declare that it is an rdfs:subClassOf bald:Resource:
+
+----
+ <{attribute}> rdfs:range <{AClass}> .
+
+ <{AClass}> rdfs:subClassOf <https://www.opengis.net/def/binary-array-ld/Resource> .
+----
+
+This standard does not support nested derivation, an implementation is not required to search the inheritance tree of a defined Class to see if any of the classes it inherits from define themselves as rdfs:subClassOf bald:Resource.
+
+The definition of the owl:objectProperty bald:references uses this rdfs:range, rdfs:subClassOf definition within the bald ontology: https://www.opengis.net/def/binary-array-ld
 
 References to variables are implemented in netCDF files by defining the value of an attribute as the name of a variable, or as a space separated set of names of variables, or as a parenthesis bound space separated list of names of variables.
 
@@ -533,7 +544,7 @@ For an in file variable reference to be declared, three conditions shall be met.
 *** 'search by absolute path' and 'search by relative path' shall be implemented;
 *** 'search by proximity' is deprecated by CF, and may be implemented or not.
 * Condition two: the attribute name is already interpreted as a URI, defining an entity, external to the file.
-* Condition three: the attribute name entity declares and `<rdfs:range>` of `<bald:Resource>`.
+* Condition three: the attribute name entity declares and `<rdfs:range>` of `<bald:Resource>` (or uses rdf:subClassOf linkage).
 
 An identified attribute reference shall map the attribute value to the identify of the matched variable within the file.
 
