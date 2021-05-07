@@ -955,6 +955,149 @@ this:location_variable a bald:Array ;
 
 ----
 
+==== Worked Example - Climate and Forecasting Conventions
+
+Variable to variable referencing is a pattern used extensively within the Climate and Forecatsing conventions for netCDF files (CF-netCDF).
+
+CF-netCDF attributes such as `coordinates` can be defined within a specification graph as variable reference attributes, i.e.:
+
+----
+cf:coordinates a owl:ObjectProperty ;
+    rdfs:range bald:Resource .
+----
+
+Given an the specification graph definition and an input CF-netCDF file:
+
+
+----
+netcdf orca2_votemper {
+dimensions:
+        dim0 = 148 ;
+        dim1 = 180 ;
+        time = 4 ;
+        deptht = 4 ;
+
+variables:
+        float votemper(time, deptht, dim0, dim1) ;
+                votemper:_FillValue = 9.96921e+36f ;
+                votemper:standard_name = "sea_water_potential_temperature" ;
+                votemper:long_name = "Temperature" ;
+                votemper:units = "degC" ;
+                votemper:coordinates = "deptht nav_lat nav_lon time" ;
+        float deptht(deptht) ;
+                deptht:units = "m" ;
+                deptht:standard_name = "depth" ;
+                deptht:long_name = "Vertical T levels" ;
+                deptht:positive = "down" ;
+                deptht:title = "deptht" ;
+        float nav_lat(dim0, dim1) ;
+                nav_lat:units = "degrees" ;
+                nav_lat:standard_name = "latitude" ;
+                nav_lat:long_name = "Latitude" ;
+                nav_lat:nav_model = "Default grid" ;
+        float nav_lon(dim0, dim1) ;
+                nav_lon:units = "degrees" ;
+                nav_lon:standard_name = "longitude" ;
+                nav_lon:long_name = "Longitude" ;
+                nav_lon:nav_model = "Default grid" ;
+        int time(time) ;
+                time:units = "hours since 2001-01-01 00:00:00" ;
+                time:standard_name = "time" ;
+                time:long_name = "Time axis" ;
+                time:calendar = "360_day" ;
+                time:time_origin = "2001-JAN-01 00:00:00" ;
+                time:title = "Time" ;
+// global attributes:
+                :Conventions = "CF-1.5" ;
+----
+
+then the `coordinates` attribute defined on the votemper variable is interpreted as a varaible to variable reference, creating 4 explicit reference statements with blank nodes representing the bald:Reference instances.
+These explicit bald:references statements are included within the graph alongside the CFTerms:coordinates statements. 
+
+This can be seen within the interpreted metadata graph for this file
+
+----
+@prefix CFTerms: <http://def.scitools.org.uk/CFTerms/> .
+@prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
+@prefix cf_sname: <http://vocab.nerc.ac.uk/standard_name/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix this: <file://CDL/minVotemper.cdl/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+this: a bald:Container ;
+    NetCDF:Conventions "CF-1.5" ;
+    dct:format [ a dct:MediaType ;
+            dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:mediaType [ a dcat:MediaType ;
+                    dct:identifier "application/x-netcdf" ] ] ;
+    bald:contains this:deptht,
+        this:nav_lat,
+        this:nav_lon,
+        this:time,
+        this:votemper .
+
+this:votemper a bald:Array ;
+    CFTerms:coordinates this:deptht,
+        this:nav_lat,
+        this:nav_lon,
+        this:time ;
+    CFTerms:standard_name "sea_water_potential_temperature" ;
+    NetCDF:FillValue "9.96921e+36" ;
+    NetCDF:long_name "Temperature" ;
+    NetCDF:units "degC" ;
+    bald:references [ a bald:Reference ;
+            bald:target this:nav_lat ;
+            bald:targetRefshape ( 1 1 148 180 ) ],
+        [ a bald:Reference ;
+            bald:target this:nav_lon ;
+            bald:targetRefshape ( 1 1 148 180 ) ],
+        [ a bald:Reference ;
+            bald:target this:deptht ;
+            bald:targetRefshape ( 1 4 1 1 ) ],
+        [ a bald:Reference ;
+            bald:target this:time ;
+            bald:targetRefshape ( 4 1 1 1 ) ] ;
+    bald:shape ( 4 4 148 180 ) .
+
+this:deptht a bald:Array ;
+    CFTerms:positive "down" ;
+    CFTerms:standard_name "depth" ;
+    NetCDF:long_name "Vertical T levels" ;
+    NetCDF:title "deptht" ;
+    NetCDF:units "m" ;
+    bald:shape ( 4 ) .
+
+this:nav_lat a bald:Array ;
+    this:nav_model "Default grid" ;
+    CFTerms:standard_name "latitude" ;
+    NetCDF:long_name "Latitude" ;
+    NetCDF:units "degrees" ;
+    bald:shape ( 148 180 ) .
+
+this:nav_lon a bald:Array ;
+    this:nav_model "Default grid" ;
+    CFTerms:standard_name "longitude" ;
+    NetCDF:long_name "Longitude" ;
+    NetCDF:units "degrees" ;
+    bald:shape ( 148 180 ) .
+
+this:time a bald:Array ;
+    this:time_origin "2001-JAN-01 00:00:00" ;
+    CFTerms:calendar "360_day" ;
+    CFTerms:standard_name "time" ;
+    NetCDF:long_name "Time axis" ;
+    NetCDF:title "Time" ;
+    NetCDF:units "hours since 2001-01-01 00:00:00" ;
+    bald:shape ( 4 ) .
+
+
+----
 
 === NetCDF Linked Data on Schema.org ===
 
