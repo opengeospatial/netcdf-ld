@@ -1,0 +1,49 @@
+{
+    "@context": {
+      "dct": "http://purl.org/dc/terms/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#",
+      "acdd": "https://def.scitools.org.uk/ACDD/",
+      "cfterms": "https://def.scitools.org.uk/CFTerms/",
+      "nc": "https://def.scitools.org.uk/NetCDF/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "op": "http://environment.data.gov.au/def/op#"
+    },
+    "@graph": [
+      {
+        "@id": "skos:prefLabel",
+        "dct:identifier": "prefLabel"
+      },
+      {
+        "@id": "acdd:id",
+        "dct:identifier": "id"
+      },
+      {
+        "@id": "acdd:title",
+        "dct:identifier": "title"
+      },
+      {
+        "@id": "cfterms:standard_name",
+        "dct:identifier": "standard_name"
+      },
+      {
+        "@id": "cfterms:units",
+        "dct:identifier": "units"
+      },
+      {
+        "@id": "op:matrix",
+        "dct:identifier": "matrix"
+      },
+      {
+        "@id": "op:objectOfInterest",
+        "dct:identifier": "substanceOrTaxon"
+      },
+      {
+        "@id": "nc:valid_max",
+        "dct:identifier": "valid_max"
+      },
+      {
+        "@id": "nc:valid_min",
+        "dct:identifier": "valid_min"
+      }
+    ]
+  }
