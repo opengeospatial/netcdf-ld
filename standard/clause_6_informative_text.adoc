@@ -1,33 +1,49 @@
 == Clauses not Containing Normative Material
 
-=== Design principles and Rationale ===
+=== Rationale and Design principles ===
 
-netCDF-LD allows existing netCDF files to be interpreted as Linked Data with minimal changes. netCDF-LD encoding rules and mechanisms allow users to leverage Linked Data in programming environments using netCDF and to improve interoperability for netCDF files using different combinations of metadata conventions.
+netCDF is used widely in the environmental sciences for data capture, analysis and archival. 
+While, netCDF allows metadata to be specified in each file, it lacks scalable mechanisms for specifying metadata that conforms to community or project conventions or standards. 
+Conformance to metadata conventions is usually achieved by one-off tools for validation or limited to manual checking.
+Linking to external resources on the web (e.g. controlled vocabulary terms, related files) can be implemented as simple strings in attribute values, however, the mechanism for implementing this is not standardised, nor are tools to form knowledge graphs from these resources.
 
-A design principle of netCDF-LD is that it works with existing netCDF encoded files. This means existing netCDF libraries can be used to parse files which have been encoded as netCDF-LD. This also ensures that netCDF-LD encoded files can be used as simply as netCDF, with no knowledge of RDF.
+The netCDF-LD standard enables the annotation metadata in netCDF files in a way that is interoperable and reusable, and with minimal changes to current netCDF syntax. This means existing files is able to be interpreted using netCDF-LD tools.  
+netCDF-LD proposes mechanisms such as encoding rules that allow users to precisely reference shared attribute names (e.g. property names) and shared values (e.g. controlled vocabulary terms). 
+This facilitates consistency in specifying metadata across netCDF files.
+These netCDF-LD mechanisms thus allow existing netCDF files to be interpreted as Linked Data, and this faciliates  interoperability between netCDF files (and potentially non-netCDF data files).
+Therefore, data providers adopting netCDF-LD are able to interpret existing standard netCDF metadata as well as annotate additional metadata in netCDF files that conform to one or more metadata conventions in a consistent way.
 
-A key aspect of netCDF-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. Using these mechanisms, netCDF-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers. Identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+A key aspect of netCDF-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. 
+URIs or identifiers are the building blocks for defining unambiguous semantics via concept definitions and relationships between concepts.
+Using these mechanisms, netCDF-LD provides a way to disambiguate attribute names and values shared among different netCDF files via identifiers.
 
-netCDF-LD aims to enable summary metadata from any netCDF file to be extracted to provide an external description of the file in RDF.  This enables references to externally published resources in RDF specifiy metadata conventions.  If desired, these descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013).
+netCDF's current use allows up to petabytes of data to be written out, sometimes organised as data files in series across thematic (observable properties), temporal (daily, monthly, yearly) or geographic regions. 
+Users of the data may want to query or discover from those files.
+The current tools for handling this include software such as THREDDS and ERRDAP that provide APIs and functionality for searching and discovery.
 
-==== Motivating Scenarios
+netCDF-LD enables the potential for search and discovery in a different way to current netCDF software tools by leveraging the Linked Data representation of netCDF metadata as knowledge graphs. netCDF-LD allows summary metadata from any netCDF file to be extracted to provide an external description of the file in RDF.  
+This enables references to externally published resources in RDF-specified metadata conventions.  
+These descriptions can be used with other Linked Data technologies including the RDF query language, SPARQL (Harris and Seaborne 2013), and RDF triple stores.
+These descriptions can also be used to support data fusion from other data sources that have RDF representations also, i.e. non-netCDF data sources.
 
-There are key objectives motivating this standard.
-
-* To provide a mechanism for extracting the metadata of netCDF files and aggregating the extracted metadata.
-* To enhance the clarity of metadata contained within netCDF files, which may implement multiple metadata conventions.
-
-
-
-// For example .. ....   why I care
-
-// interpret files and index contents
+In summary, netCDF-LD provides mechanisms that allow interpreting and annotation of metadata to conforms to community or project conventions/standards in a consistent way leveraging Linked Data approaches. In doing so, netCDF files are able to be interpreted into RDF graphs, which in turn can be used with other Linked Data technologies for data fusion, powerful querying and data discovery. 
 
 
+//In summary, the key objectives motivating this standard are:
+//* Provide a mechanism for precise annotation of metadata to enhance the clarity of metadata contained within netCDF files, which may implement multiple metadata conventions
+//* Provide a mechanism for extracting the metadata of netCDF files and aggregating the extracted metadata
 
-// extend conventions, with prefixes
+==== Design principles ====
 
-// prefixes adding to aliases, stable content
+- **Compatible with existing netCDF encoded files**. netCDF-LD encoded files should be compatible with existing netCDF encoded files. This means existing netCDF libraries can be used to parse files which have been encoded as netCDF-LD. This also ensures that netCDF-LD encoded files can be used as simply as netCDF, with no knowledge of RDF.
+- **Existing netCDF encoded files can be used with netCDF-LD tools**. Existing netCDF files can be used with netCDF-LD files. That is, existing netCDF files can be represented as RDF using netCDF-LD tools.
+- **Default behaviour while preserving flexibility**. netCDF-LD mechanisms and implementations should have consistent and useful default behaviour/configuration, but allow for user-defined configuration if needed.
+- **Explicit semantics**. netCDF-LD promotes explicitly specifying semantics even if they implicit in netCDF files, e.g. aliases for well-known netCDF attribute names are made with explicit web-resolvable identifiers.
+- **Leverage existing Linked Data approaches and tools**. The netCDF-LD standard should promote and adopt existing web and Linked Data approaches tools rather develop bespoke functionality, e.g. query language for netCDF-LD RDF content should use SPARQL.
+
+
+//==== Motivating Scenarios
+
 
 
 === Resource Description Framework
@@ -419,30 +435,86 @@ An example of alias definitions in an external file is shown below encoded as TT
 @prefix acdd: <https://def.scitools.org.uk/ACDD/> .
 @prefix cfterms: <https://def.scitools.org.uk/CFTerms/> .
 @prefix nc: <https://def.scitools.org.uk/NetCDF/> .
+@prefix op: <http://environment.data.gov.au/def/op#> .
 
-skos:prefLabel          dct:identifier "prefLabel" .
 acdd:id                 dct:identifier "id" .
 acdd:title              dct:identifier "title" .
-cfterms:units           dct:identifier "units" .
 cfterms:standard_name   dct:identifier "standard_name" .
+cfterms:units           dct:identifier "units" .
 nc:valid_min            dct:identifier "valid_min" .
 nc:valid_max            dct:identifier "valid_max" .
 op:matrix               dct:identifier "matrix" .
 op:objectOfInterest     dct:identifier "substanceOrTaxon" .
+skos:prefLabel          dct:identifier "prefLabel" .
 ----
 
 
-Example of aliases for both names and values captured in a JSON file:
+The following shows the RDF example as a JSON-LD serialization:
+----
+{
+  "@context": {
+    "dct": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "acdd": "https://def.scitools.org.uk/ACDD/",
+    "cfterms": "https://def.scitools.org.uk/CFTerms/",
+    "nc": "https://def.scitools.org.uk/NetCDF/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "op": "http://environment.data.gov.au/def/op#"
+  },
+  "@graph": [
+    {
+      "@id": "skos:prefLabel",
+      "dct:identifier": "prefLabel"
+    },
+    {
+      "@id": "acdd:id",
+      "dct:identifier": "id"
+    },
+    {
+      "@id": "acdd:title",
+      "dct:identifier": "title"
+    },
+    {
+      "@id": "cfterms:standard_name",
+      "dct:identifier": "standard_name"
+    },
+    {
+      "@id": "cfterms:units",
+      "dct:identifier": "units"
+    },
+    {
+      "@id": "op:matrix",
+      "dct:identifier": "matrix"
+    },
+    {
+      "@id": "op:objectOfInterest",
+      "dct:identifier": "substanceOrTaxon"
+    },
+    {
+      "@id": "nc:valid_max",
+      "dct:identifier": "valid_max"
+    },
+    {
+      "@id": "nc:valid_min",
+      "dct:identifier": "valid_min"
+    }
+  ]
+}
+----
+
+Alias definitions provided as input as a simple dictionary representation is available as JSON. The alias dictionary representation encoded as JSON shall consist of only an object with name/value pairs for the alias and the mapped URI respectively. The value for an item in the JSON object shall be a string value for the URI. 
+
+An example of aliases for both names and values expressed as dictionary encoded as a JSON file is shown below:
 ----
 {
         "id"                             : "https://def.scitools.org.uk/ACDD/id",
-        "standard_name"                  : "https://def.scitools.org.uk/CFTerms/standard_name",
         "title"                          : "https://def.scitools.org.uk/ACDD/title",
+        "standard_name"                  : "https://def.scitools.org.uk/CFTerms/standard_name",
         "units"                          : "https://def.scitools.org.uk/CFTerms/units",
-        "valid_max"                      : "https://def.scitools.org.uk/NetCDF/valid_max",
         "valid_min"                      : "https://def.scitools.org.uk/NetCDF/valid_min",
+        "valid_max"                      : "https://def.scitools.org.uk/NetCDF/valid_max",
         "matrix"                         : "http://environment.data.gov.au/def/op#matrix",
-        "substanceOrTaxon"               : "http://environment.data.gov.au/def/op#objectOfInterest"
+        "substanceOrTaxon"               : "http://environment.data.gov.au/def/op#objectOfInterest",
         "prefLabel"                      : "http://www.w3.org/2004/02/skos/core#prefLabel"
 }
 ----
@@ -615,8 +687,8 @@ Any array shape may be reshaped by adding elements to the array shape list, wher
 For example:
 
 ----
-bald:sourceShape (5, 9)
-bald:sourceReshape (1, 1, 5, 9, 1)
+bald:sourceRefShape (5, 9)
+bald:targetRefshape (1, 1, 5, 9, 1)
 ----
 
 
@@ -643,7 +715,7 @@ This information is unpacked and stored in a general fashion within the RDF grap
 All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a RDF statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
 NetCDf-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
 
-A reshape array has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
+A refshape array shape has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
 
 To hold this information, netCDF-LD creates a new entity within the graph, representing this relationship, a `<$referenceEntity>`.
 
@@ -654,28 +726,145 @@ This `<$referenceEntity>` is referenced by the `<$sourceEntity>` using the predi
 ----
 
 The `<$referenceEntity>` is defined to be of type `<https://www.opengis.net/def/binary-array-ld/Reference>` and shall define a single statement defining the target entity in the relationship, another variable in the file, using the predicate `bald:target`. The `<$referenceEntity>` shall define a `bald:targetShape` statement defining the reshape expansion of the target array.
-The `<$referenceEntity>` may  define a `bald:sourceShape`, where that source shape is required to be different from the defining shape of the source array.
-The `<$referenceEntity>` shall  define a `bald:sourceShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
+The `<$referenceEntity>` may  define a `bald:sourceRefShape`, where that source shape is required to be different from the defining shape of the source array.
+The `<$referenceEntity>` shall  define a `bald:targetRefShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
 
 In this manner, the source array and the target array are defined in a common dimensionality enabing the shape to be unambiguously defined for broadcasting; i.e.:
 
 ----
   <$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;
-      <https://www.opengis.net/def/binary-array-ld/sourceShape> ($d1 $d2 $d3) ;
-      <https://www.opengis.net/def/binary-array-ld/targetShape> ($d4 $d5 $d6) ;
+      <https://www.opengis.net/def/binary-array-ld/sourceRefShape> ($d1 <$d2 $d3 ...>) ;
+      <https://www.opengis.net/def/binary-array-ld/targetRefShape> ($d4 <$d5 $d6 ...>) ;
       <https://www.opengis.net/def/binary-array-ld/target> <$targetEntity> .
 ----
 
 `$dn` are all defined to be integers.  The object of these RDF statements are each an RDF list.
 
-The object of the `bald:sourceShape` statement and `bald:targetShape` shall be an RDF list with equal numbers of elements.
+The object of the `bald:sourceRefShape` statement and `bald:targetRefShape` shall be an RDF list with equal numbers of elements.
 
+The sourceRefShape is optional, it is assumed to be the same as the source array `bald:shape`, unless overridden by an explicit sourceRefShape statement.
+If the sourceRefShape is not provided, this is inferred to be the same as the defined `bald:shape`.
+
+RefShapes never change the number of elements in an array nor the ordering of extensive (greater than size 1) array shape elements.  A refShape array is only a higher dimensionality shape of a defined array shape, with dimensions of size 1 added to produce the desired dimensionality and dimension ordering.
+
+The lengths of these two RefShape lists shall be the same, they represent the same dimensionality.
+
+The product of the sourceRefShape (if provided) elements shall match the product of the `bald:shape`, the number of elements in the described arrays shall be the same.
+
+The product of the targetRefShape elements shall match the product of the `bald:shape` of the <$targetEntity>, the number of elements in the described arrays shall be the same.
+
+
+===== Example Shapes and RefShapes
+
+Shapes and RefShapes explicitly define the array dimension relationships that are implicit in the netCDF structure through the named dimensions.
+
+If an array is defined with respect to named nc dimensions (da, db, dc) giving it a shape of (13,17,7) and it references an array defined with respect to dimensions (db) a shape of (17) then the effective reference shape for the relation is a targetRefShape of (1,17,1).
+If the same array of shape (13,17,7) references an array defined with respect to dimensions (da) a shape of (13) then the effective reference shape for the relation is a targetRefShape of (13,1,1).
+
+----
+dimensions:
+    da = 13 ;
+    db = 17 ;
+    dc = 7 ;
+variables:
+    int avar(da,db,dc) ;
+    int db(db) ;
+    int da(da) :
+----
+is represented as references in the metadata graph as:
+----
+this:avar a bald:array ;
+    bald:shape ( 13 17 7 ) ;
+    bald:references [ a bald:Reference ;
+            bald:target this:db ;
+            bald:targetRefshape ( 1 17 1 ) ],
+        [ a bald:Reference ;
+            bald:target this:da ;
+            bald:targetRefshape ( 13 1 1 ) ] ;
+    .
+this:db a bald:array ;
+   bald:shape ( 17 ) .
+this:da a bald:array ;
+   bald:shape ( 13 ) .
+----
+
+This explicit reference is crucial for cases where there are unique dimensions of the same size, where inference could not be used. Given the generality of these, the standard mandates that targetRefShape shall always be defined, even if it could be inferred by the dimensionality size matching.  This is to aid implementations using this information.
+
+This reflects the explicit dimension naming within netCDF files. The references are stated explicitly in the file using these named dimensions. This standartd does not preserve dimension names within the summary metadata graph but does represent these explicit array to array relationships and their numeracy.
+
+If an array is defined with respect to named nc dimensions (de, df, dg), of shape (13,13,13), references an array defined with respect to dimensions (df), of shape (13), then there is no way to infer the correct targetRefShape, it must be specified, e.g. (1,13,1)
+
+----
+dimensions:
+    de = 13 ;
+    df = 13 ;
+    dg = 13 ;
+variables:
+    int bvar(de,df,dg) ;
+    int df(df) ;
+----
+is represented as references in the metadata graph as:
+----
+this:bvar a bald:array ;
+    bald:shape ( 13 13 13 ) ;
+    bald:references [ a bald:Reference ;
+            bald:target this:df ;
+            bald:targetRefshape ( 1 13 1 ) ] ;
+    .
+this:df  a bald:array ;
+    bald:shape ( 13 ) .
+----
+
+
+If an array defined with respect to nc dimensions (di,dj,dk,dl), of shape (13,17,13,7), references an array defined with respect to dimensions (dk, dm), of shape (13,3) then both the source and target reference shape must be defined, e.g. sourceRefShape (13,17,13,7,1) targetRefShape (1,1,13,1,3)
+
+----
+dimensions:
+    di = 13 ;
+    dj = 17 ;
+    dk = 13 ;
+    dl = 7 ;
+    dm = 3 ;
+variables:
+    int cvar(di,dj,dk,dl) ;
+      cvar:bald__references = "lvar" ;
+    int lvar(dk,dm) ;
+----
+is represented as references in the metadata graph as:
+----
+this:cvar a bald:array ;
+    bald:shape ( 13 17 13 7 ) ;
+    bald:references [ a bald:Reference ;
+            bald:target this:lvar ;
+            bald:sourceRefshape ( 13 17 13 7 1 ) ],
+            bald:targetRefshape ( 1 1 13 1 3 ) ],
+    .
+this:lvar a bald:array ;
+    bald:shape ( 13 3 ) .
+----
+
+Where any ambiguity in ordering exists in the netCDF file for explicitly defined sourceRefShape and targetRefShape instances, due to partial overlap of named dimensions for both netCDf variables, then source reference dimensions shall be ordered before target reference dimensions.
+
+In the above example the size 7 dimension is ordered before the size 3 dimension in the RefShape instances.
 
 ===== Mismatched reference 
 
 Where metadata schemes provide further variable reference predicates, it is possible for variable-to-variable references to be defined where a broadcast relationship does not exist.
 
 Applications may treat mismatches between reference definitions and the ability to broadcast as warning conditions, and skip the creation of RDF statements. In this case, it is recommended to continue to create a graph and omit references.  It is accepted that an implementation may treat this as an error condition, and fail to create a graph.  This is an implementation detail.
+
+
+===== Variable Reference Utility
+
+The definition of the variable reference with its numeracy delivers specific capability to the resulting metadata graph.
+
+References between arrays in a file are provided primarily to support partial access patterns from individual file objects.  Where an element of interest isidentified from a metadata graph, this element may be accessed directly, if supported by a suitable data supply interface, without the need to obtain the entire file object.
+
+In order to support partial retrieval, it is essential that the metadata graph provides details on which array variables depend on other array variables and the nature of that dependency.
+
+If two values from an array variable containing millions of elements in a file are requested, which other arrays within the file provide explicit metadata and need to be retrieved, and which elements within those arrays provide locational metadata?  How should the two requested data values be described by metadata?
+
+Without numerical array referencing, the alternative left to the user is to obtain the whole file and use an alternative netCDF tool to extract the values required with their associated metadata elements.
 
 ==== NetCDF Coordinate Variables
 
@@ -696,34 +885,35 @@ Here the definition of a netCDF file, in CDL, with all data array elements set a
 ----
 netcdf tmpMwXy8U {
 dimensions:
-	pdim0 = 11 ;
-	pdim1 = 17 ;
+        pdim0 = 11 ;
+        pdim1 = 17 ;
+        xy = 2 ;
 variables:
-	int data_variable1(pdim0, pdim1) ;
-		data_variable1:bald__references = "location_variable" ;
-		data_variable1:long_name = "Gerald";
-		data_variable1:obtype = "metce__SamplingObservation";
+        int data_variable1(pdim0, pdim1) ;
+                data_variable1:bald__references = "location_variable" ;
+                data_variable1:long_name = "Gerald";
+                data_variable1:obtype = "metce__SamplingObservation";
 
         int data_variable2(pdim0, pdim1) ;
-		data_variable2:bald__references = "location_variable" ;
-		data_variable2:long_name = "Imelda";
-		data_variable2:obtype = "metce__SamplingObservation";
+                data_variable2:bald__references = "location_variable" ;
+                data_variable2:long_name = "Imelda";
+                data_variable2:obtype = "metce__SamplingObservation";
 
         int pdim0(pdim0) ;
 
         int pdim1(pdim1) ;
 
-	int location_variable(pdim0, pdim1) ;
-		location_variable:bald__references = "location_reference_system" ;
+        int location_variable(pdim0, pdim1, xy) ;
+                location_variable:bald__references = "location_reference_system" ;
 
-	int location_reference_system;
-		location_reference_system:pcode = "4897";
+        int location_reference_system;
+                location_reference_system:pcode = "4897";
 
-	int set_collection ;
-	        set_collection:bald__references = "data_variable1 data_variable2" ;
+        int set_collection ;
+                set_collection:bald__references = "data_variable1 data_variable2" ;
 
-	int list_collection ;
-	        list_collection:bald__references = "( data_variable1 data_variable2 )" ;
+        int list_collection ;
+                list_collection:bald__references = "( data_variable1 data_variable2 )" ;
 
 // prefix group
 group: prefix_list {
@@ -732,7 +922,6 @@ group: prefix_list {
   :rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
 }
 // global attributes:
-		:_NCProperties = "version=1|netcdflibversion=4.4.1|hdf5libversion=1.8.17" ;
 		:bald__isPrefixedBy = "prefix_list" ;
 
 }
@@ -771,12 +960,6 @@ this: a bald:Container ;
 this:list_collection a bald:Resource ;
     bald:references ( this:data_variable1 this:data_variable2 ) .
 
-this:pdim0 a bald:Array ;
-    bald:shape ( 11 ) .
-
-this:pdim1 a bald:Array ;
-    bald:shape ( 17 ) .
-
 this:set_collection a bald:Resource ;
     bald:references this:data_variable1,
         this:data_variable2 .
@@ -787,18 +970,49 @@ this:location_reference_system a bald:Resource ;
 this:data_variable1 a bald:Array ;
     this:long_name "Gerald" ;
     this:obtype metce:SamplingObservation ;
-    bald:references this:location_variable ;
+    bald:references [ a bald:Reference ;
+            bald:target this:pdim1 ;
+            bald:targetRefshape ( 1 17 ) ],
+        [ a bald:Reference ;
+            bald:sourceRefshape ( 11 17 1 ) ;
+            bald:target this:location_variable ;
+            bald:targetRefshape ( 11 17 2 ) ],
+        [ a bald:Reference ;
+            bald:target this:pdim0 ;
+            bald:targetRefshape ( 11 1 ) ] ;
     bald:shape ( 11 17 ) .
 
 this:data_variable2 a bald:Array ;
     this:long_name "Imelda" ;
     this:obtype metce:SamplingObservation ;
-    bald:references this:location_variable ;
+    bald:references [ a bald:Reference ;
+            bald:target this:pdim0 ;
+            bald:targetRefshape ( 11 1 ) ],
+        [ a bald:Reference ;
+            bald:sourceRefshape ( 11 17 1 ) ;
+            bald:target this:location_variable ;
+            bald:targetRefshape ( 11 17 2 ) ],
+        [ a bald:Reference ;
+            bald:target this:pdim1 ;
+            bald:targetRefshape ( 1 17 ) ] ;
     bald:shape ( 11 17 ) .
 
+this:pdim0 a bald:Array ;
+    bald:shape ( 11 ) .
+
+this:pdim1 a bald:Array ;
+    bald:shape ( 17 ) .
+
 this:location_variable a bald:Array ;
-    bald:references this:location_reference_system ;
-    bald:shape ( 11 17 ) .
+    bald:references [ a bald:Reference ;
+            bald:target this:pdim1 ;
+            bald:targetRefshape ( 1 17 1 ) ],
+        [ a bald:Reference ;
+            bald:target this:pdim0 ;
+            bald:targetRefshape ( 11 1 1 ) ],
+        this:location_reference_system ;
+    bald:shape ( 11 17 2 ) .
+
 
 ----
 
