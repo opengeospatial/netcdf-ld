@@ -24,10 +24,22 @@ this: a bald:Container ;
 
 Implementations shall provide an optional 'download-url' option, providing the ability for a user to provide an explicit downloadURL for the file at run time.
 
-If provided, then the 'download-url' value shall be included in the graph, with respect to the identified root group
+If provided, then the 'download-url' value shall be included in the graph, with respect to the identified root group's `dcat:distribution` blank node:
 
 ----
-this: dcat:downloadURL <{download-url}>;
+this: a bald:Container ;
+ dcat:distribution [
+ 	a dcat:Distribution;
+ 	dcat:downloadURL <{download-url}>;
+ 	dcat:mediaType [
+ 		a dct:MediaType;
+ 		dct:identifier "application/x-netcdf"
+ 	];
+ 	dct:format [
+ 		a dct:MediaType;
+ 		dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/>
+ 	]
+                 ].
 ----
  
  {set:cellbgcolor:#FFFFFF}
