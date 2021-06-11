@@ -1,11 +1,10 @@
 ==== Requirement A-4
 
-[width="90%",cols="2,6"]
+[width="90%",cols="2,6a"]
 |===
-|*Requirement A-4* {set:cellbgcolor:#CACCCE}|/req/req-class-a/requirement-4 +
+|*Requirement A-4* |/req/req-class-a/requirement-4 +
  +
 
-// {set:cellbgcolor:#FFFFFF}
 
 Each netCDF variable shall declare a type statement, and RDF triple of the form
 
@@ -35,6 +34,5 @@ If there is no array payload and the variable is single valued (which may be mis
 ----
 
 
- {set:cellbgcolor:#FFFFFF}
 
 |===

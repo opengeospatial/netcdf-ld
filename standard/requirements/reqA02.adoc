@@ -1,8 +1,8 @@
 ==== Requirement A-2
 
-[width="90%",cols="2,6"]
+[width="90%",cols="2,6a"]
 |===
-|*Requirement A-2* {set:cellbgcolor:#CACCCE}|/req/req-class-a/requirement-2 +
+|*Requirement A-2* |/req/req-class-a/requirement-2 +
  +
 
 The identified netCDF root group shall be described as a dcat:Distribution
@@ -42,6 +42,6 @@ this: a bald:Container ;
                  ].
 ----
  
- {set:cellbgcolor:#FFFFFF}
+
 
 |===
