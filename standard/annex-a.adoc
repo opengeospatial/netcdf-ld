@@ -35,36 +35,15 @@ http://secret.binary-array-ld.net/identity.nc
 ----
 
 Input NetCDF File - Defined in CDL:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassA.cdl
 ----
-netcdf ogcClassA {
-dimensions:
-        d0 = 1 ;
-        d1 = 1 ;
-variables:
-        int var0 ;
-        int var1 ;
-
-data:
-}
-
+include::abstract_tests/CDL/ogcClassA.cdl[]
 ----
 
 Validated output RDF graph:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassA.ttl
 ----
-@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix this: <http://secret.binary-array-ld.net/identity.nc/> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<http://secret.binary-array-ld.net/identity.nc> a bald:Container ;
-    bald:contains this:var0,
-        this:var1 .
-
-this:var0 a bald:Resource .
-
-this:var1 a bald:Resource .
+include::abstract_tests/TTL/ogcClassA.ttl[]
 
 ----
 
@@ -89,46 +68,18 @@ http://secret.binary-array-ld.net/prefix.nc
 ----
 
 Input NetCDF File - Defined in CDL:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassB.cdl
 ----
-netcdf ogcClassB {
-dimensions:
-        d0 = 1 ;
-	d1 = 1 ;
-variables:
-	int var0 ;
-	    var0:rdfs__label = "rdfs__label" ;
-	int var1 ;
-	    var1:rdfs__label = "rdfs__label" ;
-        int prefix_list ;
-            prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
-            prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
-            prefix_list:rdfs__ = "http://www.w3.org/2000/01/rdf-schema#" ;
-        :bald__isPrefixedBy = "prefix_list" ;
-data:
-}
+include::abstract_tests/CDL/ogcClassB.cdl[]
 ----
 
 Validated output RDF graph:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassB.ttl
 ----
-@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix this: <http://secret.binary-array-ld.net/prefix.nc/> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<http://secret.binary-array-ld.net/prefix.nc> a bald:Container ;
-    bald:contains this:var0,
-        this:var1 ;
-    bald:isPrefixedBy "prefix_list" .
-
-this:var0 a bald:Resource ;
-    rdfs:label rdfs:label .
-
-this:var1 a bald:Resource ;
-    rdfs:label rdfs:label .
+include::abstract_tests/TTL/ogcClassB.ttl[]
 
 ----
+
 
 === Conformance Class C: Aliasing
 
@@ -137,46 +88,25 @@ Identity:
 http://secret.binary-array-ld.net/alias.nc
 ----
 
-Input NetCDF File - Defined in CDL:
-----
-netcdf ogcClassC {
-dimensions:
-        d0 = 1 ;
-	d1 = 1 ;
-variables:
-	int var0 ;
-	int var1 ;
-:title = "Sample netCDF file definition with alias terms from the netCDF user guide" ;
-data:
-}
-----
-
 Alias Graph
 ----
 http://def.scitools.org.uk/NetCDF
 ----
 
 
+Input NetCDF File - Defined in CDL:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassC.cdl
+----
+include::abstract_tests/CDL/ogcClassC.cdl[]
+----
+
 Validated output RDF graph:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassC.ttl
 ----
-@prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
-@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix this: <http://secret.binary-array-ld.net/alias.nc/> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<http://secret.binary-array-ld.net/alias.nc> a bald:Container ;
-    bald:contains this:var0,
-        this:var1 ;
-    NetCDF:title "Sample netCDF file definition with alias terms from the netCDF user guide" .
-
-this:var0 a bald:Resource .
-
-this:var1 a bald:Resource .
+include::abstract_tests/TTL/ogcClassC.ttl[]
 
 ----
+
 
 
 === Conformance Class D: Attribute Names
@@ -186,54 +116,22 @@ Identity:
 http://secret.binary-array-ld.net/attributes.nc
 ----
 
-Input NetCDF File - Defined in CDL:
-----
-netcdf ogcClassD {
-dimensions:
-        d0 = 1 ;
-	d1 = 1 ;
-variables:
-	int var0 ;
-	    var0:rdfs__label = "rdfs__label" ;
-	int var1 ;
-	    var1:rdfs__label = "rdfs__label" ;
-        int prefix_list ;
-            prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
-            prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;
-            prefix_list:rdfs__ = "http://www.w3.org/2000/01/rdf-schema#" ;
-        :bald__isPrefixedBy = "prefix_list" ;
-	:title = "Sample netCDF file definition with alias terms from the netCDF user guide" ;
-data:
-}
-----
-
 Alias Graph
 ----
 http://def.scitools.org.uk/NetCDF
 ----
 
 
-Validated output RDF graph:
+Input NetCDF File - Defined in CDL:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassD.cdl
 ----
-@prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
-@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix this: <http://secret.binary-array-ld.net/attributes.nc/> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+include::abstract_tests/CDL/ogcClassD.cdl[]
+----
 
-<http://secret.binary-array-ld.net/attributes.nc> a bald:Container ;
-    bald:contains this:var0,
-        this:var1 ;
-    bald:isPrefixedBy "prefix_list" ;
-    NetCDF:title "Sample netCDF file definition with alias terms from the netCDF user guide" .
-
-this:var0 a bald:Resource ;
-    rdfs:label rdfs:label .
-
-this:var1 a bald:Resource ;
-    rdfs:label rdfs:label .
+Validated output RDF graph:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassD.ttl
+----
+include::abstract_tests/TTL/ogcClassD.ttl[]
 
 ----
 

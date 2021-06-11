@@ -6,6 +6,8 @@
  +
 
 Aliases shall be defined as one or more RDF graphs.
+
+Implementations may choose to provide prefixes for provided alias graphs, to aid readability of output content metadata graphs.
  
  {set:cellbgcolor:#FFFFFF}
 

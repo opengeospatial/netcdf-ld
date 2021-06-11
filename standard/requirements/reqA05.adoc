@@ -1,0 +1,36 @@
+==== Requirement A-5
+
+[width="90%",cols="2,6a"]
+|===
+
+|*Requirement A-5* |/req/req-class-a/requirement-5 +
+ +
+
+
+
+Each netCDF variable that is a bald:Array shall declare a shape statement.
+
+
+A bald:array within the metadata graph shall include a statement defining the shape of the data payload array as a Literal encoded tuple of integer values, using bald:shape.  Integers are derived from references to named dimensions within the netCDF input file.
+
+For example:
+
+----
+<variableURI> rdf:type bald:Array ;
+              bald shape '(1,1,16,9)' .
+----
+
+If the bald:Array instance has a single dimension, then the first and last values from the data payload, as ordered within the netCDF file, shall be endcoded as Literals within the metadata graph, using bald:firstValue and bald:lastValue.
+
+For example:
+----
+<variableURI> rdf:type bald:Array ;
+              bald shape '(72,)' ;
+              bald:firstValue -90 ;
+              bald:lastValue 90 .
+----
+
+
+
+
+|===

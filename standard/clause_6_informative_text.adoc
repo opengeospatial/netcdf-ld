@@ -898,6 +898,7 @@ Without numerical array referencing, the alternative left to the user is to obta
 NetCDF defines a special type of variable, called a _Coordinate Variable_, which is identified by being one-dimensional and having the same name as the single dimension used to size the variable.
 
 NetCDF-LD interprets Coordinate Variables as a case of variable referencing and includes entries as `bald:references` statements. 
+There is an explicit exception to this, which is that self references, from a coordinate variable to itself shall not be added to the graph.
 
 NetCDF-LD adds information on the Coordinate Variables, providing the first value, and optionally the last value, if there is more than one value.  The first and last are taken from the order as presented within the file. If the value is encoded as a missing value, then no statement is included within the metadata graph.
 

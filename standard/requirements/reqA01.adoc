@@ -7,12 +7,20 @@
 
 // {set:cellbgcolor:#FFFFFF}
 
-A netCDF file shall be provided along with its own identity, as a URI, external to the file contents.
-
-If no identity is provided, then the path used by a library to access the file is used as a default identity.
-If used, a local file URI will always use the '/' forward slash as an element separator, even on systems where local identifiers use back slash separators.
+A netCDF file content root group shall be identified by an identity URI, external to the file contents. 
 
 The identity of the root group shall always terminate in a '/' character.
+
+By convention, the prefix 'this:' for the identity URI may be used by implementations representing a single netCDF file within a graph.
+
+Implementations shall provide an optional 'uri' option to specify the identity of the file contents. This identity URI shall conform to the W3 URI specification (https://datatracker.ietf.org/doc/html/rfc3986). Note, this includes 'http:', 'https:', 'file:', 'urn:' URIs.
+
+Implementations shall provide an optional 'download-url' option. If no 'uri' is provided, but a 'download-url' is provided, then this shall be used as the file contents identity, ensuring that a trailing '/' is added if is does not exist in the 'download-url'.
+
+If no identity is provided, then the path used by a library to access the file is used as a default identity ('file:').
+If used, a local file URI will always use the '/' forward slash as an element separator, even on systems where local identifiers use back slash separators.
+
+
 
  {set:cellbgcolor:#FFFFFF}
 
