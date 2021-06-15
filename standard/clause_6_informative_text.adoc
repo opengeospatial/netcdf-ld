@@ -94,7 +94,7 @@ image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
 
 === RDF Vocabularies
 
-A set of RDF vocabularies are used within this standard.
+A set of RDF vocabularies are used within this standard to allow the representation of structural and semantic content of netCDF metadata within the context of an RDF graph. Where possible standard RDF vocabularies are used before creating new vocabularies. This allows the ability to combine data graphs from different sources, promotes data harmonisation, and the ability query them in an interoperable way (i.e. using the same vocabularies and predicates for like-for-like semantics).
 
 A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array Linked Data vocabulary: `bald` (https://www.opengis.net/def/binary-array-ld/). The `bald` vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
 
