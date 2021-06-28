@@ -35,13 +35,13 @@ http://secret.binary-array-ld.net/identity.nc
 ----
 
 Input NetCDF File - Defined in CDL:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassA.cdl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/CDL/ogcClassA.cdl
 ----
 include::abstract_tests/CDL/ogcClassA.cdl[]
 ----
 
 Validated output RDF graph:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassA.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/TTL/ogcClassA.ttl
 ----
 include::abstract_tests/TTL/ogcClassA.ttl[]
 
@@ -68,13 +68,13 @@ http://secret.binary-array-ld.net/prefix.nc
 ----
 
 Input NetCDF File - Defined in CDL:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassB.cdl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/CDL/ogcClassB.cdl
 ----
 include::abstract_tests/CDL/ogcClassB.cdl[]
 ----
 
 Validated output RDF graph:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassB.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/TTL/ogcClassB.ttl
 ----
 include::abstract_tests/TTL/ogcClassB.ttl[]
 
@@ -90,18 +90,18 @@ http://secret.binary-array-ld.net/alias.nc
 
 Alias Graph
 ----
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/aliases/NetCDF.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/aliases/NetCDF.ttl
 ----
 
 
 Input NetCDF File - Defined in CDL:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassC.cdl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/CDL/ogcClassC.cdl
 ----
 include::abstract_tests/CDL/ogcClassC.cdl[]
 ----
 
 Validated output RDF graph:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassC.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/TTL/ogcClassC.ttl
 ----
 include::abstract_tests/TTL/ogcClassC.ttl[]
 
@@ -118,18 +118,18 @@ http://secret.binary-array-ld.net/attributes.nc
 
 Alias Graph
 ----
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/aliases/NetCDF.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/aliases/NetCDF.ttl
 ----
 
 
 Input NetCDF File - Defined in CDL:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassD.cdl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/CDL/ogcClassD.cdl
 ----
 include::abstract_tests/CDL/ogcClassD.cdl[]
 ----
 
 Validated output RDF graph:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassD.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/TTL/ogcClassD.ttl
 ----
 include::abstract_tests/TTL/ogcClassD.ttl[]
 
@@ -148,13 +148,13 @@ http://secret.binary-array-ld.net/reference.nc
 
 
 Input NetCDF File - Defined in CDL:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassEF.cdl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/CDL/ogcClassEF.cdl
 ----
 include::abstract_tests/CDL/ogcClassEF.cdl[]
 ----
 
 Validated output RDF graph:
-https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassEF.ttl
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/TTL/ogcClassEF.ttl
 ----
 include::abstract_tests/TTL/ogcClassEF.ttl[]
 
