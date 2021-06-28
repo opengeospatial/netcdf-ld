@@ -90,7 +90,7 @@ http://secret.binary-array-ld.net/alias.nc
 
 Alias Graph
 ----
-http://def.scitools.org.uk/NetCDF
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/aliases/NetCDF.ttl
 ----
 
 
@@ -118,7 +118,7 @@ http://secret.binary-array-ld.net/attributes.nc
 
 Alias Graph
 ----
-http://def.scitools.org.uk/NetCDF
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/aliases/NetCDF.ttl
 ----
 
 
@@ -137,6 +137,27 @@ include::abstract_tests/TTL/ogcClassD.ttl[]
 
 
 
-=== Conformance Class E: Variable-to-variable Referencing
+=== Conformance Class E: Variable-to-variable Referencing; Class F: Coordinate Variables
+
+
+
+Identity:
+----
+http://secret.binary-array-ld.net/reference.nc
+----
+
+
+Input NetCDF File - Defined in CDL:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/CDL/ogcClassEF.cdl
+----
+include::abstract_tests/CDL/ogcClassEF.cdl[]
+----
+
+Validated output RDF graph:
+https://raw.githubusercontent.com/opengeospatial/netcdf-ld/master/standard/abstract_tests/TTL/ogcClassEF.ttl
+----
+include::abstract_tests/TTL/ogcClassEF.ttl[]
+
+----
 
 
