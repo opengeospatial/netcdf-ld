@@ -13,7 +13,7 @@ this: a bald:Container ;
     dct:format [ a dct:MediaType ;
             dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
     dcat:distribution [ a dcat:Distribution ;
-            dcat:mediaType [ a dcat:MediaType ;
+            dcat:mediaType [ a dct:MediaType ;
                     dct:identifier "application/x-netcdf" ] ] ;
     bald:contains this:var0,
         this:var1 .
