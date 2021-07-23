@@ -1,4 +1,4 @@
-@prefix NetCDF: <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.1/standard/abstract_tests/aliases/NetCDF.ttl/> .
+@prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
 @prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix dct: <http://purl.org/dc/terms/> .
@@ -10,18 +10,19 @@
 
 this: a bald:Container ;
     NetCDF:title "Sample netCDF file definition with alias terms from the netCDF user guide" ;
+    this:localtitle "OGC netCDF-LD sample file" ;
     dct:format [ a dct:MediaType ;
             dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
     dcat:distribution [ a dcat:Distribution ;
-            dcat:mediaType [ a dcat:MediaType ;
+            dcat:mediaType [ a dct:MediaType ;
                     dct:identifier "application/x-netcdf" ] ] ;
     bald:contains this:var0,
         this:var1 ;
     bald:isPrefixedBy "prefix_list" .
 
 this:var0 a bald:Resource ;
-    this:rdfs__label "rdfs__label" .
+    rdfs:label "Variable Zero" .
 
 this:var1 a bald:Resource ;
-    this:rdfs__label "rdfs__label" .
+    rdfs:label "Variable One" .
 
