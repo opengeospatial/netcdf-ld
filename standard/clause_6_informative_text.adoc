@@ -147,20 +147,28 @@ These URIs may be declared explicitly within the files, or interpreted from file
 
 ==== Identity
 
-In netCDF-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
+In netCDF-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and decide to use different identities. The identity is not inherent to the metadata payload of the file.
 
-An explicit identity, i.e. a URL or URI, may be provided during file interpretation (i.e. by netCDF-LD parsers).  If no identity is provided, a default identity, a local file URI, will be used.  A local file URI will always use the '/' forward slash as a separator, even on systems where local identifiers use back slash separators.
+An explicit identity, i.e. a URL or URI, may be provided during file interpretation (i.e. by netCDF-LD parsers).
 
-The identifier for the netCDF file is the identity of the root group, that is, the base entity within the netCDF file. This provides identity to the contents of the file. For this reason, this standard mandates that the identifier string will always terminate in a '/' character separator.  In this way the root group's identity is distinguished as a different conceptual entity from the file itself.
+If no identity is provided, then the file path (`file:`) or remote location (`http:` / `https:`) used by a library to access the file is used as a default identity.
+If used, a local file URI will always use the '/' forward slash as an element separator, even on systems where local identifiers use back slash separators.
 
-Two examples are provided below showing, a file URI from a location, via a URL, which also serves as a URI for that file (Example 1).  Example 2 shows the root group within that file may reuse the identity string, as a compound part, with the addition of the extra '/' character, there by differentiating itself from the file object identity. 
+
+The identifier for the netCDF file is the identity of the root group, that is, the base entity within the netCDF file. This provides an identity root for the contents of the file. For this reason, this standard mandates that the identifier string will always terminate in a '/' character.  In this way the root group's identity is distinguished as a different conceptual entity from the file itself.
+
+Two examples are provided below showing, a file URI from a location, via a URL, which also serves as a URI for that file object (Example 1).  Example 2 shows the root group within that file may reuse the identity string, as a compound part, with the addition of the extra '/' character, there by differentiating itself from the file object identity.
 
 * Example 1. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc (the URI identity of the netCDF file object)
 * Example 2. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc/ (the URI identity of the root group contained within that netCDF file object)
 
 ===== Variable Identity 
 
-Each variable within that file has its own identity, that is defined relative to the file identity. The variable name is appended to the file identity and separated by a ``/`` to denote the variable identifier.
+Each netCDF variable within the root group, each netCDF group and each netCDF variable within each group shall take its identity as a URI, relative to the file identity.
+
+This identity is defined using the full variable name, including any owning groups, appended to the file identity. All element separation uses the `/` character.
+
+Thus, each variable and group within that file has its own identity, that is defined relative to the file identity.
 
 ===== Variable Type Declaration
 
@@ -218,15 +226,23 @@ For example:
 
 ===== Download URL
 
-The identity is conceptually distinct from the resolvable location of a file.  This may be simply involve the appending of a '/' character to the location, but it can be more distinct.
+The identity is conceptually distinct from the resolvable location of a file.
+
+Identity and Download URL are optional inputs to the metadata graph creation process.
+
+If a download URL is provided, but no Identity is provided, then an identity shall be inferred by the appending of a '/' character to the location.
+
+If a download URL is provided, then it shall be recorded as part of the `dcat:distribution` definition.
 
 As a bald:Container is a subclass of dcat:Distribution, DCAT is used to describe the file type and to provide an optional statement to specify the resolvable location of the file object, using dcat:downloadURL.
 
 ----
+@prefix this: <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.2/standard/abstract_tests/netCDF/ogcClassEF.nc/> .
+
 this: a bald:Container ;
  dcat:distribution [
  	a dcat:Distribution;
- 	dcat:downloadURL <{}>;
+ 	dcat:downloadURL <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.2/standard/abstract_tests/netCDF/ogcClassEF.nc>;
  	dcat:mediaType [
  		a dct:MediaType;
  		dct:identifier "application/x-netcdf"
@@ -1236,3 +1252,130 @@ On this basis, it is suggested that an implementation may provide a transformati
 The data storage shall be deemed compliant with this standard if a graph representing a single file may be transformed by the provided transformation into a single file graph that meets the validation rules within this standard.
 
 The format for such transformations is not specified by this standard, it need only provide a suitable RDF graph output.
+
+==== Illustration Example ====
+
+For example an implementation may normalise the shared content from a large number of files into a graph which may be defining a data type, which defines all of the statements valid for all instances of that type.  The metadata graph for a single file may then define itself as an instace of that type and hence inherit all of the statements defining that type.  The combination of the type definition and the specific file definition may then be compared to the standardised metAdata graph from the single file for informational equivalence.
+
+A common use case is where many files from a simulation run differ only in the time value for the time step and in the data payload encoded within the file.
+
+e.g. A common pattern definition for a large collection of highly similar files may be defined as an identified graph.
+
+----
+@prefix CFTerms: <http://def.scitools.org.uk/CFTerms/> .
+@prefix NetCDF: <http://def.scitools.org.uk/NetCDF/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
+@prefix cf_sname: <http://vocab.nerc.ac.uk/standard_name/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix this: <http://example.binary-array-ld.net/minVOTemperSharedStatements/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+this: a owl:Class ;
+    NetCDF:Conventions "CF-1.5" ;
+    dct:format [ a dct:MediaType ;
+            dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
+    dcat:distribution [ a dcat:Distribution ;
+            dcat:mediaType [ a dct:MediaType ;
+                    dct:identifier "application/x-netcdf" ] ] ;
+    bald:contains this:deptht,
+        this:nav_lat,
+        this:nav_lon,
+        this:time,
+        this:votemper .
+
+this:votemper a bald:Array ;
+    CFTerms:coordinates this:deptht,
+        this:nav_lat,
+        this:nav_lon,
+        this:time ;
+    CFTerms:standard_name "sea_water_potential_temperature" ;
+    NetCDF:FillValue "9.96921e+36" ;
+    NetCDF:long_name "Temperature" ;
+    NetCDF:units "degC" ;
+    bald:references [ a bald:Reference ;
+            bald:target this:nav_lat ;
+            bald:targetRefshape ( 1 1 148 180 ) ],
+        [ a bald:Reference ;
+            bald:target this:nav_lon ;
+            bald:targetRefshape ( 1 1 148 180 ) ],
+        [ a bald:Reference ;
+            bald:target this:deptht ;
+            bald:targetRefshape ( 1 4 1 1 ) ],
+        [ a bald:Reference ;
+            bald:target this:time ;
+            bald:targetRefshape ( 4 1 1 1 ) ] ;
+    bald:shape ( 4 4 148 180 ) .
+
+this:deptht a bald:Array ;
+    CFTerms:positive "down" ;
+    CFTerms:standard_name "depth" ;
+    NetCDF:long_name "Vertical T levels" ;
+    NetCDF:title "deptht" ;
+    NetCDF:units "m" ;
+    bald:shape ( 4 ) .
+
+this:nav_lat a bald:Array ;
+    this:nav_model "Default grid" ;
+    CFTerms:standard_name "latitude" ;
+    NetCDF:long_name "Latitude" ;
+    NetCDF:units "degrees" ;
+    bald:shape ( 148 180 ) .
+
+this:nav_lon a bald:Array ;
+    this:nav_model "Default grid" ;
+    CFTerms:standard_name "longitude" ;
+    NetCDF:long_name "Longitude" ;
+    NetCDF:units "degrees" ;
+    bald:shape ( 148 180 ) .
+
+this:time a bald:Array ;
+    this:time_origin "2001-JAN-01 00:00:00" ;
+    CFTerms:calendar "360_day" ;
+    CFTerms:standard_name "time" ;
+    NetCDF:long_name "Time axis" ;
+    NetCDF:title "Time" ;
+    NetCDF:units "hours since 2001-01-01 00:00:00" ;
+    bald:shape ( 4 ) .
+
+----
+
+Then a set of specific instances may be defined with respecct to the common metadata pattern.
+
+----
+@prefix this: <http://example.binary-array-ld.net/exqf4/minVOTemper200101010000/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
+
+this: a <http://example.binary-array-ld.net/minVOTemperSharedStatements/>,
+        bald:Container .
+
+this:time a bald:Array ;
+    bald:arrayFirstValue "2001-JAN-01 00:00:00" ;
+    bald:arrayLastValue "2001-JAN-01 18:00:00" ;
+.
+
+
+----
+
+----
+@prefix this: <http://example.binary-array-ld.net/exqf4/minVOTemper200101020000/> .
+@prefix bald: <https://www.opengis.net/def/binary-array-ld/> .
+
+this: a <http://example.binary-array-ld.net/minVOTemperSharedStatements/>,
+        bald:Container .
+
+this:time a bald:Array ;
+    bald:arrayFirstValue "2001-JAN-02 00:00:00" ;
+    bald:arrayLastValue "2001-JAN-02 18:00:00" ;
+.
+
+
+----
+
+An implementation may then transform these graph pairs into a graph defining the full metadata payload for each file, as per this specification.
+
+Normalisation details are implementation specific, and not standardised by this standard.
