@@ -10,7 +10,7 @@ Linking to external resources on the web (e.g. controlled vocabulary terms, rela
 The netCDF-LD standard enables the annotation metadata in netCDF files in a way that is interoperable and reusable, and with minimal changes to current netCDF syntax. This means existing files is able to be interpreted using netCDF-LD tools.  
 netCDF-LD proposes mechanisms such as encoding rules that allow users to precisely reference shared attribute names (e.g. property names) and shared values (e.g. controlled vocabulary terms). 
 This facilitates consistency in specifying metadata across netCDF files.
-These netCDF-LD mechanisms thus allow existing netCDF files to be interpreted as Linked Data, and this faciliates  interoperability between netCDF files (and potentially non-netCDF data files).
+These netCDF-LD mechanisms thus allow existing netCDF files to be interpreted as Linked Data, and this facilitates  interoperability between netCDF files (and potentially non-netCDF data files).
 Therefore, data providers adopting netCDF-LD are able to interpret existing standard netCDF metadata as well as annotate additional metadata in netCDF files that conform to one or more metadata conventions in a consistent way.
 
 A key aspect of netCDF-LD is the introduction of rules for mapping identifiers for netCDF global and variable attributes and variables to Uniform Resource Identifiers (URIs) via _prefix_ and _alias_ mechanisms. 
@@ -52,7 +52,7 @@ The _Resource Description Framework (RDF)_ is a W3C standard (Hayes and Patel-Sc
 
 Identifiers are a key building block of RDF and _Uniform Resource Identifiers (URIs)_ are used to identify a resource. URIs can appear in each part of a triple, i.e. _Subjects_, _Predicates_ and _Objects_. Where an _Object_ is a _URI_, this may also be a subject for another statement.
 
-Literals are another key part of RDF and are used to capture basic values other than a URI. e.g. strings such as "Gerald", dates such as "1 April 2019", and numbers such as "4897". Literals are associated with a datatype so that it can be parsed. Literals may only appear in the object part of a RDF statement. 
+Literals are another key part of RDF and are used to capture basic values other than a URI. e.g. strings such as "Gerald", dates such as "1 April 2019", and numbers such as "4897". Literals are associated with a data-type so that it can be parsed. Literals may only appear in the object part of a RDF statement. 
 
 RDF statements are collected together within an _RDF Graph_. Figure 1 below show an example of an RDF graph encoding information about the singer B.B. King.
 
@@ -98,7 +98,7 @@ A set of RDF vocabularies are used within this standard to allow the representat
 
 A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array Linked Data vocabulary: `bald` (https://www.opengis.net/def/binary-array-ld/). The `bald` vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
 
-This standard also makes use of the core RDF vocabularies, the Dublin Core vocabulary,  the schema.org vocabulary and the Data Catalog Vocabulary (DCAT):
+This standard also makes use of the core RDF vocabularies, the Dublin Core vocabulary,  the schema.org vocabulary and the Data Catalogue Vocabulary (DCAT):
 
 * rdf (http://www.w3.org/1999/02/22-rdf-syntax-ns#)
 * rdfs (http://www.w3.org/2000/01/rdf-schema#)
@@ -147,20 +147,28 @@ These URIs may be declared explicitly within the files, or interpreted from file
 
 ==== Identity
 
-In netCDF-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and hence use different identities.
+In netCDF-LD, a _netCDF file_ has an identity.  This identity provides the mechanism to obtain the file.  As it is mutable, it is dependent on how the file is provided.  Two systems may provide an identical file, but in different ways, and decide to use different identities. The identity is not inherent to the metadata payload of the file.
 
-An explicit identity, i.e. a URL or URI, may be provided during file interpretation (i.e. by netCDF-LD parsers).  If no identity is provided, a default identity, a local file URI, will be used.  A local file URI will always use the '/' forward slash as a separator, even on systems where local identifiers use back slash separators.
+An explicit identity, i.e. a URL or URI, may be provided during file interpretation (i.e. by netCDF-LD parsers).
 
-The identifier for the netCDF file is the identity of the root group, that is, the base entity within the netCDF file. This provides identity to the contents of the file. For this reason, this standard mandates that the identifier string will always terminate in a '/' character separator.  In this way the root group's identity is distinguished as a different conceptual entity from the file itself.
+If no identity is provided, then the file path (`file:`) or remote location (`http:` / `https:`) used by a library to access the file is used as a default identity.
+If used, a local file URI will always use the '/' forward slash as an element separator, even on systems where local identifiers use back slash separators.
 
-Two examples are provided below showing, a file URI from a location, via a URL, which also serves as a URI for that file (Example 1).  Example 2 shows the root group within that file may reuse the identity string, as a compound part, with the addition of the extra '/' character, there by differentiating itself from the file object identity. 
+
+The identifier for the netCDF file is the identity of the root group, that is, the base entity within the netCDF file. This provides an identity root for the contents of the file. For this reason, this standard mandates that the identifier string will always terminate in a '/' character.  In this way the root group's identity is distinguished as a different conceptual entity from the file itself.
+
+Two examples are provided below showing, a file URI from a location, via a URL, which also serves as a URI for that file object (Example 1).  Example 2 shows the root group within that file may reuse the identity string, as a compound part, with the addition of the extra '/' character, there by differentiating itself from the file object identity.
 
 * Example 1. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc (the URI identity of the netCDF file object)
 * Example 2. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc/ (the URI identity of the root group contained within that netCDF file object)
 
 ===== Variable Identity 
 
-Each variable within that file has its own identity, that is defined relative to the file identity. The variable name is appended to the file identity and separated by a ``/`` to denote the variable identifier.
+Each netCDF variable within the root group, each netCDF group and each netCDF variable within each group shall take its identity as a URI, relative to the file identity.
+
+This identity is defined using the full variable name, including any owning groups, appended to the file identity. All element separation uses the `/` character.
+
+Thus, each variable and group within that file has its own identity, that is defined relative to the file identity.
 
 ===== Variable Type Declaration
 
@@ -193,7 +201,7 @@ The names of dimensions within the netCDF file encoding are not stored within th
 
 If there is no array payload and the variable is single valued (which may be missing data) then the type shall be defined as bald:Resource.  
 
-In the bald vocabulary, bald:Resource is the general type, bald:Array is a specialiasation of this type.
+In the bald vocabulary, bald:Resource is the general type, bald:Array is a specialisation of this type.
 
 
 ----
@@ -202,7 +210,7 @@ In the bald vocabulary, bald:Resource is the general type, bald:Array is a speci
 
 ----
  
-If the bald:Array instance has a single dimension, then the first and last values from the data payload, as ordered within the netCDF file, shall be endcoded as Literals within the metadata graph, using bald:firstValue and bald:lastValue.
+If the bald:Array instance has a single dimension, then the first and last values from the data payload, as ordered within the netCDF file, shall be encoded as Literals within the metadata graph, using bald:firstValue and bald:lastValue.
 
 For example:
 ----
@@ -218,15 +226,23 @@ For example:
 
 ===== Download URL
 
-The identity is conceptually distinct from the resolvable location of a file.  This may be simply involve the appending of a '/' character to the location, but it can be more distinct.
+The identity is conceptually distinct from the resolvable location of a file.
+
+Identity and Download URL are optional inputs to the metadata graph creation process.
+
+If a download URL is provided, but no Identity is provided, then an identity shall be inferred by the appending of a '/' character to the location.
+
+If a download URL is provided, then it shall be recorded as part of the `dcat:distribution` definition.
 
 As a bald:Container is a subclass of dcat:Distribution, DCAT is used to describe the file type and to provide an optional statement to specify the resolvable location of the file object, using dcat:downloadURL.
 
 ----
+@prefix this: <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.2/standard/abstract_tests/netCDF/ogcClassEF.nc/> .
+
 this: a bald:Container ;
  dcat:distribution [
  	a dcat:Distribution;
- 	dcat:downloadURL <{}>;
+ 	dcat:downloadURL <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.2/standard/abstract_tests/netCDF/ogcClassEF.nc>;
  	dcat:mediaType [
  		a dct:MediaType;
  		dct:identifier "application/x-netcdf"
@@ -257,7 +273,7 @@ Prefixes are in wide use in a number of domains, including XML and RDF. They all
 
 Prefixes may be declared inside the file using a name-value-pair that associates a short name (e.g. `cf__`, `bald__`), with a URI.
 
-The attributes defining prefixes shall be in a seperate netCDF group or variable, as attributes.
+The attributes defining prefixes shall be in a separate netCDF group or variable, as attributes.
 
 The prefixes group shall not be interpreted as part of the graph, it is used only in the interpretation of URIs, which will be encoded as explicit RDF prefixes in RDF encodings.
 
@@ -282,19 +298,19 @@ If included the prefixes group shall be identified within the file by a single g
 If included, the prefixes group shall include the `bald` prefix declaration.
 
 The definition of multiple prefix resources within a single file is invalid in this standard. 
-netCDF-LD implementations may choose to combine prefix collections in invalid cases, but no precendence is implied, and prefix conflict is unresolved. 
+netCDF-LD implementations may choose to combine prefix collections in invalid cases, but no precedence is implied, and prefix conflict is unresolved. 
 netCDF-LD implementations may treat this condition as a warning condition and as a validation error.
 
 
 ===== Externally Defined Prefixes
 
-Prefixes may be defined at runtime, by providing parseable JSON-LD context files or contents.
+Prefixes may be defined at runtime, by providing parse-able JSON-LD context files or contents.
 
 Prefixes will be interpreted during parsing from all context files and internally defined prefixes in combination.
 
 Prefixes in context files shall be defined as RDF prefixes in JSON-LD.  This means that there is no prefix separator within the JSON-LD context file.  The prefix, defined in the JSON-LD context file shall be interpreted as the prefix string appended by a double-underscore `__` within the netCDF-LD contextual interpretation.
 
-For example, the prefix `bald` would be defined witin a JSON-LD context file as:
+For example, the prefix `bald` would be defined within a JSON-LD context file as:
 ----
 {'@context': {'bald': 'https://www.opengis.net/def/binary-array-ld/'}}
 ----
@@ -323,9 +339,9 @@ and thus match to attributes within the file, such as:
 If a prefix string is defined multiple times in JSON-LD context files, with different URI interpretations, then implementations shall ignore that prefix and treat the prefix as locally unresolved.
 Implementations may choose to raise warnings, validation errors, etc. in these cases.
 
-It is expected that files will be able to be parsed, even if prefix conflicts exist. Conflict in prefix definitions is not a violation of this standard, the fallback position is to ignore conflicting prefixes as not well defined at runtime.
+It is expected that files will be able to be parsed, even if prefix conflicts exist. Conflict in prefix definitions is not a violation of this standard, the fall-back position is to ignore conflicting prefixes as not well defined at runtime.
 
-Prefix definitions provided explicitly within a file shall not be overwridden be context files.  Prefixes defined within a file have precedence.
+Prefix definitions provided explicitly within a file shall not be over-ridden be context files.  Prefixes defined within a file have precedence.
 
 If a prefix defined within a file is also defined within provided JSON-LD context files with different URI interpretations, then implementations shall ignore that JSON-LD context definition and treat the prefix as locally resolved.
 
@@ -553,7 +569,7 @@ To identify a predicate as a variable-to-variable reference predicate, that pred
   <{predicate}> rdfs:range bald:Resource .
 ----
 
-Alternatively, it is permissable to provide an rdfs:range statement targeting another resource and for that resource to declare that it is an rdfs:subClassOf bald:Resource:
+Alternatively, it is permissible to provide an rdfs:range statement targeting another resource and for that resource to declare that it is an rdfs:subClassOf bald:Resource:
 
 ----
  <{attribute}> rdfs:range <{AClass}> .
@@ -650,6 +666,27 @@ If multiple aliases match an attribute name, this is an error condition, the dec
 
 All remaining attribute values shall be left unchanged and declared as instances of `<rdf:Literal>`.
 
+==== Reference Exceptions
+
+The BALD vocabulary elements:
+
+----
+bald:isPrefixedBy
+bald:isAliasedBy
+----
+
+are exceptions within the standard.  
+
+They are variable to variable reference definitions, but they provide capability within this standard, they are not metadata content for the file metadata summary.
+
+----
+bald:isPrefixedBy
+bald:isAliasedBy
+----
+
+statements shall not be represented within the standard output metadata graph. 
+Target variables and groups from these variable to variable references shall be omitted from the output metadata graph.
+
 
 === NetCDF Dimensions
 
@@ -665,7 +702,7 @@ image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
 
 NetCDF-LD uses the dimensions to interpret the size and shape of a variable array.
 
-NetCDF-LD does not explicity encode the dimensions: only the sizing and referencing information.  In cases where dimensions do not have a netCDF coordinate variable defined, this results in the name of the dimension being lost.
+NetCDF-LD does not explicitly encode the dimensions: only the sizing and referencing information.  In cases where dimensions do not have a netCDF coordinate variable defined, this results in the name of the dimension being lost.
 
 Extensive Variables are variables defined with respect to one or more dimensions.
 
@@ -685,9 +722,9 @@ The object of this statement is an RDF List.
 
 In order to interpret netCDf dimensions within RDF graphs, the concept of Broadcasting is presented here, and used to implement array referencing.
 
-Broadcasting enables array which share some dimensions, but have different overall dimensionality, to be interpreted together.  Two arrays may be broadcast if the dimensions they share are ordered the same and extra dimensions can be interpted unambiguously.
+Broadcasting enables array which share some dimensions, but have different overall dimensionality, to be interpreted together.  Two arrays may be broadcast if the dimensions they share are ordered the same and extra dimensions can be interpreted unambiguously.
 
-The result of broadcasting is an array shape which can represent the contents of each of the two input arrays, with extra dimensions comtaining copies of the defined values.  In other words, an array may be stretched 
+The result of broadcasting is an array shape which can represent the contents of each of the two input arrays, with extra dimensions containing copies of the defined values.  In other words, an array may be stretched 
 
 In this way an array location in the broadcast result array can interpret one and only one value from each of the input arrays.
 
@@ -740,7 +777,7 @@ The inferencing of how array dimensions are matched and how this enables the int
 This information is unpacked and stored in a general fashion within the RDF graph.
 
 All extensive variables have a shape encoded in the RDF graph.  In order to interpret references, it is commonly required that a RDF statement, similar to the shape, is encoded, showing the reshaped shape that an array needs to be in order to properly broadcast.
-NetCDf-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
+NetCDF-LD explicitly includes all reference RDF statements, even where the broadcast relationship can be inferred, for clarity and to aid comprehension.
 
 A refshape array shape has the same total number of elements as the original array, but includes extra dimensions, of size 1, defining the order which the extensive dimensions are handled in.
 
@@ -756,7 +793,7 @@ The `<$referenceEntity>` is defined to be of type `<https://www.opengis.net/def/
 The `<$referenceEntity>` may  define a `bald:sourceRefShape`, where that source shape is required to be different from the defining shape of the source array.
 The `<$referenceEntity>` shall  define a `bald:targetRefShape`, whether that source shape is required to be different from the defining shape of the source array or whether the shape is the same.
 
-In this manner, the source array and the target array are defined in a common dimensionality enabing the shape to be unambiguously defined for broadcasting; i.e.:
+In this manner, the source array and the target array are defined in a common dimensionality enabling the shape to be unambiguously defined for broadcasting; i.e.:
 
 ----
   <$referenceEntity> a <https://www.opengis.net/def/binary-array-ld/Reference> ;
@@ -817,7 +854,7 @@ this:da a bald:array ;
 
 This explicit reference is crucial for cases where there are unique dimensions of the same size, where inference could not be used. Given the generality of these, the standard mandates that targetRefShape shall always be defined, even if it could be inferred by the dimensionality size matching.  This is to aid implementations using this information.
 
-This reflects the explicit dimension naming within netCDF files. The references are stated explicitly in the file using these named dimensions. This standartd does not preserve dimension names within the summary metadata graph but does represent these explicit array to array relationships and their numeracy.
+This reflects the explicit dimension naming within netCDF files. The references are stated explicitly in the file using these named dimensions. This standard does not preserve dimension names within the summary metadata graph but does represent these explicit array to array relationships and their numeracy.
 
 If an array is defined with respect to named nc dimensions (de, df, dg), of shape (13,13,13), references an array defined with respect to dimensions (df), of shape (13), then there is no way to infer the correct targetRefShape, it must be specified, e.g. (1,13,1)
 
@@ -885,7 +922,7 @@ Applications may treat mismatches between reference definitions and the ability 
 
 The definition of the variable reference with its numeracy delivers specific capability to the resulting metadata graph.
 
-References between arrays in a file are provided primarily to support partial access patterns from individual file objects.  Where an element of interest isidentified from a metadata graph, this element may be accessed directly, if supported by a suitable data supply interface, without the need to obtain the entire file object.
+References between arrays in a file are provided primarily to support partial access patterns from individual file objects.  Where an element of interest is identified from a metadata graph, this element may be accessed directly, if supported by a suitable data supply interface, without the need to obtain the entire file object.
 
 In order to support partial retrieval, it is essential that the metadata graph provides details on which array variables depend on other array variables and the nature of that dependency.
 
@@ -908,7 +945,7 @@ In this way, searchable information on the location in geospatial and conceptual
 
 ==== Worked Example
 
-Here the definition of a netCDF file, in CDL, with all data array elements set as missing, is presented. It is followed by an RDF graph interpretation of the netCDF, illustrating many of the interpretation features desribed in this chapter.
+Here the definition of a netCDF file, in CDL, with all data array elements set as missing, is presented. It is followed by an RDF graph interpretation of the netCDF, illustrating many of the interpretation features described in this chapter.
 
 ----
 netcdf tmpMwXy8U {
@@ -1194,7 +1231,7 @@ This standard recognises that while domain specific vocabularies and detailed RD
 
 To this end, NetCDF-LD also supports a limited description of a netCDF file as Schema.org Dataset through mapping a bald:Container to the Schema.org Dataset class. 
 
-Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properites.
+Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properties.
 
 image::netcdf_ld_as_schema_dot_org.png
 
@@ -1221,7 +1258,7 @@ A worked example follows in RDF, encoded using the terse triple language (TTL):
 	
 ----
 
-=== Implementation Adaptions ===
+=== Implementation Adaptation ===
 
 This standard recognises that there are myriad opportunities for optimisation of large collections of graphs of netCDF files contents.
 
@@ -1236,3 +1273,4 @@ On this basis, it is suggested that an implementation may provide a transformati
 The data storage shall be deemed compliant with this standard if a graph representing a single file may be transformed by the provided transformation into a single file graph that meets the validation rules within this standard.
 
 The format for such transformations is not specified by this standard, it need only provide a suitable RDF graph output.
+

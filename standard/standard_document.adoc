@@ -23,7 +23,7 @@
 |Publication Date:   <yyyy-mm-dd>
 |External identifier of this OGC(R) document: http://www.opengis.net/doc/{doc-type}/{standard}/{m.n}
 |Internal reference number of this OGC(R) document:    19-002
-|Version: 0.2_dev
+|Version: 0.2
 |Category: OGC(R) Implementation
 |Editor:   Mark Hedley, Jonathan Yu
 |===
