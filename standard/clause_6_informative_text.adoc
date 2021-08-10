@@ -1255,7 +1255,7 @@ The format for such transformations is not specified by this standard, it need o
 
 ==== Illustration Example ====
 
-For example an implementation may normalise the shared content from a large number of files into a graph which may be defining a data type, which defines all of the statements valid for all instances of that type.  The metadata graph for a single file may then define itself as an instace of that type and hence inherit all of the statements defining that type.  The combination of the type definition and the specific file definition may then be compared to the standardised metAdata graph from the single file for informational equivalence.
+For example an implementation may normalise the shared content from a large number of files into a graph which may be defining a data type, which defines all of the statements valid for all instances of that type.  The metadata graph for a single file may then define itself as an instance of that type and hence inherit all of the statements defining that type.  The combination of the type definition and the specific file definition may then be compared to the standardised metadata graph from the single file for informational equivalence.
 
 A common use case is where many files from a simulation run differ only in the time value for the time step and in the data payload encoded within the file.
 
