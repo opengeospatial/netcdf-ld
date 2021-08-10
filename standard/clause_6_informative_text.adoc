@@ -666,6 +666,27 @@ If multiple aliases match an attribute name, this is an error condition, the dec
 
 All remaining attribute values shall be left unchanged and declared as instances of `<rdf:Literal>`.
 
+==== Reference Exceptions
+
+The BALD vocabulary elements:
+
+----
+bald:isPrefixedBy
+bald:isAliasedBy
+----
+
+are exceptions within the standard.  
+
+They are variable to variable reference definitions, but they provide capability within this standard, they are not metadata content for the file metadata summary.
+
+----
+bald:isPrefixedBy
+bald:isAliasedBy
+----
+
+statements shall not be represented within the standard output metadata graph. 
+Target variables and groups from these variable to variable references shall be omitted from the output metadata graph.
+
 
 === NetCDF Dimensions
 
