@@ -7,7 +7,7 @@
 
 A specific reference shall be made in the output graph to capture the containment relationship between netCDF groups and variables.
 
-Each netCDF group in the metadata graph shall declare a statement
+Each netCDF group in the metadata graph shall declare a statement for each variable that it contains.
 
 ----
 
