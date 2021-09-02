@@ -7,7 +7,7 @@
  +
 
 
-NetCDF Coordinate Variables, which are limited to 1 Dimensional variables of data,  shall be interpreted as cases of variable to variable referencing and produce
+NetCDF Coordinate Variables, which are limited to one-dimensional variables of data,  shall be interpreted as cases of variable to variable referencing and produce
 
 `bald:references`
 
