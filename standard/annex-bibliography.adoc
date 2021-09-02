@@ -13,3 +13,5 @@ Miles, A., Bechhofer, S.: SKOS Simple Knowledge Organization System Reference. (
 OGC: CF-netCDF Core and Extensions Primer, http://portal.opengeospatial.org/files/?artifact_id=43733, (2011).
 
 Rew, R., Davis, G.: NetCDF: An interface for scientific data access. IEEE Comput. Graph. Appl. 10, 76–82 (1990).
+
+UML Profile, ISO 19103:2015 Geographic information — Conceptual schema language, https://www.iso.org/standard/56734.html
