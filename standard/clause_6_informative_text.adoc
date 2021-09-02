@@ -3,11 +3,11 @@
 === Rationale and Design principles ===
 
 netCDF is used widely in the environmental sciences for data capture, analysis and archival. 
-While, netCDF allows metadata to be specified in each file, it lacks scalable mechanisms for specifying metadata that conforms to community or project conventions or standards. 
+While netCDF allows metadata to be specified in each file, it lacks scalable mechanisms for specifying metadata that conforms to community or project conventions or standards. 
 Conformance to metadata conventions is usually achieved by one-off tools for validation or limited to manual checking.
-Linking to external resources on the web (e.g. controlled vocabulary terms, related files) can be implemented as simple strings in attribute values, however, the mechanism for implementing this is not standardised, nor are tools to form knowledge graphs from these resources.
+Linking to external resources on the web (e.g. controlled vocabulary terms, related files) can be implemented as simple strings in attribute values, however, the mechanism for implementing this is not standardised, nor are the tools to form knowledge graphs from these resources.
 
-The netCDF-LD standard enables the annotation metadata in netCDF files in a way that is interoperable and reusable, and with minimal changes to current netCDF syntax. This means existing files is able to be interpreted using netCDF-LD tools.  
+The netCDF-LD standard enables the annotation metadata in netCDF files in a way that is interoperable and reusable, and with minimal changes to current netCDF syntax. This means existing files can be interpreted using netCDF-LD tools.  
 netCDF-LD proposes mechanisms such as encoding rules that allow users to precisely reference shared attribute names (e.g. property names) and shared values (e.g. controlled vocabulary terms). 
 This facilitates consistency in specifying metadata across netCDF files.
 These netCDF-LD mechanisms thus allow existing netCDF files to be interpreted as Linked Data, and this facilitates  interoperability between netCDF files (and potentially non-netCDF data files).
