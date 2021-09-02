@@ -20,7 +20,7 @@ For example:
               bald shape '(1,1,16,9)' .
 ----
 
-If the bald:Array instance has a single dimension, then the first and last values from the data payload, as ordered within the netCDF file, shall be endcoded as Literals within the metadata graph, using bald:firstValue and bald:lastValue.
+If the bald:Array instance has a single dimension, then the first and last values from the data payload, as ordered within the netCDF file, shall be encoded as Literals within the metadata graph, using bald:firstValue and bald:lastValue.
 
 For example:
 ----
