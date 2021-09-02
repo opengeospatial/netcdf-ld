@@ -159,8 +159,8 @@ The identifier for the netCDF file is the identity of the root group, that is, t
 
 Two examples are provided below showing a file URI from a location, via a URL, which also serves as a URI for that file object (Example 1).  Example 2 shows the root group, within that file, may reuse the identity string, as a compound part, with the addition of the extra '/' character, thereby differentiating itself from the file object identity.
 
-* Example 1. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc (the URI identity of the netCDF file object)
-* Example 2. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc/ (the URI identity of the root group contained within that netCDF file object)
+1. Example 1. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc (the URI identity of the netCDF file object)
+1. Example 2. https://www.unidata.ucar.edu/software/netcdf/examples/test_hgroups.nc/ (the URI identity of the root group contained within that netCDF file object)
 
 ===== Variable Identity 
 
