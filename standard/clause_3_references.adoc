@@ -23,3 +23,5 @@ W3C: SKOS Simple Knowledge Organization System Reference, (2009).
 
 W3C: Resource Description Framework (RDF): Concepts and Abstract Syntax, (2004).
 
+Python Numpy library: Broadcasting, https://numpy.org/devdocs/user/theory.broadcasting.html.
+
