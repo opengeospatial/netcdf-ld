@@ -3,23 +3,13 @@
 [[Bibliography]]
 = Bibliography
 
-[NOTE]
-.Example Bibliography (Delete this note).
-===============================================
-The TC has approved Springer LNCS as the official document citation type.
 
-Springer LNCS is widely used in technical and computer science journals and other publications
+Eaton, B., Gregory, J., Drach, B., Taylor, K., Hankin, S.: NetCDF Climate and Forecast (CF) Metadata Conventions, (2011).
 
-* For citations in the text please use square brackets and consecutive numbers: [1], [2], [3]
+Gregory, J.: The CF metadata standard. CLIVAR Exch. 8, 4 (2003).
 
-– Actual References:
+Miles, A., Bechhofer, S.: SKOS Simple Knowledge Organization System Reference. (2008).
 
-[n] Journal: Author Surname, A.: Title. Publication Title. Volume number, Issue number, Pages Used (Year Published)
+OGC: CF-netCDF Core and Extensions Primer, http://portal.opengeospatial.org/files/?artifact_id=43733, (2011).
 
-[n] Web: Author Surname, A.: Title, http://Website-Url
-
-===============================================
-
-((( Example )))
-[[OGC2015]]
-[1] OGC: OGC Testbed 12 Annex B: Architecture. (2015).
+Rew, R., Davis, G.: NetCDF: An interface for scientific data access. IEEE Comput. Graph. Appl. 10, 76–82 (1990).
