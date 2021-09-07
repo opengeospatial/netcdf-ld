@@ -3,7 +3,7 @@
 [width="90%",cols="2,6"]
 |===
 |*Requirement E-4* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-4 +
-+
+ +
 
 Each variable to variable reference between two variables, both of which are defined with respect to one or more dimensions, shall be described by the statement.
 
