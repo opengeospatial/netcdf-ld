@@ -15,6 +15,8 @@ include::requirements/reqA03.adoc[]
 
 include::requirements/reqA04.adoc[]
 
+include::requirements/reqA05.adoc[]
+
 
 === Requirement Class B: Prefixing
 
@@ -92,6 +94,9 @@ include::requirements/reqE05.adoc[]
 
 include::requirements/reqE06.adoc[]
 
+include::requirements/reqE07.adoc[]
+
+include::requirements/reqE08.adoc[]
 
 === Requirement Class F: NetCDF Coordinate Variables
 

@@ -4,9 +4,9 @@ dimensions:
 	d1 = 1 ;
 variables:
 	int var0 ;
-	    var0:rdfs__label = "rdfs__label" ;
+	    var0:rdfs__label = "Variable Zero" ;
 	int var1 ;
-	    var1:rdfs__label = "rdfs__label" ;
+	    var1:rdfs__label = "Variable One" ;
         int prefix_list ;
             prefix_list:bald__ = "https://www.opengis.net/def/binary-array-ld/" ;
             prefix_list:rdf__ = "http://www.w3.org/1999/02/22-rdf-syntax-ns#" ;

@@ -1,14 +1,47 @@
 ==== Requirement A-2
 
-[width="90%",cols="2,6"]
+[width="90%",cols="2,6a"]
 |===
-|*Requirement A-2* {set:cellbgcolor:#CACCCE}|/req/req-class-a/requirement-2 +
+|*Requirement A-2* |/req/req-class-a/requirement-2 +
  +
 
-Each netCDF variable within the root group, each netCDF group and each netCDF variable within each group shall take its identity as a URI, relative to the file identity.
+The identified netCDF root group shall be described as a dcat:Distribution
 
-This identity is defined using the full variable name, including any owning groups, appended to the file identity. All element separation uses the `/` character.
+----
+this: a bald:Container ;
+ dcat:distribution [
+ 	a dcat:Distribution;
+ 	dcat:mediaType [
+ 		a dct:MediaType;
+ 		dct:identifier "application/x-netcdf"
+ 	];
+ 	dct:format [
+ 		a dct:MediaType;
+ 		dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/>
+ 	]
+                 ].
+----
+
+Implementations shall provide an optional 'download-url' option, providing the ability for a user to provide an explicit downloadURL for the file at run time.
+
+If provided, then the 'download-url' value shall be included in the graph, with respect to the identified root group's `dcat:distribution` blank node:
+
+----
+this: a bald:Container ;
+ dcat:distribution [
+ 	a dcat:Distribution;
+ 	dcat:downloadURL <{download-url}>;
+ 	dcat:mediaType [
+ 		a dct:MediaType;
+ 		dct:identifier "application/x-netcdf"
+ 	];
+ 	dct:format [
+ 		a dct:MediaType;
+ 		dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/>
+ 	]
+                 ].
+----
  
- {set:cellbgcolor:#FFFFFF}
+
 
 |===
