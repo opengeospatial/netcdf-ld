@@ -3,7 +3,7 @@
 [width="90%",cols="2,6"]
 |===
 |*Requirement E-6* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-6 +
-+
+ +
 
 Where any ambiguity in ordering exists in the netCDF file for explicitly defined sourceRefShape and targetRefShape instances, due to partial overlap of named dimensions for both netCDf variables, then source reference dimensions shall be ordered before target reference dimensions.
 
