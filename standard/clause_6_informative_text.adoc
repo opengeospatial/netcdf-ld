@@ -56,7 +56,9 @@ Literals are another key part of RDF and are used to capture basic values other 
 
 RDF statements are collected together within an _RDF Graph_. Figure 1 below show an example of an RDF graph encoding information about the singer B.B. King.
 
-image::bb-king-rdf-example.png[Figure 1. RDF Example: BB king]
+[#figure-1]
+.RDF Example: BB King
+image::bb-king-rdf-example.png[Figure 1. RDF Example: BB King]
 
 ```
 <B.B. King> <is a> <person>.
@@ -69,7 +71,7 @@ The netCDF-LD standard maps the netCDF data model encoding onto the RDF informat
 
 === NetCDF File
 
-The Unidata network Common Data Form (netCDF) is an interface for scientific data access and a freely-distributed software library that provides an implementation of the interface. The netCDF library also defines a machine-independent format for representing scientific data (https://github.com/Unidata/netcdf-c).
+The Unidata network Common Data Form (netCDF) is an interface for scientific data access and a freely-distributed software library that provides an implementation of the interface. The netCDF library also defines a machine-independent format for representing scientific data (https://github.com/Unidata/netcdf-c), which may consist of multiple dimensions (Figure 2 and Figure 3).
 
 NetCDF is an encoding format with open semantics and inferred referencing.  Metadata may be defined on all variables and groups within a netCDF file, with each entity having it's own name space for locally unique attribute names and each attribute containing a single value.
 
@@ -79,8 +81,12 @@ Metadata conventions and internal referencing enable a detailed representation o
 
 // example diagram from scitools
 
+[#figure-2]
+.Multi-dimensional Array
 image::multi_array.png[Figure 2. Multi-dimensional Array]
 
+[#figure-3]
+.Array with Arrays Defining Dimensions
 image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
 
 // variables
@@ -96,7 +102,7 @@ image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
 
 A set of RDF vocabularies are used within this standard to allow the representation of structural and semantic content of netCDF metadata within the context of an RDF graph. Where possible standard RDF vocabularies are used before creating new vocabularies. This allows the ability to combine data graphs from different sources, promotes data harmonisation, and the ability query them in an interoperable way (i.e. using the same vocabularies and predicates for like-for-like semantics).
 
-A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array Linked Data vocabulary: `bald` (https://www.opengis.net/def/binary-array-ld/). The `bald` vocabulary defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
+A new vocabulary is defined by the Open Geospatial Consortium, the Binary Array Linked Data vocabulary: `bald` (https://www.opengis.net/def/binary-array-ld/). The `bald` vocabulary (Figure 4) defines a small set of concepts which enable the structural elements of generic binary array containers, including netCDF, to be represented within an RDF graph. 
 
 This standard also makes use of the core RDF vocabularies, the Dublin Core vocabulary,  the schema.org vocabulary and the Data Catalogue Vocabulary (DCAT):
 
@@ -107,7 +113,9 @@ This standard also makes use of the core RDF vocabularies, the Dublin Core vocab
 * dcat (http://www.w3.org/ns/dcat#)
 
 
-image::bald-ont-1.png[Figure X. BALD vocabulary]
+[#figure-4]
+.Binary Array Linked Data (BALD) vocabulary
+image::bald-ont-1.png[Figure 4. BALD vocabulary]
 
 
 === Metadata RDF Graph
@@ -116,10 +124,11 @@ An _RDF graph_ representing the metadata of multiple files provides a valuable r
 
 The numerical data within the file is not encoded within the graph, only the metadata.  In general, this means that the graph is orders of magnitude smaller than the data file it summarises.
 
-Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways. In Figure 2, an example is given showing the CF standard name attribute value across multiple files.
+Having an _RDF graph_ of metadata across a file collection enables the use of Semantic Web technologies to explore, interrogate and visualise the metadata from that file collection in a variety of ways. In Figure 5, an example is given showing the CF standard name attribute value across multiple files.
 
-
-image::metadata-across-files-example.png[Figure 2. Example showing cf:standard_name property values across different files.]
+[#figure-5]
+.Example showing cf:standard_name property values across different files
+image::metadata-across-files-example.png[Figure 5. Example showing cf:standard_name property values across different files.]
 
 Representing this and other metadata enables queries across netCDF files, e.g. show me netCDF files that has data values on  `sea_surface_temperature`.
 
@@ -692,13 +701,17 @@ Target variables and groups from these variable to variable references shall be 
 
 NetCDF makes strong inferences regarding how variables are defined by dimensions.
 
-NetCDF files define named dimensions, `dims`.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other.
+NetCDF files define named dimensions, `dims`.  Each dimension defines a size, which is used as an array dimension.  NetCDF Variables use dimensions to define their size and shape and to define some implicit references between each other (Figure 6).
 
-In this way the netCDF variables are defined with respect to shared dimensions.
+In this way the netCDF variables are defined with respect to shared dimensions (Figure 7).
 
-image::multi_array.png[Figure 2. Multi-dimensional Array]
+[#figure-6]
+.Multi-dimensional Array
+image::multi_array.png[Figure 6. Multi-dimensional Array]
 
-image::multi_array_to_cube.png[Figure 3. Array with Arrays Defining Dimensions]
+[#figure-7]
+.Array with Arrays Defining Dimensions
+image::multi_array_to_cube.png[Figure 7. Array with Arrays Defining Dimensions]
 
 NetCDF-LD uses the dimensions to interpret the size and shape of a variable array.
 
@@ -728,14 +741,22 @@ The result of broadcasting is an array shape which can represent the contents of
 
 In this way an array location in the broadcast result array can interpret one and only one value from each of the input arrays.
 
-The concept of broadcasting defined in the Python Numpy library https://numpy.org/devdocs/user/theory.broadcasting.html, where some of these images and descriptions are sourced from.
+The concept of broadcasting defined in the Python Numpy library https://numpy.org/devdocs/user/basics.broadcasting.html, from where Figures 8-11 and the associated descriptions are sourced.
 
+[#figure-8]
+.Scalar b is stretched to become an array of same shape as a so the shapes are compatible for element-by-element multiplication
 image::theory.broadcast_1.gif[]
 
+[#figure-9]
+.A one dimensional array added to a two dimensional array results in broadcasting if number of 1-d array elements matches the number of 2-d array columns
 image::theory.broadcast_2.gif[]
 
+[#figure-10]
+.When the trailing dimensions of the arrays are unequal, broadcasting fails because it is impossible to align the values in the rows of the 1st array with the elements of the 2nd arrays for element-by-element addition
 image::theory.broadcast_3.gif[]
 
+[#figure-11]
+.In some cases, broadcasting stretches both arrays to form an output array larger than either of the initial arrays
 image::theory.broadcast_4.gif[]
 
 ==== Shape and Reshape
@@ -1231,8 +1252,10 @@ This standard recognises that while domain specific vocabularies and detailed RD
 
 To this end, NetCDF-LD also supports a limited description of a netCDF file as Schema.org Dataset through mapping a bald:Container to the Schema.org Dataset class. 
 
-Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properties.
+Within the Schema.org representation, the DCAT usage to describe the file type and to provide an optional statement to specify the resolvable location of the file object described above is mapped to Schema.org's DataDownload class and its associated properties (Figure 12).
 
+[#figure-12]
+.A sample NetCDF-LD graph cast to the Schema.org vocabulary
 image::netcdf_ld_as_schema_dot_org.png
 
 A worked example follows in RDF, encoded using the terse triple language (TTL):
