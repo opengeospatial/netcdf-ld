@@ -5,7 +5,7 @@
 |*Requirement B-8* {set:cellbgcolor:#CACCCE}|/req/req-class-b/requirement-8 +
  +
 
-Prefix definitions provided explicitly within a file shall not be overwridden be context files.  Prefixes defined within a file have precedence.
+Prefix definitions provided explicitly within a file shall not be overwritten be context files.  Prefixes defined within a file have precedence.
 
 If a prefix defined within a file is also defined within provided JSON-LD context files with different URI interpretations, then implementations shall ignore that JSON-LD context definition and treat the prefix as locally resolved.
 
