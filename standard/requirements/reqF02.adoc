@@ -7,13 +7,13 @@
  +
 
 
-Information on the NetCDF Coordinate Variables' data payload, which are limited to 1 Dimensional variables of data, shall be included in created graphs.
+Information on the NetCDF Coordinate Variables' data payload, which are limited to one-dimensional variables of data, shall be included in created graphs.
 
 The first value of the coordinate variable data payload shall be included in the created graph, using the predicate:
 
 `bald:arrayFirstValue`
 
-Optionally the last value, if there is more than one value, of the coordinate variable data payload shall be included in the created graph, using the predicate:
+Optionally the last value, if there is more than one value, of the coordinate variable data payload, shall be included in the created graph, using the predicate:
 
 `bald:arrayLastValue`
 

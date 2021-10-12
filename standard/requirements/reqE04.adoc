@@ -38,7 +38,7 @@ The product of the sourceRefShape (if provided) elements shall match the product
 
 The product of the targetRefShape elements shall match the product of the `bald:shape` of the <$targetEntity>, the number of elements shall be the same.
 
-The creation of this bald:references definition within the metadata graph is in addition to the ecxplicit statement interpreted from the netCDF file.
+The creation of this bald:references definition within the metadata graph is in addition to the explicit statement interpreted from the netCDF file.
 The exception to this is where the netCDF file explicitly uses the bald:references attribute (bald__references). In this exception case, then the derived statement replaces the explicit statement.
 
  {set:cellbgcolor:#FFFFFF}
