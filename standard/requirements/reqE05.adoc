@@ -5,9 +5,9 @@
 |*Requirement E-5* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-5 +
  +
 
-Each variable defined with respect to a netCDF Coordinate Variable shall be interpreted as a variable to variable reference frOm that variable to the netCDF Coordinate variable.
+Each variable that is not itself a netCDF Coordinate Variable, that is defined with respect to a netCDF Coordinate Variable, shall be interpreted as a variable to variable reference from that variable to the netCDF Coordinate variable.
 
-A netCDF Coordinate Variable is defind within the netCDF user guide as a 1 dimensional variable with the same variable name as the only netCDF dimension it is defined with respect to.
+A netCDF Coordinate Variable is defined within the netCDF user guide as a one-dimensional variable with the same variable name as the only netCDF dimension with respect to which it is defined.
 
  {set:cellbgcolor:#FFFFFF}
 

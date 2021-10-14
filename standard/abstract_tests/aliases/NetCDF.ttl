@@ -1,0 +1,134 @@
+@prefix cc:    <http://creativecommons.org/ns#> .
+@prefix void:  <http://rdfs.org/ns/void#> .
+@prefix org:   <http://www.w3.org/ns/org#> .
+@prefix odrs:  <http://schema.theodi.org/odrs#> .
+@prefix ssd:   <http://www.w3.org/ns/sparql-service-description#> .
+@prefix owl:   <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix env-ui: <http://environment.data.gov.uk/registry/structure/ui/> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix version: <http://purl.org/linked-data/version#> .
+@prefix qb:    <http://purl.org/linked-data/cube#> .
+@prefix dgu:   <http://reference.data.gov.uk/def/reference/> .
+@prefix ui:    <http://purl.org/linked-data/registry-ui#> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix reg:   <http://purl.org/linked-data/registry#> .
+@prefix ldp:   <http://www.w3.org/ns/ldp#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix api:   <http://purl.org/linked-data/api/vocab#> .
+@prefix vann:  <http://purl.org/vocab/vann/> .
+@prefix vs:    <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix prov:  <http://www.w3.org/ns/prov#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix dc:    <http://purl.org/dc/elements/1.1/> .
+
+<http://def.scitools.org.uk/NetCDF>
+        a                      reg:Register , ldp:Container ;
+        rdfs:label             "Net CDF" ;
+        dct:description        "Vocabulary of terms used in the netCDF User Guide." ;
+        dct:modified           "2020-05-04T14:15:24.798Z"^^xsd:dateTime ;
+        reg:category           <http://def.scitools.org.uk/structure/category/SciTools> ;
+        owl:versionInfo        1 ;
+        ldp:contains           <http://def.scitools.org.uk/NetCDF/units> , <http://def.scitools.org.uk/NetCDF/scale_factor> , <http://def.scitools.org.uk/NetCDF/add_offset> , <http://def.scitools.org.uk/NetCDF/Conventions> , <http://def.scitools.org.uk/NetCDF/long_name> , <http://def.scitools.org.uk/NetCDF/valid_max> , <http://def.scitools.org.uk/NetCDF/valid_min> , <http://def.scitools.org.uk/NetCDF/history> , <http://def.scitools.org.uk/NetCDF/valid_range> , <http://def.scitools.org.uk/NetCDF/FillValue> , <http://def.scitools.org.uk/NetCDF/title> ;
+        ldp:hasMemberRelation  ldp:contains .
+
+<http://def.scitools.org.uk/NetCDF/valid_max>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "valid max" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "Largest valid value of a variable." ;
+        dct:identifier   "valid_max" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/FillValue>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       " FillValue" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "A value used to represent missing or undefined data.  Allowed for auxiliary coordinate variables but not allowed for coordinate variables." ;
+        dct:identifier   "_FillValue" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/valid_range>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "valid range" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "Smallest and largest valid values of a variable." ;
+        dct:identifier   "valid_range" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/title>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "title" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "Short description of the file contents." ;
+        dct:identifier   "title" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/units>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "units" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "Units of a variable's content." ;
+        dct:identifier   "units" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/add_offset>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "add offset" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "If present for a variable, this number is to be added to the data after it is read by an application.  If both **`scale_factor`** and **`add_offset`** attributes are present, the data are first scaled before the offset is added.  In cases where there is a strong constraint on dataset size, it is allowed to pack the coordinate variables (using add_offset and/or scale_factor), but this is not recommended in general." ;
+        dct:identifier   "add_offset" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/long_name>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "long name" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "A descriptive name that indicates a variable's content. This name is not standardized." ;
+        dct:identifier   "long_name" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/valid_min>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "valid min" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "Smallest valid value of a variable." ;
+        dct:identifier   "valid_min" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/scale_factor>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "scale factor" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "If present for a variable, the data are to be multiplied by this factor after the data are read by an application.  See also the **`add_offset`** attribute.  In cases where there is a strong constraint on dataset size, it is allowed to pack the coordinate variables (using add_offset and/or scale_factor), but this is not recommended in general." ;
+        dct:identifier   "scale_factor" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/history>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "history" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "List of the applications that have modified the original data." ;
+        dct:identifier   "history" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
+
+<http://def.scitools.org.uk/NetCDF/Conventions>
+        a                rdf:Property ;
+        rdfs:domain      <https://www.opengis.net/def/binary-array-ld/Resource> ;
+        rdfs:label       "Conventions" ;
+        rdfs:range       rdfs:Literal ;
+        dct:description  "Name of the conventions followed by the dataset." ;
+        dct:identifier   "Conventions" ;
+        dct:references   <http://www.unidata.ucar.edu/software/netcdf/docs/attribute_conventions.html> .
