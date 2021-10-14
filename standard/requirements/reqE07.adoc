@@ -3,7 +3,7 @@
 [width="90%",cols="2,6"]
 |===
 |*Requirement E-7* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-7 +
-+
+ +
 
 A specific reference shall be made in the output graph to capture the containment relationship between netCDF groups and variables.
 
