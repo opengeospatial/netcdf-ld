@@ -1,6 +1,6 @@
 [cols="1,4",width="90%"]
 |===
 2+|*Requirements Class* {set:cellbgcolor:#CACCCE}
-2+|http://www.opengis.net/spec/19-002/m.n/req/req-class-a {set:cellbgcolor:#FFFFFF}
+2+|http://www.opengis.net/spec/netcdf-ld/1.0/req/req-class-a {set:cellbgcolor:#FFFFFF}
 |Target type |Core
 |===

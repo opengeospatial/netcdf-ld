@@ -3,7 +3,7 @@
 [width="90%",cols="2,6"]
 |===
 |*Requirement E-4* {set:cellbgcolor:#CACCCE}|/req/req-class-e/requirement-4 +
-+
+ +
 
 A variable to variable reference is defined in Requirement E-2
 
