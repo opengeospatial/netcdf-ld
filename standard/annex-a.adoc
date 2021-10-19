@@ -2,30 +2,18 @@
 :appendix-caption: Annex
 == Conformance Class Abstract Test Suite (Normative)
 
-[NOTE]
-Ensure that there is a conformance class for each requirements class and a test for each requirement (identified by requirement name and number)
 
 === Conformance Class A: URIs
 
 Conformance class for Universal Resource Identifiers definition and interpretation.
 
-==== Requirement 1
+==== Abstract Test for Requirements A-1, A-2, A-3, A-4, A-5
 [cols=">20h,<80d",width="100%"]
 |===
-|Test id: |/conf/conf-class-a/requirement-1
-|Requirement: |/req/req-class-a/requirement-1
-|Test purpose: | Verify that the identity of a file is always present within the RDF graph parsed from that file.
-|Test method: | Inspect the identity of the Container, within the parsed RDF graph, representing the root group of the netCDF file and validate that it matches the input parameter, or default value, for that file.
-|===
-
-==== Requirement 2
-
-[cols=">20h,<80d",width="100%"]
-|===
-|Test id: |/conf/conf-class-a/requirement-2
-|Requirement: |/req/req-class-a/requirement-2
-|Test purpose: | Verify that the identity of variables and groups within a file are defined relative to the defined file identity.
-|Test method: | Inspect the identity of the variables and containers, within the parsed RDF graph, representing the contents of the root group of the netCDF file and validate that their identifiers are all defined as a combination of the file identity and the variable / container identity.
+|Test id: |/conf/conf-class-a/test-1
+|Requirement: |/req/req-class-a/requirement-1, /req/req-class-a/requirement-2, /req/req-class-a/requirement-3, /req/req-class-a/requirement-4, /req/req-class-a/requirement-5
+|Test purpose: | Verify that the identities of the file entities and their descriptors are present within the RDF graph parsed from that file.
+|Test method: | Parse the input netCDF file, created from the provided CDL, into an RDF Graph, given the provided identity. Verify that the output RDF graph conforms to the expected result.
 |===
 
 
@@ -51,14 +39,14 @@ include::abstract_tests/TTL/ogcClassA.ttl[]
 === Conformance Class B: Prefixing
 
 
-==== Requirement 1
+==== Abstract Test for Requirement B-1, B-2, B-3, B-4, B-5, B-6, B-7, B-8
 
 [cols=">20h,<80d",width="100%"]
 |===
-|Test id: |/conf/conf-class-a/requirement-2
-|Requirement: |/req/req-class-a/requirement-2
+|Test id: |/conf/conf-class-b/test-1
+|Requirement: |/req/req-class-b/requirement-1, /req/req-class-b/requirement-2, /req/req-class-b/requirement-3, /req/req-class-b/requirement-4, /req/req-class-b/requirement-5, /req/req-class-b/requirement-6, /req/req-class-b/requirement-7, /req/req-class-b/requirement-8
 |Test purpose: | Verify that defined prefixes within a file are recognised and used to expand prefix notation attribute names and values.
-|Test method: | Inspect the predicates and objects, within the parsed RDF graph, and verify that all prefix quantities are expanded to the correct URIs.
+|Test method: | Parse the input netCDF file, created from the provided CDL, into an RDF Graph, given the provided identity. Verify that the output RDF graph conforms to the expected result.
 |===
 
 
@@ -82,6 +70,17 @@ include::abstract_tests/TTL/ogcClassB.ttl[]
 
 
 === Conformance Class C: Aliasing
+
+==== Abstract Test for Requirement C-1, C-2, C-3
+
+[cols=">20h,<80d",width="100%"]
+|===
+|Test id: |/conf/conf-class-c/test-1
+|Requirement: |/req/req-class-c/requirement-1, /req/req-class-c/requirement-2, /req/req-class-c/requirement-3
+|Test purpose: | Verify that defined aliases within a file are recognised and used to expand attribute names and values.
+|Test method: | Parse the input netCDF file, created from the provided CDL, into an RDF Graph, given the provided identity and provided alias graph. Verify that the output RDF graph conforms to the expected result.
+|===
+
 
 Identity:
 ----
@@ -111,6 +110,18 @@ include::abstract_tests/TTL/ogcClassC.ttl[]
 
 === Conformance Class D: Attribute Names
 
+
+==== Abstract Test for Requirement D-1, D-2, D-3, D-4
+
+[cols=">20h,<80d",width="100%"]
+|===
+|Test id: |/conf/conf-class-d/test-1
+|Requirement: |/req/req-class-d/requirement-1, /req/req-class-d/requirement-2, /req/req-class-d/requirement-3, /req/req-class-d/requirement-4
+|Test purpose: | Verify that attribute names within a file are represented as URIs in the output RDF graph and that attribute naming rules are conformed to.
+|Test method: | Parse the input netCDF file, created from the provided CDL, into an RDF Graph, given the provided identity and provided alias graph. Verify that the output RDF graph conforms to the expected result.
+|===
+
+
 Identity:
 ----
 http://secret.binary-array-ld.net/attributes.nc
@@ -138,6 +149,17 @@ include::abstract_tests/TTL/ogcClassD.ttl[]
 
 
 === Conformance Class E: Variable-to-variable Referencing; Class F: Coordinate Variables
+
+==== Abstract Test for Requirement E-1, E-2, E-3, E-4, E-5, E-6, E-7, E-8, F-1, F-2
+
+[cols=">20h,<80d",width="100%"]
+|===
+|Test id: |/conf/conf-class-ef/test-1
+|Requirement: |/req/req-class-e/requirement-1, /req/req-class-e/requirement-2, /req/req-class-e/requirement-3, /req/req-class-e/requirement-4, /req/req-class-e/requirement-5, /req/req-class-e/requirement-6, /req/req-class-e/requirement-7, /req/req-class-e/requirement-8, /req/req-class-f/requirement-1, /req/req-class-f/requirement-2
+|Test purpose: | Verify that variable to variable References and coordinate variables within a file are recognised and represented as references in the output RDF graph.
+|Test method: | Parse the input netCDF file, created from the provided CDL, into an RDF Graph, given the provided identity. Verify that the output RDF graph conforms to the expected result.
+|===
+
 
 
 
