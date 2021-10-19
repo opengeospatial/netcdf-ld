@@ -2,7 +2,8 @@
 
 === Rationale and Design principles ===
 
-netCDF is used widely in the environmental sciences for data capture, analysis and archival. 
+netCDF is used widely in the environmental sciences for data capture, analysis and archival. netCDF as a format is used for encoding array-oriented earth- and space-science data. netCDF is an open Geospatial Consortium (OGC) standard. As netCDF can be, and is, used to store and disseminate a wide-range of multi-dimensional data types it is a natural format for encoding digital geospatial information. A number of widely used conventions exist in order to promote interoperability across netCDF files. The Climate and Forecast (CF) conventions in particular are a widely used in the encoding of geospatial data in netCDF and are also an OGC standard. Whilst this standard uses concepts which have grown out of the World Wide Web Consortium (W3C), namely the Linked Data approach, this standard builds specifically on netCDF and the outputs of OGC's netCDF Standards Working Group, hence this standard belongs in the OGC suite.
+
 While netCDF allows metadata to be specified in each file, it lacks scalable mechanisms for specifying metadata that conforms to community or project conventions or standards. 
 Conformance to metadata conventions is usually achieved by one-off tools for validation or limited to manual checking.
 Linking to external resources on the web (e.g. controlled vocabulary terms, related files) can be implemented as simple strings in attribute values, however, the mechanism for implementing this is not standardised, nor are the tools to form knowledge graphs from these resources.
