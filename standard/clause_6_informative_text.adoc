@@ -116,7 +116,7 @@ This standard also makes use of the core RDF vocabularies, the Dublin Core vocab
 
 [#figure-4]
 .Binary Array Linked Data (BALD) vocabulary
-image::bald-ont-1.png[Figure 4. BALD vocabulary]
+image::bald-ont-2.png[Figure 4. BALD vocabulary]
 
 
 === Metadata RDF Graph
