@@ -26,13 +26,16 @@ ogcdoc, OGC document,  netCDF, Linked Data
 
 [big]*iii.   Preface*
 
-[NOTE]
-====
-Insert Preface Text here. Give OGC specific commentary: describe the technical content, reason for document, history of the document and precursors, and plans for future work. >
+This encoding standard standardises a W3 RDF encoding for a graph derived from the metadata payload of a netCDF file.  This provides a mechanism to summarise and index individual netCDF files and to aggregate summaries across file sets and structured collections of identified files.
+
+In providing these encoding mechanisms and rules, this standard provides a framework for publishers to define namespace qualified attributes for new metadata standards, enabling extended interoperability for using multiple complementary metadata scheme within a file and for existing standards to continue with their standardised terms. The standard also provides opportunity for publishers of metadata standards for netCDF files to publish standards specifications as machine parsable content for use within the parsing process.
+
+The mechanisms standardised are deliberately generic, with detailed implementation to netCDF provided.  This gives the opportunity for future work, beyond the scope of this standard, to reuse aspects of the approach for content metadata extraction and aggregation for other file formats; for example HDF5 and GeoTIFF may be suitable targets for future standardisation work.
+
 Attention is drawn to the possibility that some of the elements of this document may be the subject of patent rights. The Open Geospatial Consortium shall not be held responsible for identifying any or all such patent rights.
 
 Recipients of this document are requested to submit, with their comments, notification of any relevant patent claims or other intellectual property rights of which they may be aware that might be infringed by any implementation of the standard set forth in this document, and to provide supporting documentation.
-====
+
 [big]*iv.    Submitting organizations*
 
 The following organizations submitted this Document to the Open Geospatial Consortium (OGC):
