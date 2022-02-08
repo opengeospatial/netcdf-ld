@@ -311,6 +311,19 @@ The definition of multiple prefix resources within a single file is invalid in t
 netCDF-LD implementations may choose to combine prefix collections in invalid cases, but no precedence is implied, and prefix conflict is unresolved. 
 netCDF-LD implementations may treat this condition as a warning condition and as a validation error.
 
+====== The Double Underscore Syntax
+
+This standard introduces a special text syntax, a double underscore '__' as a separator between the prefix and suffix.
+
+The choice of special character has been chosen as a compromise of various factors.  RDF uses a ':' (colon) as a separator between prefix and suffix, but the netCDF CDL specification uses the colon as a variable attribute separator.  As such, the use of a colon as a separator requires escape characters to be used.
+
+Older versions of the netCDF libraries precluded the use of colon at all, the ability to use the escape character was introduced, but some use of double underscore was already in use in ad-hoc file encodings.  Maintaining backwards compatibility is deemed a seful facet of this syntax.
+
+The use of attribute names with colon separators is a limiting factor in writing code, as the attribute name can only be used within a string in many programming languages (e.g. python), and not as a variable name or identifier.
+
+Early adopters of the approaches being standardised in this document have been using the double underscore to namespace locally defined attribute names for a significant period of time, in the hope that this syntax would become standardised.  There is fairly widespread use of this namespace syntax in existing files across a number of archives of earth system geospatial data.
+
+Given the ad-hoc usage of the double underscore and its utility in programming languages and data specifications, this standard adopts and standardises the double underscore as the prefix separator for this standard.
 
 ===== Externally Defined Prefixes
 
