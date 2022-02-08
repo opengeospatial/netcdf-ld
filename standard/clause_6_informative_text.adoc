@@ -745,7 +745,7 @@ The concept of broadcasting is defined in the Python Numpy library https://numpy
 image::theory.broadcast_1.gif[]
 
 [#figure-9]
-.A one dimensional array added to a two dimensional array results in broadcasting if number of 1-d array elements matches the number of 2-d array columns
+.A one dimensional array added to a two dimensional array results in broadcasting if number of 1D array elements matches the number of 2D array columns
 image::theory.broadcast_2.gif[]
 
 [#figure-10]
