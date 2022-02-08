@@ -8,7 +8,7 @@ The media type for output encodings for metadata graphs interpreted by this stan
 
 The media type definition for defining the netCDF encoding is currently detailed in the specification as:
 
-* `application/x-netcdf`
+* `application/netcdf`
 
 A new media Type is being targeted for registration with IANA:
 

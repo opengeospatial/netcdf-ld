@@ -13,7 +13,7 @@ this: a bald:Container ;
  	a dcat:Distribution;
  	dcat:mediaType [
  		a dct:MediaType;
- 		dct:identifier "application/x-netcdf"
+ 		dct:identifier "application/netcdf"
  	];
  	dct:format [
  		a dct:MediaType;
@@ -33,7 +33,7 @@ this: a bald:Container ;
  	dcat:downloadURL <{download-url}>;
  	dcat:mediaType [
  		a dct:MediaType;
- 		dct:identifier "application/x-netcdf"
+ 		dct:identifier "application/netcdf"
  	];
  	dct:format [
  		a dct:MediaType;

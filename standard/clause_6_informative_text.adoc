@@ -255,7 +255,7 @@ this: a bald:Container ;
  	dcat:downloadURL <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.2/standard/abstract_tests/netCDF/ogcClassEF.nc>;
  	dcat:mediaType [
  		a dct:MediaType;
- 		dct:identifier "application/x-netcdf"
+ 		dct:identifier "application/netcdf"
  	];
  	dct:format [
  		a dct:MediaType;
@@ -1029,7 +1029,7 @@ this: a bald:Container ;
             dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
     dcat:distribution [ a dcat:Distribution ;
             dcat:mediaType [ a dct:MediaType ;
-                    dct:identifier "application/x-netcdf" ] ] ;
+                    dct:identifier "application/netcdf" ] ] ;
     bald:contains this:data_variable1,
         this:data_variable2,
         this:list_collection,
@@ -1179,7 +1179,7 @@ this: a bald:Container ;
             dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
     dcat:distribution [ a dcat:Distribution ;
             dcat:mediaType [ a dct:MediaType ;
-                    dct:identifier "application/x-netcdf" ] ] ;
+                    dct:identifier "application/netcdf" ] ] ;
     bald:contains this:deptht,
         this:nav_lat,
         this:nav_lon,
@@ -1273,7 +1273,7 @@ A worked example follows in RDF, encoded using Turtle, the terse triple language
 	so:distribution [
 		a so:DataDownload ;
 		so:contentUrl <https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc/> ;
-		so:encodingFormat "application/x-netcdf", "http://vocab.nerc.ac.uk/collection/M01/current/NC/"
+		so:encodingFormat "application/netcdf", "http://vocab.nerc.ac.uk/collection/M01/current/NC/"
 	] .
 	
 ----
