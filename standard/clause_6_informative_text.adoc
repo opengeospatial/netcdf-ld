@@ -317,7 +317,7 @@ This standard introduces a special text syntax, a double underscore '__' as a se
 
 The choice of special character has been chosen as a compromise of various factors.  RDF uses a ':' (colon) as a separator between prefix and suffix, but the netCDF CDL specification uses the colon as a variable attribute separator.  As such, the use of a colon as a separator requires escape characters to be used.
 
-Older versions of the netCDF libraries precluded the use of colon at all, the ability to use the escape character was introduced, but some use of double underscore was already in use in ad-hoc file encodings.  Maintaining backwards compatibility is deemed a seful facet of this syntax.
+Older versions of the netCDF libraries precluded the use of colon at all, the ability to use the escape character was introduced, but some use of double underscore was already in use in ad-hoc file encodings.  Maintaining backwards compatibility is deemed a useful facet of this syntax.
 
 The use of attribute names with colon separators is a limiting factor in writing code, as the attribute name can only be used within a string in many programming languages (e.g. python), and not as a variable name or identifier.
 
