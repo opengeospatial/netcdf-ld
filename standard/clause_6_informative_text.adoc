@@ -255,7 +255,7 @@ this: a bald:Container ;
  	dcat:downloadURL <https://raw.githubusercontent.com/opengeospatial/netcdf-ld/v0.2/standard/abstract_tests/netCDF/ogcClassEF.nc>;
  	dcat:mediaType [
  		a dct:MediaType;
- 		dct:identifier "application/x-netcdf"
+ 		dct:identifier "application/netcdf"
  	];
  	dct:format [
  		a dct:MediaType;
@@ -311,6 +311,19 @@ The definition of multiple prefix resources within a single file is invalid in t
 netCDF-LD implementations may choose to combine prefix collections in invalid cases, but no precedence is implied, and prefix conflict is unresolved. 
 netCDF-LD implementations may treat this condition as a warning condition and as a validation error.
 
+====== The Double Underscore Syntax
+
+This standard introduces a special text syntax, a double underscore '__' as a separator between the prefix and suffix.
+
+The choice of special character has been chosen as a compromise of various factors.  RDF uses a ':' (colon) as a separator between prefix and suffix, but the netCDF CDL specification uses the colon as a variable attribute separator.  As such, the use of a colon as a separator requires escape characters to be used.
+
+Older versions of the netCDF libraries precluded the use of colon at all, the ability to use the escape character was introduced, but some use of double underscore was already in use in ad-hoc file encodings.  Maintaining backwards compatibility is deemed a useful facet of this syntax.
+
+The use of attribute names with colon separators is a limiting factor in writing code, as the attribute name can only be used within a string in many programming languages (e.g. python), and not as a variable name or identifier.
+
+Early adopters of the approaches being standardised in this document have been using the double underscore to namespace locally defined attribute names for a significant period of time, in the hope that this syntax would become standardised.  There is fairly widespread use of this namespace syntax in existing files across a number of archives of earth system geospatial data.
+
+Given the ad-hoc usage of the double underscore and its utility in programming languages and data specifications, this standard adopts and standardises the double underscore as the prefix separator for this standard.
 
 ===== Externally Defined Prefixes
 
@@ -745,7 +758,7 @@ The concept of broadcasting is defined in the Python Numpy library https://numpy
 image::theory.broadcast_1.gif[]
 
 [#figure-9]
-.A one dimensional array added to a two dimensional array results in broadcasting if number of 1-d array elements matches the number of 2-d array columns
+.A one dimensional array added to a two dimensional array results in broadcasting if number of 1D array elements matches the number of 2D array columns
 image::theory.broadcast_2.gif[]
 
 [#figure-10]
@@ -1029,7 +1042,7 @@ this: a bald:Container ;
             dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
     dcat:distribution [ a dcat:Distribution ;
             dcat:mediaType [ a dct:MediaType ;
-                    dct:identifier "application/x-netcdf" ] ] ;
+                    dct:identifier "application/netcdf" ] ] ;
     bald:contains this:data_variable1,
         this:data_variable2,
         this:list_collection,
@@ -1179,7 +1192,7 @@ this: a bald:Container ;
             dct:identifier <http://vocab.nerc.ac.uk/collection/M01/current/NC/> ] ;
     dcat:distribution [ a dcat:Distribution ;
             dcat:mediaType [ a dct:MediaType ;
-                    dct:identifier "application/x-netcdf" ] ] ;
+                    dct:identifier "application/netcdf" ] ] ;
     bald:contains this:deptht,
         this:nav_lat,
         this:nav_lon,
@@ -1273,7 +1286,7 @@ A worked example follows in RDF, encoded using Turtle, the terse triple language
 	so:distribution [
 		a so:DataDownload ;
 		so:contentUrl <https://www.ngdc.noaa.gov/thredds/dodsC/arctic/Polar-APP-X_v01r01_Nhem_1400_d20160801_c20160803.nc/> ;
-		so:encodingFormat "application/x-netcdf", "http://vocab.nerc.ac.uk/collection/M01/current/NC/"
+		so:encodingFormat "application/netcdf", "http://vocab.nerc.ac.uk/collection/M01/current/NC/"
 	] .
 	
 ----
