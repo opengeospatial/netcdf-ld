@@ -19,7 +19,7 @@ Conformance class for Universal Resource Identifiers definition and interpretati
 
 Identity:
 ----
-http://secret.binary-array-ld.net/identity.nc
+http://example.org/identity.nc
 ----
 
 Input NetCDF File - Defined in CDL:
@@ -52,7 +52,7 @@ include::abstract_tests/TTL/ogcClassA.ttl[]
 
 Identity:
 ----
-http://secret.binary-array-ld.net/prefix.nc
+http://example.org/prefix.nc
 ----
 
 Input NetCDF File - Defined in CDL:
@@ -84,7 +84,7 @@ include::abstract_tests/TTL/ogcClassB.ttl[]
 
 Identity:
 ----
-http://secret.binary-array-ld.net/alias.nc
+http://example.org/alias.nc
 ----
 
 Alias Graph
@@ -124,7 +124,7 @@ include::abstract_tests/TTL/ogcClassC.ttl[]
 
 Identity:
 ----
-http://secret.binary-array-ld.net/attributes.nc
+http://example.org/attributes.nc
 ----
 
 Alias Graph
@@ -165,7 +165,7 @@ include::abstract_tests/TTL/ogcClassD.ttl[]
 
 Identity:
 ----
-http://secret.binary-array-ld.net/reference.nc
+http://example.org/reference.nc
 ----
 
 
